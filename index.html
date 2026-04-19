@@ -32,6 +32,18 @@ line-height: 2;
 
 ::selection { background: var(–gold); color: #fff; }
 
+/* ── READING PROGRESS BAR ── */
+.progress-bar {
+position: fixed;
+top: 0;
+left: 0;
+width: 0%;
+height: 2px;
+background: var(–gold);
+z-index: 1000;
+transition: width 0.1s linear;
+}
+
 /* ── HERO ── */
 .hero {
 min-height: 85vh;
@@ -53,6 +65,14 @@ margin-bottom: 2rem;
 opacity: 0;
 animation: fadeUp 1s 0.2s forwards;
 }
+
+.hero-label a {
+color: inherit;
+text-decoration: none;
+border-bottom: 1px solid transparent;
+transition: border-color 0.3s;
+}
+.hero-label a:hover { border-bottom-color: var(–gold-dim); }
 
 .hero-title {
 font-family: ‘Cormorant Garamond’, serif;
@@ -88,6 +108,16 @@ color: var(–text-dim);
 line-height: 1.9;
 opacity: 0;
 animation: fadeUp 1s 0.8s forwards;
+}
+
+.hero-updated {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.6rem;
+color: var(–text-dim);
+letter-spacing: 0.2em;
+margin-top: 2.5rem;
+opacity: 0;
+animation: fadeUp 1s 1s forwards;
 }
 
 /* ── TOC ── */
@@ -141,6 +171,14 @@ color: var(–text-dim);
 min-width: 1.2rem;
 }
 
+.toc-list .ch-date {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.55rem;
+color: var(–text-dim);
+margin-left: auto;
+opacity: 0.6;
+}
+
 /* ── CHAPTER ── */
 .chapter {
 max-width: 640px;
@@ -170,6 +208,15 @@ color: var(–text-bright);
 margin-top: 0.4rem;
 }
 
+.chapter-date {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.6rem;
+color: var(–text-dim);
+letter-spacing: 0.15em;
+margin-top: 0.5rem;
+opacity: 0.6;
+}
+
 .part-divider {
 max-width: 640px;
 margin: 0 auto;
@@ -192,6 +239,21 @@ font-weight: 400;
 font-style: italic;
 color: var(–text-bright);
 margin-top: 0.5rem;
+}
+
+.part-intro {
+max-width: 640px;
+margin: 0 auto;
+padding: 1.5rem 2rem 0;
+}
+
+.part-intro p {
+font-size: 0.85rem;
+color: var(–text-dim);
+line-height: 1.9;
+text-align: center;
+max-width: 460px;
+margin: 0 auto;
 }
 
 /* ── BODY ── */
@@ -234,6 +296,30 @@ max-width: 640px;
 margin: 0 auto;
 padding: 1rem 2rem;
 border-bottom: 1px solid var(–divider);
+}
+
+/* ── BACK TO TOC ── */
+.back-toc {
+max-width: 640px;
+margin: 0 auto;
+padding: 0.8rem 2rem 0;
+text-align: right;
+}
+
+.back-toc a {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.55rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–text-dim);
+text-decoration: none;
+opacity: 0.5;
+transition: all 0.3s;
+}
+
+.back-toc a:hover {
+opacity: 1;
+color: var(–gold);
 }
 
 /* ── TIP ── */
@@ -307,23 +393,30 @@ border-top: 1px solid var(–divider);
 
 @keyframes fadeUp {
 from { opacity: 0; transform: translateY(16px); }
-to { opacity: 1; transform: translateY(0); }
+to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 640px) {
 .chapter { padding: 3rem 1.5rem 1.5rem; }
 .toc { padding: 2rem 1.5rem; }
 .tip { padding: 3rem 1.5rem 4rem; }
+.part-intro { padding: 1.5rem 1.5rem 0; }
+.back-toc { padding: 0.8rem 1.5rem 0; }
+.toc-list .ch-date { display: none; }
 }
 </style>
 
 </head>
 <body>
 
+<!-- ═══ PROGRESS BAR ═══ -->
+
+<div class="progress-bar" id="progressBar"></div>
+
 <!-- ═══ HERO ═══ -->
 
-<section class="hero">
-  <div class="hero-label">微策略日報 · Threads</div>
+<section class="hero" id="top">
+  <div class="hero-label"><a href="https://www.threads.net/@mstr_daily" target="_blank" rel="noopener">微策略日報 · Threads</a></div>
   <h1 class="hero-title">囤比特幣<br><em>筆記</em></h1>
   <div class="hero-sub">W. — NTU · 21 · BITCOIN MAXIMALIST</div>
   <p class="hero-bio">
@@ -331,25 +424,26 @@ to { opacity: 1; transform: translateY(0); }
     不是要你買比特幣，而是希望你理解它。<br>
     理解之後，你會做出自己的決定。
   </p>
+  <div class="hero-updated">LAST UPDATED — 2026.04</div>
 </section>
 
 <!-- ═══ TOC ═══ -->
 
-<nav class="toc">
+<nav class="toc" id="toc">
   <div class="toc-part">Part I — 為什麼是比特幣</div>
   <ul class="toc-list">
-    <li><a href="#c1"><span class="num">01</span>你的錢怎麼了</a></li>
-    <li><a href="#c2"><span class="num">02</span>比特幣是什麼</a></li>
-    <li><a href="#c3"><span class="num">03</span>為什麼只有比特幣</a></li>
-    <li><a href="#c4"><span class="num">04</span>為什麼大多數人還不理解</a></li>
-    <li><a href="#c5"><span class="num">05</span>一個 21 歲的選擇</a></li>
+    <li><a href="#c1"><span class="num">01</span>你的錢怎麼了<span class="ch-date">2025.06</span></a></li>
+    <li><a href="#c2"><span class="num">02</span>比特幣是什麼<span class="ch-date">2025.07</span></a></li>
+    <li><a href="#c3"><span class="num">03</span>為什麼只有比特幣<span class="ch-date">2025.08</span></a></li>
+    <li><a href="#c4"><span class="num">04</span>為什麼大多數人還不理解<span class="ch-date">2025.09</span></a></li>
+    <li><a href="#c5"><span class="num">05</span>一個 21 歲的選擇<span class="ch-date">2025.10</span></a></li>
   </ul>
   <div class="toc-part">Part II — Strategy 與比特幣本位</div>
   <ul class="toc-list">
-    <li><a href="#c6"><span class="num">06</span>制定規則的人</a></li>
-    <li><a href="#c7"><span class="num">07</span>數位煉油廠</a></li>
-    <li><a href="#c8"><span class="num">08</span>資本結構與風險</a></li>
-    <li><a href="#c9"><span class="num">09</span>The Stars Are Aligning</a></li>
+    <li><a href="#c6"><span class="num">06</span>制定規則的人<span class="ch-date">2025.12</span></a></li>
+    <li><a href="#c7"><span class="num">07</span>數位煉油廠<span class="ch-date">2026.01</span></a></li>
+    <li><a href="#c8"><span class="num">08</span>資本結構與風險<span class="ch-date">2026.02</span></a></li>
+    <li><a href="#c9"><span class="num">09</span>The Stars Are Aligning<span class="ch-date">2026.04</span></a></li>
   </ul>
 </nav>
 
@@ -370,6 +464,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">01</div>
     <h2 class="chapter-title">你的錢怎麼了</h2>
+    <div class="chapter-date">2025.06</div>
   </div>
   <div class="body">
     <p>你有沒有一種感覺：東西越來越貴，但薪水沒怎麼漲？</p>
@@ -385,6 +480,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH2 ── -->
 
@@ -392,6 +488,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">02</div>
     <h2 class="chapter-title">比特幣是什麼</h2>
+    <div class="chapter-date">2025.07</div>
   </div>
   <div class="body">
     <p>2008 年，全球金融海嘯。銀行倒閉、政府印鈔紓困。在這場混亂中，一個匿名者在一個幾百人的密碼學郵件論壇裡，發了一封信：</p>
@@ -409,6 +506,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH3 ── -->
 
@@ -416,6 +514,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">03</div>
     <h2 class="chapter-title">為什麼只有比特幣</h2>
+    <div class="chapter-date">2025.08</div>
   </div>
   <div class="body">
     <p>「可是，其他加密貨幣不也有這些特性嗎？」</p>
@@ -438,6 +537,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH4 ── -->
 
@@ -445,6 +545,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">04</div>
     <h2 class="chapter-title">為什麼大多數人還不理解</h2>
+    <div class="chapter-date">2025.09</div>
   </div>
   <div class="body">
     <p>如果比特幣這麼好，為什麼大多數人不買？</p>
@@ -465,6 +566,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH5 ── -->
 
@@ -472,6 +574,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">05</div>
     <h2 class="chapter-title">一個 21 歲的選擇</h2>
+    <div class="chapter-date">2025.10</div>
   </div>
   <div class="body">
     <p>我 19 歲開始接觸加密貨幣。不是從比特幣開始的——是從山寨幣開始的。追漲殺跌，槓桿合約，從 6 萬翻到 100 萬再歸零。跟大部分人一樣的故事。</p>
@@ -486,6 +589,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ═══════════════════════════════ -->
 
@@ -498,12 +602,17 @@ to { opacity: 1; transform: translateY(0); }
   <div class="part-title">Strategy 與比特幣本位</div>
 </div>
 
+<div class="part-intro">
+  <p>如果你讀完 Part I 已經理解比特幣的價值主張，<br>Part II 會進入一個更具體的問題：如何在傳統金融的框架裡配置比特幣？<br>這部分涉及股票、優先股、資本結構等概念，適合有基礎投資經驗的讀者。</p>
+</div>
+
 <!-- ── CH6 ── -->
 
 <section class="chapter" id="c6">
   <div class="chapter-header">
     <div class="chapter-num">06</div>
     <h2 class="chapter-title">制定規則的人</h2>
+    <div class="chapter-date">2025.12</div>
   </div>
   <div class="body">
     <p>在金融科技導論的課堂上，老師的投影片裡有一句話：「要成為制定規則的那個人。」下課之後我一直在想——渺小如我一個大學生，能制定什麼規則？</p>
@@ -518,6 +627,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH7 ── -->
 
@@ -525,6 +635,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">07</div>
     <h2 class="chapter-title">數位煉油廠</h2>
+    <div class="chapter-date">2026.01</div>
   </div>
   <div class="body">
     <p>要理解 Strategy 真正在做什麼，最好的類比是 Standard Oil。</p>
@@ -546,6 +657,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH8 ── -->
 
@@ -553,6 +665,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">08</div>
     <h2 class="chapter-title">資本結構與風險</h2>
+    <div class="chapter-date">2026.02</div>
   </div>
   <div class="body">
     <p>2025 年，Strategy 做了一件事，讓它的資本結構進化到新的層次：它發行了一檔叫 STRC 的優先股。</p>
@@ -571,6 +684,7 @@ to { opacity: 1; transform: translateY(0); }
   </div>
 </section>
 <div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH9 ── -->
 
@@ -578,6 +692,7 @@ to { opacity: 1; transform: translateY(0); }
   <div class="chapter-header">
     <div class="chapter-num">09</div>
     <h2 class="chapter-title">The Stars Are Aligning</h2>
+    <div class="chapter-date">2026.04 · 含時效性資訊</div>
   </div>
   <div class="body">
     <p>2026 年，幾件事正在同時發生。</p>
@@ -590,6 +705,8 @@ to { opacity: 1; transform: translateY(0); }
     <p>這是人類史上第一次，一個普通人跟華爾街的銀行家，站在完全相同的起跑線上。差別只在於，誰先理解了這件事。</p>
   </div>
 </section>
+<div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ═══ TIP ═══ -->
 
@@ -613,6 +730,7 @@ to { opacity: 1; transform: translateY(0); }
 </footer>
 
 <script>
+// ── Copy Lightning Address ──
 function copyAddr() {
   const a = document.getElementById('addr').textContent.trim();
   navigator.clipboard.writeText(a).then(() => {
@@ -621,6 +739,24 @@ function copyAddr() {
     setTimeout(() => o.classList.remove('on'), 2000);
   });
 }
+
+// ── Reading Progress Bar ──
+(function() {
+  const bar = document.getElementById('progressBar');
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
 </script>
 
 </body>
