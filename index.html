@@ -1,470 +1,495 @@
 <!DOCTYPE html>
-
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
 <title>W. — 囤比特幣筆記</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;700&family=JetBrains+Mono:wght@400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light only;
     --bg: #faf9f6;
     --surface: #f0efeb;
     --gold: #b08d2e;
     --gold-dim: #c4a85a;
-    --text: #2a2a28;
-    --text-dim: #7a786f;
-    --text-bright: #1a1a18;
+    --text: #1a1a1a;
+    --text-dim: #5a5850;
+    --text-bright: #000000;
     --divider: #ddd9d0;
   }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: #faf9f6 !important;
+    color: #1a1a1a !important;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
-  html { scroll-behavior: smooth; background: var(–bg); }
+  html { scroll-behavior: smooth; background: var(--bg); }
 
-body {
-font-family: ‘Noto Serif TC’, serif;
-background: var(–bg);
-color: var(–text);
-line-height: 2;
--webkit-font-smoothing: antialiased;
-}
+  body {
+    font-family: 'Noto Serif TC', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+  }
 
-::selection { background: var(–gold); color: #fff; }
+  ::selection { background: var(--gold); color: #fff; }
 
-/* ── READING PROGRESS BAR ── */
-.progress-bar {
-position: fixed;
-top: 0;
-left: 0;
-width: 0%;
-height: 2px;
-background: var(–gold);
-z-index: 1000;
-transition: width 0.1s linear;
-}
+  /* ── READING PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--gold);
+    z-index: 1000;
+    transition: width 0.1s linear;
+  }
 
-/* ── HERO ── */
-.hero {
-min-height: 85vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 3rem 2rem;
-}
+  /* ── HERO ── */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
 
-.hero-label {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.65rem;
-letter-spacing: 0.35em;
-text-transform: uppercase;
-color: var(–gold-dim);
-margin-bottom: 2rem;
-opacity: 0;
-animation: fadeUp 1s 0.2s forwards;
-}
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
 
-.hero-label a {
-color: inherit;
-text-decoration: none;
-border-bottom: 1px solid transparent;
-transition: border-color 0.3s;
-}
-.hero-label a:hover { border-bottom-color: var(–gold-dim); }
+  .hero-label a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .hero-label a:hover { border-bottom-color: var(--gold-dim); }
 
-.hero-title {
-font-family: ‘Noto Serif TC’, ‘Cormorant Garamond’, serif;
-font-size: clamp(2.8rem, 7vw, 5.5rem);
-font-weight: 400;
-color: var(–text-bright);
-letter-spacing: 0.05em;
-line-height: 1.15;
-margin-bottom: 1.5rem;
-opacity: 0;
-animation: fadeUp 1s 0.4s forwards;
-}
+  .hero-title {
+    font-family: 'Noto Serif TC', 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 400;
+    color: var(--text-bright);
+    letter-spacing: 0.05em;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
 
-.hero-title em {
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic;
-font-weight: 400;
-color: var(–gold);
-letter-spacing: -0.02em;
-}
+  .hero-title em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+  }
 
-.hero-sub {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.75rem;
-color: var(–text-dim);
-letter-spacing: 0.15em;
-margin-bottom: 2.5rem;
-opacity: 0;
-animation: fadeUp 1s 0.6s forwards;
-}
+  .hero-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
 
-.hero-bio {
-max-width: 380px;
-font-size: 0.9rem;
-color: var(–text-dim);
-line-height: 1.9;
-opacity: 0;
-animation: fadeUp 1s 0.8s forwards;
-}
+  .hero-bio {
+    max-width: 380px;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.9;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
 
-.hero-updated {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.6rem;
-color: var(–text-dim);
-letter-spacing: 0.2em;
-margin-top: 2.5rem;
-opacity: 0;
-animation: fadeUp 1s 1s forwards;
-}
+  .hero-updated {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
 
-/* ── TOC ── */
-.toc {
-max-width: 640px;
-margin: 0 auto;
-padding: 3rem 2rem;
-border-top: 1px solid var(–divider);
-}
+  /* ── TOC ── */
+  .toc {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--divider);
+  }
 
-.toc-part {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.6rem;
-letter-spacing: 0.35em;
-text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 0.8rem;
-margin-top: 2rem;
-}
+  .toc-part {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    margin-top: 2rem;
+  }
 
-.toc-part:first-child { margin-top: 0; }
+  .toc-part:first-child { margin-top: 0; }
 
-.toc-list {
-list-style: none;
-display: flex;
-flex-direction: column;
-gap: 0;
-}
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
 
-.toc-list a {
-display: flex;
-align-items: baseline;
-gap: 0.8rem;
-text-decoration: none;
-color: var(–text);
-padding: 0.55rem 0;
-border-bottom: 1px solid var(–divider);
-transition: all 0.3s;
-font-size: 0.95rem;
-}
+  .toc-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: var(--text);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--divider);
+    transition: all 0.3s;
+    font-size: 0.95rem;
+  }
 
-.toc-list a:hover {
-color: var(–gold);
-padding-left: 0.4rem;
-}
+  .toc-list a:hover {
+    color: var(--gold);
+    padding-left: 0.4rem;
+  }
 
-.toc-list .num {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.65rem;
-color: var(–text-dim);
-min-width: 1.2rem;
-}
+  .toc-list .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    min-width: 1.2rem;
+  }
 
-.toc-list .ch-date {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.55rem;
-color: var(–text-dim);
-margin-left: auto;
-opacity: 0.6;
-}
+  .toc-list .ch-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    margin-left: auto;
+    opacity: 0.6;
+  }
 
-/* ── CHAPTER ── */
-.chapter {
-max-width: 640px;
-margin: 0 auto;
-padding: 4rem 2rem 2rem;
-}
+  /* ── CHAPTER ── */
+  .chapter {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
+  }
 
-.chapter-header {
-margin-bottom: 2.5rem;
-padding-bottom: 1.2rem;
-border-bottom: 1px solid var(–divider);
-}
+  .chapter-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--divider);
+  }
 
-.chapter-num {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 3.5rem;
-font-weight: 400;
-color: var(–gold-dim);
-line-height: 1;
-opacity: 0.25;
-}
+  .chapter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: var(--gold-dim);
+    line-height: 1;
+    opacity: 0.25;
+  }
 
-.chapter-title {
-font-size: 1.4rem;
-font-weight: 700;
-color: var(–text-bright);
-margin-top: 0.4rem;
-}
+  .chapter-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-top: 0.4rem;
+  }
 
-.chapter-date {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.6rem;
-color: var(–text-dim);
-letter-spacing: 0.15em;
-margin-top: 0.5rem;
-opacity: 0.6;
-}
+  .chapter-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    margin-top: 0.5rem;
+    opacity: 0.6;
+  }
 
-.part-divider {
-max-width: 640px;
-margin: 0 auto;
-padding: 4rem 2rem 0;
-text-align: center;
-}
+  .part-divider {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 2rem 0;
+    text-align: center;
+  }
 
-.part-label {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.6rem;
-letter-spacing: 0.4em;
-text-transform: uppercase;
-color: var(–gold);
-}
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
 
-.part-title {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.8rem;
-font-weight: 400;
-font-style: italic;
-color: var(–text-bright);
-margin-top: 0.5rem;
-}
+  .part-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-bright);
+    margin-top: 0.5rem;
+  }
 
-.part-intro {
-max-width: 640px;
-margin: 0 auto;
-padding: 1.5rem 2rem 0;
-}
+  .part-intro {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 0;
+  }
 
-.part-intro p {
-font-size: 0.85rem;
-color: var(–text-dim);
-line-height: 1.9;
-text-align: center;
-max-width: 460px;
-margin: 0 auto;
-}
+  .part-intro p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.9;
+    text-align: center;
+    max-width: 460px;
+    margin: 0 auto;
+  }
 
-/* ── BODY ── */
-.body p {
-margin-bottom: 1.3rem;
-font-size: 1rem;
-line-height: 2;
-}
+  /* ── BODY ── */
+  .body p {
+    margin-bottom: 1.3rem;
+    font-size: 1rem;
+    line-height: 2;
+  }
 
-.body p:last-child { margin-bottom: 0; }
+  .body p:last-child { margin-bottom: 0; }
 
-.body .pull {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.2rem;
-font-style: italic;
-color: var(–text-bright);
-line-height: 1.75;
-margin: 2rem 0;
-padding-left: 1.4rem;
-border-left: 2px solid var(–gold);
-}
+  .body .pull {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-bright);
+    line-height: 1.75;
+    margin: 2rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--gold);
+  }
 
-.body .en {
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic;
-}
+  .body .en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
 
-.body .eq {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.85em;
-color: #4a4940;
-display: block;
-margin: 1rem 0;
-padding-left: 1.4rem;
-line-height: 2.2;
-}
+  .body .eq {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    color: #4a4940;
+    display: block;
+    margin: 1rem 0;
+    padding-left: 1.4rem;
+    line-height: 2.2;
+  }
 
-.sep {
-max-width: 640px;
-margin: 0 auto;
-padding: 1rem 2rem;
-border-bottom: 1px solid var(–divider);
-}
+  .sep {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--divider);
+  }
 
-/* ── BACK TO TOC ── */
-.back-toc {
-max-width: 640px;
-margin: 0 auto;
-padding: 0.8rem 2rem 0;
-text-align: right;
-}
+  /* ── BACK TO TOC ── */
+  .back-toc {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0.8rem 2rem 0;
+    text-align: right;
+  }
 
-.back-toc a {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.55rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–text-dim);
-text-decoration: none;
-opacity: 0.5;
-transition: all 0.3s;
-}
+  .back-toc a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    opacity: 0.5;
+    transition: all 0.3s;
+  }
 
-.back-toc a:hover {
-opacity: 1;
-color: var(–gold);
-}
+  .back-toc a:hover {
+    opacity: 1;
+    color: var(--gold);
+  }
 
-/* ── TIP ── */
-.tip {
-max-width: 640px;
-margin: 0 auto;
-padding: 4rem 2rem 6rem;
-text-align: center;
-}
+  /* ── TIP ── */
+  .tip {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+    text-align: center;
+  }
 
-.tip-icon { font-size: 1.8rem; margin-bottom: 1.2rem; opacity: 0.5; }
+  .tip-icon { font-size: 1.8rem; margin-bottom: 1.2rem; opacity: 0.5; }
 
-.tip-title {
-font-size: 1.1rem;
-color: var(–text-bright);
-margin-bottom: 0.8rem;
-}
+  .tip-title {
+    font-size: 1.1rem;
+    color: var(--text-bright);
+    margin-bottom: 0.8rem;
+  }
 
-.tip-desc {
-font-size: 0.85rem;
-color: var(–text-dim);
-max-width: 360px;
-margin: 0 auto 1.8rem;
-line-height: 1.8;
-}
+  .tip-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    max-width: 360px;
+    margin: 0 auto 1.8rem;
+    line-height: 1.8;
+  }
 
-.tip-addr {
-display: inline-block;
-background: var(–surface);
-border: 1px solid var(–divider);
-padding: 0.7rem 1.3rem;
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.7rem;
-color: var(–gold);
-word-break: break-all;
-cursor: pointer;
-transition: border-color 0.3s;
-}
+  .tip-addr {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    padding: 0.7rem 1.3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    word-break: break-all;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
 
-.tip-addr:hover { border-color: var(–gold-dim); }
+  .tip-addr:hover { border-color: var(--gold-dim); }
 
-.tip-sub {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.55rem;
-letter-spacing: 0.25em;
-color: var(–text-dim);
-margin-top: 0.6rem;
-}
+  .tip-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--text-dim);
+    margin-top: 0.6rem;
+  }
 
-.tip-ok {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.65rem;
-color: var(–gold);
-opacity: 0;
-transition: opacity 0.3s;
-margin-top: 0.5rem;
-}
+  .tip-ok {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin-top: 0.5rem;
+  }
 
-.tip-ok.on { opacity: 1; }
+  .tip-ok.on { opacity: 1; }
 
-/* ── FOOTER ── */
-.foot {
-text-align: center;
-padding: 1.5rem 2rem;
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.55rem;
-color: var(–text-dim);
-letter-spacing: 0.15em;
-border-top: 1px solid var(–divider);
-}
+  /* ── FOOTER ── */
+  .foot {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    border-top: 1px solid var(--divider);
+  }
 
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(16px); }
-to   { opacity: 1; transform: translateY(0); }
-}
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-@media (max-width: 640px) {
-.chapter { padding: 3rem 1.5rem 1.5rem; }
-.toc { padding: 2rem 1.5rem; }
-.tip { padding: 3rem 1.5rem 4rem; }
-.part-intro { padding: 1.5rem 1.5rem 0; }
-.back-toc { padding: 0.8rem 1.5rem 0; }
-.toc-list .ch-date { display: none; }
-}
+  @media (max-width: 640px) {
+    .chapter { padding: 3rem 1.5rem 1.5rem; }
+    .toc { padding: 2rem 1.5rem; }
+    .tip { padding: 3rem 1.5rem 4rem; }
+    .part-intro { padding: 1.5rem 1.5rem 0; }
+    .back-toc { padding: 0.8rem 1.5rem 0; }
+    .toc-list .ch-date { display: none; }
+  }
 </style>
-
 </head>
 <body>
 
 <!-- ═══ PROGRESS BAR ═══ -->
-
 <div class="progress-bar" id="progressBar"></div>
 
 <!-- ═══ HERO ═══ -->
-
 <section class="hero" id="top">
   <div class="hero-label"><a href="https://www.threads.net/@mstr_daily" target="_blank" rel="noopener">微策略日報 · Threads</a></div>
   <h1 class="hero-title">囤比特幣<br><em>筆記</em></h1>
   <div class="hero-sub">W. — NTU · 21 · BITCOIN MAXIMALIST</div>
   <p class="hero-bio">
-    寫給還在觀望的你。<br>
-    不是要你買比特幣，而是希望你理解它。<br>
-    理解之後，你會做出自己的決定。
+    這是我 19 歲到 21 歲之間，<br>
+    寫給自己的筆記。<br>
+    如果你願意，就讀下去吧。
   </p>
   <div class="hero-updated">LAST UPDATED — 2026.04</div>
 </section>
 
 <!-- ═══ TOC ═══ -->
-
 <nav class="toc" id="toc">
-  <div class="toc-part">Part I — 為什麼是比特幣</div>
+  <div class="toc-part">Preface</div>
+  <ul class="toc-list">
+    <li><a href="#preface"><span class="num">—</span>寫在前面<span class="ch-date"></span></a></li>
+  </ul>
+  <div class="toc-part">Part I — 為什麼我囤比特幣</div>
   <ul class="toc-list">
     <li><a href="#c1"><span class="num">01</span>你的錢怎麼了<span class="ch-date">2025.06</span></a></li>
     <li><a href="#c2"><span class="num">02</span>比特幣是什麼<span class="ch-date">2025.07</span></a></li>
     <li><a href="#c3"><span class="num">03</span>為什麼只有比特幣<span class="ch-date">2025.08</span></a></li>
     <li><a href="#c4"><span class="num">04</span>為什麼大多數人還不理解<span class="ch-date">2025.09</span></a></li>
-    <li><a href="#c5"><span class="num">05</span>一個 21 歲的選擇<span class="ch-date">2025.10</span></a></li>
   </ul>
   <div class="toc-part">Part II — Strategy 與比特幣本位</div>
   <ul class="toc-list">
-    <li><a href="#c6"><span class="num">06</span>制定規則的人<span class="ch-date">2025.12</span></a></li>
-    <li><a href="#c7"><span class="num">07</span>數位煉油廠<span class="ch-date">2026.01</span></a></li>
-    <li><a href="#c8"><span class="num">08</span>資本結構與風險<span class="ch-date">2026.02</span></a></li>
-    <li><a href="#c9"><span class="num">09</span>The Stars Are Aligning<span class="ch-date">2026.04</span></a></li>
+    <li><a href="#c6"><span class="num">05</span>制定規則的人<span class="ch-date">2025.12</span></a></li>
+    <li><a href="#c7"><span class="num">06</span>數位煉油廠<span class="ch-date">2026.01</span></a></li>
+    <li><a href="#c8"><span class="num">07</span>資本結構與風險<span class="ch-date">2026.02</span></a></li>
+    <li><a href="#c9"><span class="num">08</span>The Stars Are Aligning<span class="ch-date">2026.04</span></a></li>
+  </ul>
+  <div class="toc-part">Epilogue</div>
+  <ul class="toc-list">
+    <li><a href="#epilogue"><span class="num">—</span>後記<span class="ch-date"></span></a></li>
   </ul>
 </nav>
 
-<!-- ═══════════════════════════════ -->
+<!-- ═══ 前言 ═══ -->
+<section class="chapter" id="preface" style="padding-top: 5rem;">
+  <div class="chapter-header" style="border-bottom: none; padding-bottom: 0;">
+    <div class="part-label" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);">Preface</div>
+    <h2 class="chapter-title" style="margin-top: 0.6rem;">寫在前面</h2>
+  </div>
+  <div class="body">
+    <p>我 19 歲那年賠掉了一百萬。</p>
+    <p>不是投資失利，是純粹的投機——槓桿、合約、追漲殺跌。錢歸零之後我花了很長的時間坐下來想一件事：我到底在幹嘛。</p>
+    <p>後來我才明白，問題不是我不會交易，是「交易」本身就是錯的。那些讓我虧錢的山寨幣，不是因為買錯時機，而是它們從頭到尾就不值得持有。</p>
+    <p>這份筆記就是那之後寫的。</p>
+    <p>它不是教學，也不是分析。比較像是我把自己搞懂一件事的過程記下來，一篇一篇。中間有很多地方我想了很久才想通，也有很多地方可能到現在還是錯的。</p>
+    <p>我不打算說服你買比特幣。我只是想把我怎麼一步一步走到今天的思考，誠實地寫出來。</p>
+    <p>如果你剛好也在想類似的問題，歡迎一起讀。</p>
+    <p class="pull" style="margin-top: 2.5rem;">— W.<br><span class="en" style="font-size: 0.9rem;">2026 春</span></p>
+  </div>
+</section>
+<div class="sep"></div>
 
+<!-- ═══════════════════════════════ -->
 <!-- PART I                          -->
-
 <!-- ═══════════════════════════════ -->
-
 <div class="part-divider">
   <div class="part-label">Part I</div>
-  <div class="part-title">為什麼是比特幣</div>
+  <div class="part-title">為什麼我囤比特幣</div>
 </div>
 
 <!-- ── CH1 ── -->
-
 <section class="chapter" id="c1">
   <div class="chapter-header">
     <div class="chapter-num">01</div>
@@ -488,7 +513,6 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH2 ── -->
-
 <section class="chapter" id="c2">
   <div class="chapter-header">
     <div class="chapter-num">02</div>
@@ -514,7 +538,6 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH3 ── -->
-
 <section class="chapter" id="c3">
   <div class="chapter-header">
     <div class="chapter-num">03</div>
@@ -545,7 +568,6 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH4 ── -->
-
 <section class="chapter" id="c4">
   <div class="chapter-header">
     <div class="chapter-num">04</div>
@@ -573,35 +595,9 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="sep"></div>
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
-<!-- ── CH5 ── -->
-
-<section class="chapter" id="c5">
-  <div class="chapter-header">
-    <div class="chapter-num">05</div>
-    <h2 class="chapter-title">一個 21 歲的選擇</h2>
-    <div class="chapter-date">2025.10</div>
-  </div>
-  <div class="body">
-    <p>我 19 歲開始接觸加密貨幣。不是從比特幣開始的——是從山寨幣開始的。追漲殺跌，槓桿合約，從 6 萬翻到 100 萬再歸零。跟大部分人一樣的故事。</p>
-    <p>大部分人在炒幣歸零之後只剩兩條路：再借錢翻本，或從此不碰 crypto。</p>
-    <p>我走了第三條路。我沒有急著翻本，也沒有逃走。我花了很長的時間坐下來想清楚一個問題：為什麼我會輸？最後得出一個結論——問題不是我不會交易，問題是「交易」本身就是錯的。那些讓我虧錢的山寨幣，不是因為我買錯了時機，而是因為它們從頭到尾就不值得持有。它們的 K 線圖在激情過後就像停止的心電圖——那才是真正泡沫的樣子。而比特幣不是。</p>
-    <p>於是我開始囤比特幣。每天寫一篇筆記，記錄我的思考。不是為了做內容行銷，是為了跟自己確認——我沒有瘋。因為我身邊沒有人能跟我討論這些，說了別人也聽不懂，只能自己跟自己對話。</p>
-    <p>塔羅牌的第 0 號牌叫「愚者」。他身穿花衣，昂首走向懸崖，眼裡卻只有天空。世人笑他瘋癲，但他知道，這一躍不是墜落，而是飛翔的起點。囤比特幣的人，在別人眼裡就是這副模樣。我們看著資產腰斬還在喊 HODL，把私鑰刻在鋼板上，相信一串程式碼比國家信用更值錢。</p>
-    <p>所有脫離社會共識的選擇，最折磨人的從來都不是做決定的那一刻，而是你必須在周遭的不理解中，獨自熬過漫長又無聊的空白期。</p>
-    <p class="pull"><span class="en">I may be early, but I'm not wrong.</span></p>
-    <p>我不是要說服你買比特幣。我只是想讓你看見，在這個法幣無限增發、資產價格通膨、勞動力越來越廉價的世界裡，有一個 21 歲的大學生，選擇了一條不同的路。</p>
-    <p>這條路很孤獨。但在洪水來臨之前，每一個造方舟的人，看起來都像個瘋子。</p>
-  </div>
-</section>
-<div class="sep"></div>
-<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
-
 <!-- ═══════════════════════════════ -->
-
 <!-- PART II                         -->
-
 <!-- ═══════════════════════════════ -->
-
 <div class="part-divider">
   <div class="part-label">Part II</div>
   <div class="part-title">Strategy 與比特幣本位</div>
@@ -612,10 +608,9 @@ to   { opacity: 1; transform: translateY(0); }
 </div>
 
 <!-- ── CH6 ── -->
-
 <section class="chapter" id="c6">
   <div class="chapter-header">
-    <div class="chapter-num">06</div>
+    <div class="chapter-num">05</div>
     <h2 class="chapter-title">制定規則的人</h2>
     <div class="chapter-date">2025.12</div>
   </div>
@@ -635,10 +630,9 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH7 ── -->
-
 <section class="chapter" id="c7">
   <div class="chapter-header">
-    <div class="chapter-num">07</div>
+    <div class="chapter-num">06</div>
     <h2 class="chapter-title">數位煉油廠</h2>
     <div class="chapter-date">2026.01</div>
   </div>
@@ -665,10 +659,9 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH8 ── -->
-
 <section class="chapter" id="c8">
   <div class="chapter-header">
-    <div class="chapter-num">08</div>
+    <div class="chapter-num">07</div>
     <h2 class="chapter-title">資本結構與風險</h2>
     <div class="chapter-date">2026.02</div>
   </div>
@@ -692,10 +685,9 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
 <!-- ── CH9 ── -->
-
 <section class="chapter" id="c9">
   <div class="chapter-header">
-    <div class="chapter-num">09</div>
+    <div class="chapter-num">08</div>
     <h2 class="chapter-title">The Stars Are Aligning</h2>
     <div class="chapter-date">2026.04 · 含時效性資訊</div>
   </div>
@@ -713,14 +705,38 @@ to   { opacity: 1; transform: translateY(0); }
 <div class="sep"></div>
 <div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
-<!-- ═══ TIP ═══ -->
+<!-- ═══ 後記 ═══ -->
+<section class="chapter" id="epilogue" style="padding-top: 5rem;">
+  <div class="chapter-header" style="border-bottom: none; padding-bottom: 0;">
+    <div class="part-label" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);">Epilogue</div>
+    <h2 class="chapter-title" style="margin-top: 0.6rem;">後記</h2>
+  </div>
+  <div class="body">
+    <p>寫到這裡，八個章節，兩年的思考。</p>
+    <p>我常常在想，真正讓我變成現在這個樣子的，其實不是 19 歲那場歸零，而是那之後漫長的、沒有人能跟我討論的兩年。</p>
+    <p>我身邊沒有人在囤比特幣。說了別人也聽不懂，或是覺得我瘋了。所以我開始寫筆記，不是為了做內容行銷，是為了跟自己確認——我沒有瘋。</p>
+    <p>塔羅牌的第 0 號牌叫「愚者」。他身穿花衣，昂首走向懸崖，眼裡卻只有天空。世人笑他瘋癲，但他知道，這一躍不是墜落，而是飛翔的起點。囤比特幣的人，在別人眼裡就是這副模樣。我們看著資產腰斬還在喊 HODL，把私鑰刻在鋼板上，相信一串程式碼比國家信用更值錢。</p>
+    <p>所有脫離社會共識的選擇，最折磨人的從來都不是做決定的那一刻，而是你必須在周遭的不理解中，獨自熬過漫長又無聊的空白期。</p>
+    <p>老實說，我到現在還是會緊張。</p>
+    <p>每次看到有人寫一篇邏輯嚴密的文章，論證比特幣為什麼沒有價值、為什麼終將歸零，我都會停下來認真讀完。因為我沒辦法 <span class="en">unsee</span> 一個有說服力的推論——一旦看到了，我就得重新檢查我花了兩年搭建起來的整套思考，有沒有哪塊被拆穿。</p>
+    <p>我很怕那一天到來。怕我花了兩年相信的事情，其實只是我想相信。</p>
+    <p>但到目前為止，我還沒遇到一個論述能真正動搖我。不是因為我沒讀，是因為每一次我把自己當成對立方去攻擊這套思考，它都還站得住。</p>
+    <p>這不是信仰，這是我自己壓力測試過的結論。我還會繼續緊張，繼續讀反方，繼續檢查自己哪裡可能錯了。如果有一天我被說服了，我會第一個告訴你們。</p>
+    <p class="pull"><span class="en">I may be early, but I'm not wrong.</span></p>
+    <p>如果你讀到這裡，我想說的其實不是比特幣本身。</p>
+    <p>是這個世界上有太多事情，需要你在沒有人理解的狀態下，一個人走很久。金錢的選擇只是其中一種。更多時候，它是關於你想過什麼樣的生活、相信什麼樣的價值、願意為了什麼等很久。</p>
+    <p>這條路很孤獨。但在洪水來臨之前，每一個造方舟的人，看起來都像個瘋子。</p>
+  </div>
+</section>
+<div class="sep"></div>
+<div class="back-toc"><a href="#toc">↑ 目錄</a></div>
 
+<!-- ═══ TIP ═══ -->
 <section class="tip">
   <div class="tip-icon">⚡</div>
-  <div class="tip-title">如果這些文字對你有幫助</div>
+  <div class="tip-title">如果你覺得這份筆記值得什麼</div>
   <p class="tip-desc">
-    這份筆記是免費的。<br>
-    如果你覺得它值得什麼，可以透過 Lightning Network 打賞。
+    這是我的地址。
   </p>
   <div class="tip-addr" onclick="copyAddr()" id="addr">
     fixedocelot62@walletofsatoshi.com
