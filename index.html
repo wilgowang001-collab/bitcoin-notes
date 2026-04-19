@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W. — 囤比特幣筆記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;700&family=JetBrains+Mono:wght@400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f6;
+    --surface: #f0efeb;
+    --gold: #8b7432;
+    --gold-dim: #a89460;
+    --text: #2a2a28;
+    --text-dim: #7a786f;
+    --text-bright: #1a1a18;
+    --divider: #ddd9d0;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(–bg); }
+
+body {
+font-family: ‘Noto Serif TC’, serif;
+background: var(–bg);
+color: var(–text);
+line-height: 2;
+-webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(–gold); color: #fff; }
+
+/* ── HERO ── */
+.hero {
+min-height: 85vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 3rem 2rem;
+}
+
+.hero-label {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.65rem;
+letter-spacing: 0.35em;
+text-transform: uppercase;
+color: var(–gold-dim);
+margin-bottom: 2rem;
+opacity: 0;
+animation: fadeUp 1s 0.2s forwards;
+}
+
+.hero-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(2.8rem, 7vw, 5.5rem);
+font-weight: 400;
+color: var(–text-bright);
+letter-spacing: -0.02em;
+line-height: 1.15;
+margin-bottom: 1.5rem;
+opacity: 0;
+animation: fadeUp 1s 0.4s forwards;
+}
+
+.hero-title em {
+font-style: italic;
+color: var(–gold);
+}
+
+.hero-sub {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.75rem;
+color: var(–text-dim);
+letter-spacing: 0.15em;
+margin-bottom: 2.5rem;
+opacity: 0;
+animation: fadeUp 1s 0.6s forwards;
+}
+
+.hero-bio {
+max-width: 380px;
+font-size: 0.9rem;
+color: var(–text-dim);
+line-height: 1.9;
+opacity: 0;
+animation: fadeUp 1s 0.8s forwards;
+}
+
+/* ── TOC ── */
+.toc {
+max-width: 640px;
+margin: 0 auto;
+padding: 3rem 2rem;
+border-top: 1px solid var(–divider);
+}
+
+.toc-part {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.6rem;
+letter-spacing: 0.35em;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 0.8rem;
+margin-top: 2rem;
+}
+
+.toc-part:first-child { margin-top: 0; }
+
+.toc-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 0;
+}
+
+.toc-list a {
+display: flex;
+align-items: baseline;
+gap: 0.8rem;
+text-decoration: none;
+color: var(–text);
+padding: 0.55rem 0;
+border-bottom: 1px solid var(–divider);
+transition: all 0.3s;
+font-size: 0.95rem;
+}
+
+.toc-list a:hover {
+color: var(–gold);
+padding-left: 0.4rem;
+}
+
+.toc-list .num {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.65rem;
+color: var(–text-dim);
+min-width: 1.2rem;
+}
+
+/* ── CHAPTER ── */
+.chapter {
+max-width: 640px;
+margin: 0 auto;
+padding: 4rem 2rem 2rem;
+}
+
+.chapter-header {
+margin-bottom: 2.5rem;
+padding-bottom: 1.2rem;
+border-bottom: 1px solid var(–divider);
+}
+
+.chapter-num {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 3.5rem;
+font-weight: 400;
+color: var(–gold-dim);
+line-height: 1;
+opacity: 0.25;
+}
+
+.chapter-title {
+font-size: 1.4rem;
+font-weight: 700;
+color: var(–text-bright);
+margin-top: 0.4rem;
+}
+
+.part-divider {
+max-width: 640px;
+margin: 0 auto;
+padding: 4rem 2rem 0;
+text-align: center;
+}
+
+.part-label {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.6rem;
+letter-spacing: 0.4em;
+text-transform: uppercase;
+color: var(–gold);
+}
+
+.part-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.8rem;
+font-weight: 400;
+font-style: italic;
+color: var(–text-bright);
+margin-top: 0.5rem;
+}
+
+/* ── BODY ── */
+.body p {
+margin-bottom: 1.3rem;
+font-size: 1rem;
+line-height: 2;
+}
+
+.body p:last-child { margin-bottom: 0; }
+
+.body .pull {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem;
+font-style: italic;
+color: var(–text-bright);
+line-height: 1.75;
+margin: 2rem 0;
+padding-left: 1.4rem;
+border-left: 2px solid var(–gold);
+}
+
+.body .en {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+}
+
+.body .eq {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.85em;
+color: #4a4940;
+display: block;
+margin: 1rem 0;
+padding-left: 1.4rem;
+line-height: 2.2;
+}
+
+.sep {
+max-width: 640px;
+margin: 0 auto;
+padding: 1rem 2rem;
+border-bottom: 1px solid var(–divider);
+}
+
+/* ── TIP ── */
+.tip {
+max-width: 640px;
+margin: 0 auto;
+padding: 4rem 2rem 6rem;
+text-align: center;
+}
+
+.tip-icon { font-size: 1.8rem; margin-bottom: 1.2rem; opacity: 0.5; }
+
+.tip-title {
+font-size: 1.1rem;
+color: var(–text-bright);
+margin-bottom: 0.8rem;
+}
+
+.tip-desc {
+font-size: 0.85rem;
+color: var(–text-dim);
+max-width: 360px;
+margin: 0 auto 1.8rem;
+line-height: 1.8;
+}
+
+.tip-addr {
+display: inline-block;
+background: var(–surface);
+border: 1px solid var(–divider);
+padding: 0.7rem 1.3rem;
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.7rem;
+color: var(–gold);
+word-break: break-all;
+cursor: pointer;
+transition: border-color 0.3s;
+}
+
+.tip-addr:hover { border-color: var(–gold-dim); }
+
+.tip-sub {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.55rem;
+letter-spacing: 0.25em;
+color: var(–text-dim);
+margin-top: 0.6rem;
+}
+
+.tip-ok {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.65rem;
+color: var(–gold);
+opacity: 0;
+transition: opacity 0.3s;
+margin-top: 0.5rem;
+}
+
+.tip-ok.on { opacity: 1; }
+
+/* ── FOOTER ── */
+.foot {
+text-align: center;
+padding: 1.5rem 2rem;
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.55rem;
+color: var(–text-dim);
+letter-spacing: 0.15em;
+border-top: 1px solid var(–divider);
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(16px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+.chapter { padding: 3rem 1.5rem 1.5rem; }
+.toc { padding: 2rem 1.5rem; }
+.tip { padding: 3rem 1.5rem 4rem; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+
+<section class="hero">
+  <div class="hero-label">微策略日報 · Threads</div>
+  <h1 class="hero-title">囤比特幣<br><em>筆記</em></h1>
+  <div class="hero-sub">W. — NTU · 21 · BITCOIN MAXIMALIST</div>
+  <p class="hero-bio">
+    寫給還在觀望的你。<br>
+    不是要你買比特幣，而是希望你理解它。<br>
+    理解之後，你會做出自己的決定。
+  </p>
+</section>
+
+<!-- ═══ TOC ═══ -->
+
+<nav class="toc">
+  <div class="toc-part">Part I — 為什麼是比特幣</div>
+  <ul class="toc-list">
+    <li><a href="#c1"><span class="num">01</span>你的錢怎麼了</a></li>
+    <li><a href="#c2"><span class="num">02</span>比特幣是什麼</a></li>
+    <li><a href="#c3"><span class="num">03</span>為什麼只有比特幣</a></li>
+    <li><a href="#c4"><span class="num">04</span>為什麼大多數人還不理解</a></li>
+    <li><a href="#c5"><span class="num">05</span>一個 21 歲的選擇</a></li>
+  </ul>
+  <div class="toc-part">Part II — Strategy 與比特幣本位</div>
+  <ul class="toc-list">
+    <li><a href="#c6"><span class="num">06</span>制定規則的人</a></li>
+    <li><a href="#c7"><span class="num">07</span>數位煉油廠</a></li>
+    <li><a href="#c8"><span class="num">08</span>資本結構與風險</a></li>
+    <li><a href="#c9"><span class="num">09</span>The Stars Are Aligning</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════ -->
+
+<!-- PART I                          -->
+
+<!-- ═══════════════════════════════ -->
+
+<div class="part-divider">
+  <div class="part-label">Part I</div>
+  <div class="part-title">為什麼是比特幣</div>
+</div>
+
+<!-- ── CH1 ── -->
+
+<section class="chapter" id="c1">
+  <div class="chapter-header">
+    <div class="chapter-num">01</div>
+    <h2 class="chapter-title">你的錢怎麼了</h2>
+  </div>
+  <div class="body">
+    <p>你有沒有一種感覺：東西越來越貴，但薪水沒怎麼漲？</p>
+    <p>這不是錯覺。科技進步的本質是通縮——AI 讓生產成本降低、能源越來越便宜，照理說，我們生活中的物價應該每年下跌個 5%。但你感受到的卻是每年漲 2%。</p>
+    <p>問題出在現代金融體系建立在龐大的債務之上。名目債務的數字是固定的，一旦發生通縮，所有人的實質還款壓力就會瞬間暴增，整個系統會崩潰。</p>
+    <p>為了讓這台機器繼續運轉，央行唯一的選擇就是不斷印鈔，硬生生把原本 -5% 的技術通縮扭轉成 +2% 的名目通膨。</p>
+    <p class="pull">(-5) + 7 = 2<br>這憑空多印出來的 7%，就是在稀釋所有法幣持有者的財富。</p>
+    <p>於是資金開始逃離那些「跑不贏印鈔機」的資產——債券、現金、平庸的企業。巴菲特說「無腦買進大盤指數，跑贏通膨」，但如果你把股價拆開來看：</p>
+    <span class="eq">黃金價格 ＝ 工業價值 ＋ 貨幣溢價<br>股市價格 ＝ 企業現金流 ＋ 貨幣溢價 ＋ 營運風險<br>比特幣價格 ＝ 貨幣溢價</span>
+    <p>當前股市的高本益比，或許不全是因為企業獲利爆發，而是因為資金在法幣體系中無處可去。你為了保值被迫擠進股市，卻承擔了不必要的營運風險——你得賭 CEO 不犯錯、賭技術路線正確、賭財報不爆雷。</p>
+    <p>如果你只是想存錢，為什麼非得去承擔這些你無法控制的風險？</p>
+    <p>也許，我們需要一個更純粹的選項。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH2 ── -->
+
+<section class="chapter" id="c2">
+  <div class="chapter-header">
+    <div class="chapter-num">02</div>
+    <h2 class="chapter-title">比特幣是什麼</h2>
+  </div>
+  <div class="body">
+    <p>2008 年，全球金融海嘯。銀行倒閉、政府印鈔紓困。在這場混亂中，一個匿名者在一個幾百人的密碼學郵件論壇裡，發了一封信：</p>
+    <p class="pull"><span class="en">「I've been working on a new electronic cash system that's fully peer-to-peer, with no trusted third party.」</span></p>
+    <p>三個月後，他把軟體上線了。第一個區塊裡他埋了一句話——那天倫敦泰晤士報的頭條：英國財政大臣即將對銀行進行第二次紓困。他將舊世界崩塌的證據，刻進了新世界的基石裡。</p>
+    <p>兩年後，他確認系統穩定運作，就永遠離開了。他很清楚，他的離開是比特幣成功的必要條件之一——因為只要創造者還在，這個系統就不是真正中立的。</p>
+    <p>這個人叫中本聰。沒有人知道他是誰。</p>
+    <p>那比特幣到底是什麼？很多人試圖用「數位黃金」或「加密貨幣」來解釋它，但這些比喻都不精準。Jack Mallers 的演講裡有一個更好的框架：<span class="en">The Map is Not the Territory</span>（地圖不等於領土）。</p>
+    <p>法幣的價值來自政府的信用——但政府信用是一種「抽象的承諾」。央行可以修改貨幣供給，就像在地圖上重新畫線，但領土本身並沒有改變。你的購買力被稀釋了，但帳戶上的數字看起來沒變。</p>
+    <p>比特幣不同。它引入了外部的物理限制。要獲得比特幣，必須在真實世界消耗能量——這是一道無法靠修改程式碼就跨越的物理屏障。馬斯克說過：<span class="en">「Impossible to fake energy.」</span> 黃仁勳則說：<span class="en">「Bitcoin is absorbing excess energy and storing it as a new currency.」</span></p>
+    <p class="pull">中本聰並非發明了比特幣，而是找到了將密碼學、博弈論、熱力學、網路技術拼在一起的那個「唯一解」。</p>
+    <p>它的偉大之處不在於創造了什麼新技術，而在於透過這四者的結合，徹底剔除了貨幣系統中最大的變數——「人」。</p>
+    <p>比特幣的邏輯是數學公理與能量守恆。數學不會因為你是哪國人而改變，能量不會因為你的政治立場而增減。在一個充滿偏見與互不信任的世界裡，人類最終只能相信一個「沒有人能控制」的東西。</p>
+    <p>但這些都只是理論。真正讓我信服的，是時間。比特幣已經在沒有任何公司、政府或組織維護的情況下，不間斷運行了超過十五年。這段期間它被宣告死亡超過 400 次，經歷了交易所倒閉、國家禁令、量子威脅論、每一輪 80% 以上的暴跌——但它的網路從未停止過一秒。沒有客服、沒有總部、沒有 CEO，卻比任何一間銀行都更可靠。這不是運氣，這是數學的力量。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH3 ── -->
+
+<section class="chapter" id="c3">
+  <div class="chapter-header">
+    <div class="chapter-num">03</div>
+    <h2 class="chapter-title">為什麼只有比特幣</h2>
+  </div>
+  <div class="body">
+    <p>「可是，其他加密貨幣不也有這些特性嗎？」</p>
+    <p>不。比特幣之所以是唯一的選擇，有四個原因。</p>
+    <p><strong>第一，它不需要創新。</strong></p>
+    <p>科技產業的規律是「長江後浪推前浪」。即便是最強的巨頭，也必須不斷推出新產品，稍有停滯就會被替代。但比特幣不是科技產品，它是一套規則。它不需要開產品發布會，不需要為了營收去改變什麼。它的價值，恰恰來自於它的「不變」。</p>
+    <p><strong>第二，它必須是「無用的」。</strong></p>
+    <p>你爸媽可能會說：房子能住、店面能租，才叫有價值。但一個資產一旦有了實際用途，它就得背負兩個枷鎖：流動性的犧牲，和地域的侷限。</p>
+    <p>台北的房產只對需要在台北生活的人有吸引力，離開這個地理範圍，它的價值共識就會斷崖式下跌。但比特幣沒有物理實體，不受地域限制，全球任何地方的人都能在幾秒內轉移它。</p>
+    <p class="pull">最好的價值儲存，必須是無用的。只有擺脫了地域需求的束縛，資產才能獲得真正的全球共識。</p>
+    <p><strong>第三，絕對中立。</strong></p>
+    <p>黃金不屬於任何國家，但開採和儲存黃金的能力仍然受限於地理與政治。美元由美國控制，人民幣由中國控制，連以太坊都有一個基金會和一群核心開發者可以修改規則。世界上幾乎所有的價值系統，背後都站著一個「人」或一個「組織」。</p>
+    <p>比特幣是唯一的例外。它的創造者消失了——不是被迫離開，而是主動選擇在系統穩定後退場，因為他知道自己的存在本身就是一個中心化的風險。沒有任何人能修改比特幣的發行規則，沒有任何國家能凍結比特幣的網路，沒有任何組織能決定誰可以、誰不可以使用它。這種絕對中立，是歷史上從未出現過的屬性，也是無法被任何後來者複製的。</p>
+    <p><strong>第四，先行者的不可複製性。</strong></p>
+    <p>山寨幣也稀缺，但稀缺不等於有價值。比特幣是唯一一個佔據了人類群體意識的加密貨幣先行者。這種先行者地位是歷史給的，無法靠技術複製。就像你可以做一個功能更好的社群平台，但你複製不了 Facebook 的網路效應。</p>
+    <p>當你理解，你擁有的是整個網路 2100 萬分之一的永久所有權時，你內心擁有的安全感，應該要大過在曼哈頓擁有一間房子。</p>
+    <p>如果你還是不確定，看看這個模式：</p>
+    <span class="eq">2014: idiot · 2015: idiot · 2016: idiot<br>2017: you got lucky<br>2018: idiot · 2019: idiot · 2020: idiot<br>2021: you got lucky<br>2022: idiot · 2023: idiot · 2024: idiot<br>2025: you got lucky<br>2026: idiot</span>
+    <p>囤比特幣的人，在 90% 的時間裡都被當成傻子。但每隔幾年，所有人都會突然說你「運氣好」。然後下一輪開始，你又變回傻子。這個模式已經重複了四次。而每一次「運氣好」的價格，都比上一次高出一個數量級。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH4 ── -->
+
+<section class="chapter" id="c4">
+  <div class="chapter-header">
+    <div class="chapter-num">04</div>
+    <h2 class="chapter-title">為什麼大多數人還不理解</h2>
+  </div>
+  <div class="body">
+    <p>如果比特幣這麼好，為什麼大多數人不買？</p>
+    <p>因為人類的安全感建立在舒適圈之上。我們習慣了用看得見、摸得到的東西來儲存財富——房子、黃金、現金。比特幣只是一串程式碼，沒有實體，這讓人本能地感到恐懼。但這是人類從物理世界走向數位世界的陣痛，不是比特幣的問題。</p>
+    <p><strong>「比特幣是泡沫」——這是最常見的質疑。</strong></p>
+    <p>真正的泡沫，特徵是「一去不復返」。你去看那些上一輪紅極一時的山寨幣，它們的 K 線圖在激情過後就像停止的心電圖，長時間躺在底部毫無生氣——這才是泡沫破裂的樣子。</p>
+    <p>反觀比特幣，十五年來經歷了多次暴跌，但每一次都從灰燼中爬起，每一次熊市的底部都比上一次更高。它不是泡沫，它是一場正在發生的貨幣進化。</p>
+    <p><strong>「金融體系很穩定，不需要比特幣」——這是另一個常見的誤解。</strong></p>
+    <p>在自然界與工程系統中，失敗是必要的演化機制。但金融體系裡，「大到不能倒」切斷了風險與責任的連結。銀行家玩的是一場「贏了算我的，輸了算大家的」遊戲。這種人為的穩定，就像在森林裡拼命撲滅每一場小火災——表面上在保護森林，其實是在讓枯枝落葉無限堆積，最終釀成無法撲滅的大火。</p>
+    <p>FTX 倒了、BlockFi 死了，但比特幣依然在運行。它的世界沒有紓困機制，市場透過殘酷的清洗變得更健康。</p>
+    <p class="pull">唯有允許個體死亡，才能確保整體生存。</p>
+    <p><strong>「我的理財規劃很穩定，不需要比特幣」——這是最隱蔽的陷阱。</strong></p>
+    <p>最近很流行一種玩法：買非投資等級債 ETF，質押借錢，再買更多，用配息滾複利。目標是「月領十萬被動收入」。整個模型建立在一個假設上：配息會永遠穩定發放。</p>
+    <p>但非投資等級債的本質是什麼？就是你把錢借給一群信用不好的公司。利息高不是因為它慷慨，是因為它還不出來的機率比較高。目前全球有 29 兆美元的企業債務即將到期，這些公司必須在高利率環境下借新還舊，同時 AI 正在侵蝕大量傳統產業的現金流。</p>
+    <p>塔雷伯講過一個寓言：有一隻火雞，農場主人每天準時餵牠。火雞根據過去一千天的數據建立了一個模型——「明天也會被餵」。信心越來越強。直到感恩節那天，牠的模型徹底失效了。</p>
+    <p>那些在社群裡互相確認「不需要帶傘」的人，就是那隻火雞。統計學的核心是歸納法，但歸納法的前提是環境穩定。當結構性斷裂來臨，過去的數據不只無法預測未來，還會給你虛假的安全感。</p>
+    <p>叔本華說過，所有真理都經歷三個階段：先是被嘲笑，然後被激烈反對，最後被視為理所當然。比特幣正在從第二階段走向第三階段。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH5 ── -->
+
+<section class="chapter" id="c5">
+  <div class="chapter-header">
+    <div class="chapter-num">05</div>
+    <h2 class="chapter-title">一個 21 歲的選擇</h2>
+  </div>
+  <div class="body">
+    <p>我 19 歲開始接觸加密貨幣。不是從比特幣開始的——是從山寨幣開始的。追漲殺跌，槓桿合約，從 6 萬翻到 100 萬再歸零。跟大部分人一樣的故事。</p>
+    <p>大部分人在炒幣歸零之後只剩兩條路：再借錢翻本，或從此不碰 crypto。</p>
+    <p>我走了第三條路。我沒有急著翻本，也沒有逃走。我花了很長的時間坐下來想清楚一個問題：為什麼我會輸？最後得出一個結論——問題不是我不會交易，問題是「交易」本身就是錯的。那些讓我虧錢的山寨幣，不是因為我買錯了時機，而是因為它們從頭到尾就不值得持有。它們的 K 線圖在激情過後就像停止的心電圖——那才是真正泡沫的樣子。而比特幣不是。</p>
+    <p>於是我開始囤比特幣。每天寫一篇筆記，記錄我的思考。不是為了做內容行銷，是為了跟自己確認——我沒有瘋。因為我身邊沒有人能跟我討論這些，說了別人也聽不懂，只能自己跟自己對話。</p>
+    <p>塔羅牌的第 0 號牌叫「愚者」。他身穿花衣，昂首走向懸崖，眼裡卻只有天空。世人笑他瘋癲，但他知道，這一躍不是墜落，而是飛翔的起點。囤比特幣的人，在別人眼裡就是這副模樣。我們看著資產腰斬還在喊 HODL，把私鑰刻在鋼板上，相信一串程式碼比國家信用更值錢。</p>
+    <p>所有脫離社會共識的選擇，最折磨人的從來都不是做決定的那一刻，而是你必須在周遭的不理解中，獨自熬過漫長又無聊的空白期。</p>
+    <p class="pull"><span class="en">I may be early, but I'm not wrong.</span></p>
+    <p>我不是要說服你買比特幣。我只是想讓你看見，在這個法幣無限增發、資產價格通膨、勞動力越來越廉價的世界裡，有一個 21 歲的大學生，選擇了一條不同的路。</p>
+    <p>這條路很孤獨。但在洪水來臨之前，每一個造方舟的人，看起來都像個瘋子。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════ -->
+
+<!-- PART II                         -->
+
+<!-- ═══════════════════════════════ -->
+
+<div class="part-divider">
+  <div class="part-label">Part II</div>
+  <div class="part-title">Strategy 與比特幣本位</div>
+</div>
+
+<!-- ── CH6 ── -->
+
+<section class="chapter" id="c6">
+  <div class="chapter-header">
+    <div class="chapter-num">06</div>
+    <h2 class="chapter-title">制定規則的人</h2>
+  </div>
+  <div class="body">
+    <p>在金融科技導論的課堂上，老師的投影片裡有一句話：「要成為制定規則的那個人。」下課之後我一直在想——渺小如我一個大學生，能制定什麼規則？</p>
+    <p>我們從小被教導的規則是：努力讀書、找好工作、存錢買房。但現實的規則是：法幣無限增發、資產價格通膨、勞動力越來越廉價。</p>
+    <p>直到我看懂了 Strategy（前身 MicroStrategy）。這間公司原本是一家做企業數據分析軟體的美國上市公司，規模不大，在科技業裡算不上出色。但 2020 年，它的創辦人 Michael Saylor 做了一個當時被所有人嘲笑的決定：把公司帳上的現金全部換成比特幣。</p>
+    <p>他的邏輯很簡單——現金放在帳上每年被通膨吃掉，不如換成一個總量固定、無法被稀釋的資產。一般 CEO 會被董事會轟下台，但 Saylor 是公司的最大股東，沒有人攔得住他。於是他不只把現金換了，還開始借錢買、發行新股買、發行債券買——整間公司從軟體公司變成了一台比特幣囤積機器。</p>
+    <p>截至 2026 年，Strategy 持有超過 50 萬顆比特幣，是全世界持有最多比特幣的上市公司。它的股票代號是 MSTR，買 MSTR 的股票，本質上就是間接持有比特幣——而且是帶槓桿的。</p>
+    <p>它的運作邏輯像一個飛輪：用溢價發行新股 → 拿到的錢全部買比特幣 → 每股對應的比特幣數量上升 → 投資人願意付更高的溢價買股票 → 再發行新股，循環加速。只要比特幣的長期方向是向上的，這台機器就會越轉越快。而比特幣的長期方向，在過去十五年裡，從來沒有改變過。</p>
+    <p class="pull">既然我沒有資本去改變世界，那我就把資本押注在那個正在改變世界的人身上。</p>
+    <p>很多人會說，預測一間公司五到十年後的競爭格局太難了。沒錯——自駕車是必然趨勢，但 AOL 和 Yahoo 不是網路的最終贏家，Nokia 也沒有贏得智慧型手機的戰爭。「趨勢必然發生」跟「某家公司一定贏」是完全不同的事。</p>
+    <p>但 Strategy 不一樣。它的商業模式不依賴技術創新、不需要打贏競爭對手。它唯一需要的，是比特幣繼續存在。而比特幣的存在，不取決於任何一間公司。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH7 ── -->
+
+<section class="chapter" id="c7">
+  <div class="chapter-header">
+    <div class="chapter-num">07</div>
+    <h2 class="chapter-title">數位煉油廠</h2>
+  </div>
+  <div class="body">
+    <p>要理解 Strategy 真正在做什麼，最好的類比是 Standard Oil。</p>
+    <p>十九世紀末，John D. Rockefeller 發現原油本身幾乎沒有用處——它需要被提煉成煤油、汽油、柴油，才能變成消費者真正需要的東西。Standard Oil 做的事就是把原油變成不同的產品，賣給不同需求的人。最終，Rockefeller 建立了人類史上最大的壟斷企業。</p>
+    <p>Strategy 做的事本質上一模一樣，只是把原油換成了比特幣。</p>
+    <p>比特幣很好，但大部分機構投資人無法直接買它——退休基金有法規限制、企業財務長受不了波動、保險公司的資產配置手冊裡根本沒有「加密貨幣」這個選項。比特幣對他們來說就像未經提煉的原油：有價值，但無法直接使用。</p>
+    <p>Strategy 做的就是把比特幣「提煉」成不同風險等級的金融商品，讓每一種投資人都能找到適合自己的入口：</p>
+    <p>想要穩定配息、最低風險的保守型投資人？有 STRF（高優先順位、固定 10% 股息）。想要短期穩定、接近貨幣市場基金的體驗？有 STRC（浮動利率、價格錨定在 100 美元附近）。想要兼顧配息和比特幣上漲潛力的？有 STRK（可轉換為普通股）。想要最大化報酬、願意承擔全部波動的？直接買 MSTR 普通股。</p>
+    <p>每一層商品都在吸引不同的資金池。加在一起，Strategy 觸及的潛在市場是整個全球固定收益市場——大約 300 到 500 兆美元。</p>
+    <p><strong>商業模式的核心只有一句話：</strong></p>
+    <p class="pull">用 8-12% 的資金成本借錢，買入年化報酬率 20-30% 的資產，賺取中間的利差。</p>
+    <p>Strategy 付給投資人的股息是用法幣計價的——而法幣每年貶值大約 8%。它買入的資產是比特幣——過去十五年的年化報酬率超過 30%。只要比特幣的長期報酬率持續高於資金成本，這台機器就會永遠運轉下去。</p>
+    <p><strong>護城河：為什麼沒有人能複製它？</strong></p>
+    <p>你可能會問：如果模式這麼簡單，為什麼別人不來抄？事實上，已經有幾十間公司在模仿了。但這裡有一個反直覺的事實：每一間新的比特幣金庫公司，反而都在強化 Strategy 的地位。</p>
+    <p>邏輯很簡單：新公司進場買比特幣 → 比特幣價格上漲 → Strategy 持有的 50 萬顆比特幣市值上升 → Strategy 的市值上升 → 它能用更好的條件發行新商品、募集更多資金、買更多比特幣。</p>
+    <p>這就像一個城市越多人搬進來，房價越高，最大的地主反而越有錢。Strategy 已經達到了「逃逸速度」——它的規模本身就是護城河。其他公司想追上它，唯一的方法是好幾間合併在一起。</p>
+    <p>更重要的是，Strategy 不只是持有比特幣數量最多，它還壟斷了「數位信用」這個品類。要發行比特幣擔保的信用商品，你需要兩樣東西：足夠大的抵押品規模，和資本市場的信任。Strategy 從 1998 年就在 NASDAQ 上市，是第一間把比特幣放進資產負債表的上市公司。這種先行者信任，不是靠錢能買到的。</p>
+    <p class="pull">比特幣是貨幣的壟斷。Strategy 是比特幣信用市場的壟斷。</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH8 ── -->
+
+<section class="chapter" id="c8">
+  <div class="chapter-header">
+    <div class="chapter-num">08</div>
+    <h2 class="chapter-title">資本結構與風險</h2>
+  </div>
+  <div class="body">
+    <p>2025 年，Strategy 做了一件事，讓它的資本結構進化到新的層次：它發行了一檔叫 STRC 的優先股。</p>
+    <p>什麼是優先股？簡單說，它是一種介於股票和債券之間的東西。買普通股（MSTR）的人，享受比特幣上漲的所有好處，但也承受所有的下跌風險。買優先股（STRC）的人，放棄了暴漲的機會，換來的是穩定的固定配息和優先償還的權利——就像你把房子租給別人，你不管房價漲跌，只要每個月準時收到房租。</p>
+    <p>這個設計解決了一個長期困擾 Saylor 的問題。過去他忙著說服微軟或其他企業直接持有比特幣，但大多數企業的財務長無法承受比特幣動輒 30-50% 的價格波動——把公司現金丟進一個可能半年腰斬的資產，沒有幾個 CFO 敢簽字。</p>
+    <p>STRC 把波動精準地剝離出來，交由普通股股東去承擔。企業端只需要持有 STRC 這個穩定的信用工具，就能間接配置在比特幣的體系裡，同時帳面上看起來跟買了一張公司債沒什麼兩樣。</p>
+    <p>這套結構的防禦力有多強？比特幣從最高點回檔將近 50%，STRC 依然穩穩維持在面額附近。</p>
+    <p>做空者也成為這台機器的燃料。當空頭借券賣出，帳面上會創造出「虛假多頭」——在只有 10 股股票的世界裡，做空 20% 就會讓 12 個人同時認為自己持有股票。當股價反轉向上，空頭被迫平倉回補時，在 Strategy 這種籌碼被信仰者和指數基金鎖死的結構下，市場上可能根本沒有賣家。</p>
+    <p><strong>但這不代表沒有風險。</strong></p>
+    <p>Strategy 的模式建立在一個前提上：比特幣的長期報酬率必須高於資金成本。如果比特幣進入一個超長期的停滯甚至下跌，飛輪就會反轉——股價溢價消失，公司無法再用有利的條件發行新股，而已經發行的優先股股息仍然要付。</p>
+    <p>更危險的是一種「負向反身性循環」：市場信心下降 → 股價下跌 → 募資能力減弱 → 付股息的壓力增大 → 市場信心進一步下降。這個螺旋一旦啟動，不需要比特幣本身暴跌，光是投資人的恐慌就足以讓事態惡化。如果 Strategy 的持倉規模夠大，恐慌甚至可能蔓延到比特幣市場本身，形成第四重壓力。</p>
+    <p>需要特別注意的是，Strategy 大約 30-40% 的股份由散戶持有——而散戶是最容易在恐慌中做出情緒化決策的群體。2022 年熊市期間，MSTR 一度跌破淨資產價值。在信心最低迷的時候，所有理性分析都會被恐懼淹沒。</p>
+    <p>另外，MSTR 的股價波動遠大於比特幣本身。比特幣跌 20%，MSTR 可能跌 40%。這是槓桿的本質——它放大收益，也放大虧損。如果你無法承受帳面上短期腰斬甚至更多的虧損，這個標的不適合你。</p>
+    <p>我自己用槓桿持有 MSTR，平均成本在 162 美元左右。股價最低跌到 100 美元附近的時候，加上槓桿，我的帳面虧損超過 60%。我沒有賣，是因為我對比特幣長期方向的判斷沒有改變。但我非常清楚，這個判斷有可能是錯的。風險不是確定性的遊戲，而是機率的遊戲。</p>
+    <p class="pull"><span class="en">A good thesis is one that holds over time.<br>A great thesis is one that expands over time.</span></p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<!-- ── CH9 ── -->
+
+<section class="chapter" id="c9">
+  <div class="chapter-header">
+    <div class="chapter-num">09</div>
+    <h2 class="chapter-title">The Stars Are Aligning</h2>
+  </div>
+  <div class="body">
+    <p>2026 年，幾件事正在同時發生。</p>
+    <p>Morgan Stanley 用自己的品牌名字發行了現貨 Bitcoin ETF，代號 MSBT，年費 0.14%，比 BlackRock 的 IBIT 還低。這是第一家這樣做的華爾街大型銀行。它管理 9.3 兆美元的客戶資產，有 16,000 個理財顧問。如果這些客戶只把資產的 1% 配置到比特幣，就是 930 億美元——超過目前整個美國現貨 Bitcoin ETF 市場的規模。</p>
+    <p>CLARITY Act 正在參議院進入最後衝刺。白宮、財政部、SEC、Coinbase 第一次全部站在同一邊。一旦通過，美國將首次擁有完整的加密資產市場結構法案，機構資金進場的最後一道閘門會被打開。</p>
+    <p>與此同時，交易所的比特幣存量掉到七年來的最低點。STRC 成為機構配置現金的新選項。Strategy 的做空率仍在歷史高位。</p>
+    <p>2017 年華爾街說比特幣是詐騙。2024 年 BlackRock 發了 ETF。2026 年 Morgan Stanley 用自己的名字發，還打價格戰。</p>
+    <p class="pull">籌碼在離開交易所，法案在推進，空頭還沒認輸。<br><br>市場上並沒有那麼多比特幣可以分給這些人。</p>
+    <p>你不需要等 Morgan Stanley 的理財顧問打電話給你。你不需要等國會通過法案。你不需要等任何人批准。比特幣的設計，就是讓任何人、在任何時候、在世界的任何角落，都能直接參與。沒有門檻、沒有最低投資額、不需要任何人的許可。</p>
+    <p>這是人類史上第一次，一個普通人跟華爾街的銀行家，站在完全相同的起跑線上。差別只在於，誰先理解了這件事。</p>
+  </div>
+</section>
+
+<!-- ═══ TIP ═══ -->
+
+<section class="tip">
+  <div class="tip-icon">⚡</div>
+  <div class="tip-title">如果這些文字對你有幫助</div>
+  <p class="tip-desc">
+    這份筆記是免費的。<br>
+    如果你覺得它值得什麼，可以透過 Lightning Network 打賞。
+  </p>
+  <div class="tip-addr" onclick="copyAddr()" id="addr">
+    fixedocelot62@walletofsatoshi.com
+  </div>
+  <div class="tip-sub">LIGHTNING ADDRESS — 點擊複製</div>
+  <div class="tip-ok" id="ok">✓ 已複製</div>
+</section>
+
+<footer class="foot">
+  W. · 2025–2026 · 囤比特幣筆記<br>
+  <span class="en">I may be early, but I'm not wrong.</span>
+</footer>
+
+<script>
+function copyAddr() {
+  const a = document.getElementById('addr').textContent.trim();
+  navigator.clipboard.writeText(a).then(() => {
+    const o = document.getElementById('ok');
+    o.classList.add('on');
+    setTimeout(() => o.classList.remove('on'), 2000);
+  });
+}
+</script>
+
+</body>
+</html>
