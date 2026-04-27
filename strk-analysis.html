@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRK 完整條款分析 — 微策略日報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e8e6e3;
+    --text-dim: #8a8a9a;
+    --accent: #f7931a;
+    --accent-glow: rgba(247, 147, 26, 0.15);
+    --green: #22c55e;
+    --green-bg: rgba(34, 197, 94, 0.08);
+    --red: #ef4444;
+    --red-bg: rgba(239, 68, 68, 0.08);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96, 165, 250, 0.08);
+    --purple: #a78bfa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 120px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .header h1 span {
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .header-meta {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* Section */
+  section {
+    margin-bottom: 56px;
+  }
+
+  section > h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.3px;
+  }
+
+  section > h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  /* Info card */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .info-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .info-value.accent {
+    color: var(--accent);
+  }
+
+  /* Callout boxes */
+  .callout {
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    border-left: 3px solid;
+  }
+
+  .callout-green {
+    background: var(--green-bg);
+    border-color: var(--green);
+  }
+
+  .callout-red {
+    background: var(--red-bg);
+    border-color: var(--red);
+  }
+
+  .callout-blue {
+    background: var(--blue-bg);
+    border-color: var(--blue);
+  }
+
+  .callout-accent {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+  }
+
+  .callout-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+
+  .callout-green .callout-title { color: var(--green); }
+  .callout-red .callout-title { color: var(--red); }
+  .callout-blue .callout-title { color: var(--blue); }
+  .callout-accent .callout-title { color: var(--accent); }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* Capital stack */
+  .stack {
+    margin: 24px 0;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    margin-bottom: -1px;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .stack-item:first-child { border-radius: 10px 10px 0 0; }
+  .stack-item:last-child { border-radius: 0 0 10px 10px; }
+
+  .stack-item.highlight {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  .stack-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .stack-name {
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .stack-detail {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  .stack-item.highlight .stack-name {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .stack-item.highlight .stack-rank {
+    color: var(--accent);
+  }
+
+  /* Scenario table */
+  .scenario {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .scenario-header {
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+
+  .scenario-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .scenario-row:last-child { border-bottom: none; }
+
+  .scenario-cell {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .scenario-cell:first-child {
+    border-right: 1px solid var(--border);
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .scenario-cell:last-child {
+    font-weight: 500;
+  }
+
+  /* Bug section */
+  .bug-box {
+    background: var(--accent-glow);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+
+  .bug-box h3 {
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    margin-top: 0;
+  }
+
+  .bug-box p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* Comparison */
+  .vs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 480px) {
+    .vs { grid-template-columns: 1fr; }
+  }
+
+  .vs-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .vs-card h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: var(--text-dim);
+  }
+
+  .vs-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .vs-card li {
+    font-size: 14px;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .vs-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .vs-card.pro li::before { background: var(--green); }
+  .vs-card.con li::before { background: var(--red); }
+
+  /* Footer */
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* Mono inline */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  strong { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-tag">mstr_daily · 微策略日報</div>
+    <h1>STRK 的設計漏洞：<br>為什麼這可能是 Strategy 資本結構裡<span>最被低估的機會</span></h1>
+    <p class="header-sub">Strategy 發行的可轉換永續優先股 STRK，缺少了業界標準的強制轉換機制。這個設計上的缺陷，讓持有人可以永遠同時享受固定收益和上行空間。</p>
+    <div class="header-meta">2026.04.27 · 資料來源：SEC Filing, Strategy Official</div>
+  </div>
+
+  <!-- 基本資訊 -->
+  <section>
+    <h2>基本資訊</h2>
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">全名</span>
+          <span class="info-value" style="font-size:14px;">8.00% Series A Perpetual Strike Preferred Stock</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">代碼</span>
+          <span class="info-value accent">STRK</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">面值</span>
+          <span class="info-value">$100</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">目前市價（約）</span>
+          <span class="info-value accent">~$80</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">年股息率</span>
+          <span class="info-value">8%（實際 ~10%）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">發行總額</span>
+          <span class="info-value">~$12.4 億</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">到期日</span>
+          <span class="info-value">永續（無到期日）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">配息頻率</span>
+          <span class="info-value">每季</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 股息 -->
+  <section>
+    <h2>股息條款</h2>
+    <p>每股每年配 $8，按季發放（3/31、6/30、9/30、12/31）。以目前市價約 $80 計算，實際殖利率約 <strong>10%</strong>。</p>
+    <p>配息方式由公司選擇：可付現金、付 MSTR 普通股、或混合。股息由董事會宣告，理論上可暫停，但未付股息會<strong>累積</strong>，恢復時須補發。</p>
+  </section>
+
+  <!-- 轉換權 -->
+  <section>
+    <h2>轉換權</h2>
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">轉換比率</span>
+          <span class="info-value">1 STRK → 0.1 MSTR</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">等效轉換價</span>
+          <span class="info-value accent">$1,000 / 股 MSTR</span>
+        </div>
+      </div>
+    </div>
+    <p>持有人可以在<strong>任何工作日</strong>自願轉換成 MSTR 普通股。轉換權永遠不會到期。</p>
+
+    <div class="bug-box">
+      <h3>關鍵缺陷：沒有強制轉換機制</h3>
+      <p>傳統的可轉換優先股通常設有強制轉換條款（Forced Conversion）——當普通股股價持續高於轉換價一段時間（例如 130% 持續 30 天），公司可以強制持有人轉換成普通股，終止配息義務。</p>
+      <p><strong>STRK 沒有這個機制。</strong></p>
+      <p>這意味著即使 MSTR 漲到 $2,000、$5,000 甚至更高，公司都無法強制你轉換。你可以永遠不轉換，永遠領 8% 股息，同時你的 STRK 市價會跟著 MSTR 上漲（因為轉換權有內在價值）。</p>
+      <p>而理性的持有人永遠不會主動轉換——因為轉換意味著同時失去三樣東西：<strong>8% 股息、優先清償權、以及轉換的選擇權本身。</strong></p>
+    </div>
+  </section>
+
+  <!-- 贖回權 -->
+  <section>
+    <h2>公司贖回權</h2>
+    <p>Strategy 只有兩種極其有限的情況可以贖回 STRK：</p>
+
+    <h3>Clean-up Redemption</h3>
+    <div class="callout callout-blue">
+      <div class="callout-title">觸發條件</div>
+      <p>流通中的 STRK 總清算價值低於原始發行量的 25%（< $1.825 億）</p>
+      <p>必須全部贖回，不能只贖回一部分</p>
+      <p>贖回價 = 清算優先價 + 未付股息</p>
+    </div>
+    <p>但如果所有理性持有人都不轉換，流通量永遠不會降到 25% 以下，這個條件永遠不會被觸發。這是一個<strong>納許均衡</strong>——每個人的最優策略都是不動，所以沒有人會動。</p>
+
+    <h3>Tax Event Redemption</h3>
+    <div class="callout callout-blue">
+      <div class="callout-title">觸發條件</div>
+      <p>發生特定稅務事件</p>
+      <p>必須全部贖回</p>
+      <p>贖回價 = 清算優先價 或 前五個交易日平均市價（取較高者）+ 未付股息</p>
+    </div>
+    <p>即使觸發 Tax Event，贖回價取市價和面值中的較高者，不會在溢價時用面值強制買回。</p>
+  </section>
+
+  <!-- Fundamental Change -->
+  <section>
+    <h2>Fundamental Change 保護</h2>
+    <p>如果發生重大變更事件（如被併購），<strong>持有人</strong>有權要求公司按面值 $100 + 未付股息買回。這是保護持有人的條款，選擇權在你手上。</p>
+  </section>
+
+  <!-- 資本結構 -->
+  <section>
+    <h2>資本結構順位</h2>
+    <p>清算時的償還順序，由高到低：</p>
+    <div class="stack">
+      <div class="stack-item">
+        <span class="stack-rank">1</span>
+        <span class="stack-name">可轉換高級票據</span>
+        <span class="stack-detail">~$82 億</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">2</span>
+        <span class="stack-name">STRF 優先股</span>
+        <span class="stack-detail">10% 永續</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">3</span>
+        <span class="stack-name">STRC 優先股</span>
+        <span class="stack-detail">浮動利率</span>
+      </div>
+      <div class="stack-item highlight">
+        <span class="stack-rank">4</span>
+        <span class="stack-name">STRK 優先股 ← 你在這裡</span>
+        <span class="stack-detail">8% 永續</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">5</span>
+        <span class="stack-name">STRD 優先股</span>
+        <span class="stack-detail">10% 永續</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">6</span>
+        <span class="stack-name">MSTR 普通股</span>
+        <span class="stack-detail">最後</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 情境模擬 -->
+  <section>
+    <h2>情境模擬</h2>
+    <p>假設你用 $80 買入一股 STRK：</p>
+
+    <div class="scenario">
+      <div class="scenario-header">📉 MSTR 下跌 50%</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">MSTR 持有人</div>
+        <div class="scenario-cell">虧損 50%，零收入</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">STRK 持有人</div>
+        <div class="scenario-cell">股價也跌，但照領 10% 股息，且有優先清償保護</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-header">➡️ MSTR 橫盤三年</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">MSTR 持有人</div>
+        <div class="scenario-cell">三年零回報</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">STRK 持有人</div>
+        <div class="scenario-cell">三年領回 30% 本金（$24 股息），轉換權繼續持有</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-header">📈 MSTR 漲到 $1,500</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">一般可轉換優先股</div>
+        <div class="scenario-cell">被強制轉換，保護消失，股息停止</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">STRK 持有人</div>
+        <div class="scenario-cell">不會被強制轉換。繼續領 10% + 股價跟漲 + 優先權不變</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-header">🚀 MSTR 漲到 $3,000</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">轉換價值</div>
+        <div class="scenario-cell">$300 / 股（成本 $80，近 4 倍）</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">同時</div>
+        <div class="scenario-cell">繼續領 10% 股息 + 優先清償權不變 + 仍不需要轉換</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 不對稱機會 -->
+  <section>
+    <h2>不對稱的機會</h2>
+
+    <div class="vs">
+      <div class="vs-card pro">
+        <h4>你拿到的</h4>
+        <ul>
+          <li>10% 永續殖利率</li>
+          <li>20% 折價保護（$80 買面值 $100）</li>
+          <li>免費的永續 Call Option（轉換價 $1,000）</li>
+          <li>優先清償權</li>
+          <li>沒有 Forced Conversion</li>
+        </ul>
+      </div>
+      <div class="vs-card con">
+        <h4>你承擔的風險</h4>
+        <ul>
+          <li>Strategy 倒閉</li>
+          <li>董事會暫停配息</li>
+          <li>流動性較低（bid-ask spread）</li>
+          <li>排在三層債務之後</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-accent">
+      <div class="callout-title">一句話總結</div>
+      <p>$80 買一個每年領 10%、有折價保護、有優先清償、附帶免費永續 Call Option、而且公司不能強制你放棄任何一項的東西。</p>
+      <p>別人的優先股是「跌了保護你，漲了把保護收走」。STRK 是「跌了保護你，漲了還是保護你，同時讓你跟著賺」。</p>
+    </div>
+  </section>
+
+  <!-- 為什麼市場還沒 price in -->
+  <section>
+    <h2>為什麼市場還沒有完全定價</h2>
+    <p>大部分投資者在看 MSTR 普通股，不在看 STRK。優先股本來就是散戶很少碰的工具，中文分析資料更是幾乎為零。</p>
+    <p>而且大部分分析師用傳統框架看可轉換優先股，預設持有人最終會轉換。他們沒有想通一件事：<strong>如果沒有 Forced Conversion，理性持有人永遠不會轉換，因為不轉換永遠是最優策略。</strong></p>
+    <p>這是一個納許均衡——每個人的最優策略都是不動，所以沒有人會動。條款已經寫死了，公司改不了。</p>
+  </section>
+
+  <!-- ROC -->
+  <section>
+    <h2>稅務優勢：Return of Capital（ROC）</h2>
+
+    <div class="bug-box">
+      <h3>2025 年配息 100% 認列為 ROC，且預計持續十年以上</h3>
+      <p>Strategy 於 2026 年 2 月 2 日正式公告：2025 年所有優先股（包含 STRK）的配息，<strong>100%</strong> 被認列為 Return of Capital。不是部分，是全部。而且 Strategy 預期這個狀態會持續十年以上。</p>
+    </div>
+
+    <h3>ROC 是什麼</h3>
+    <p>正常的股息被視為「收入」，美國會對外國投資者預扣 30% 的稅。但 ROC 不算收入——它在稅務上被定義為「公司把你投入的資本還一部分給你」，不觸發任何所得稅。</p>
+
+    <h3>為什麼 STRK 的配息是 100% ROC</h3>
+    <p>一間公司要把配息認列為「股息收入」，前提是公司有<strong>累積盈餘（Earnings & Profits，E&P）</strong>。Strategy 的商業模式是不斷發債和發股去買比特幣，而比特幣不產生現金流。公司的軟體業務收入也不足以覆蓋所有成本和股息支出。</p>
+    <p>所以在稅務上，Strategy 沒有「利潤」可以分配。配出去的錢只能被歸類為資本返還。Strategy 自己也明確表示：<strong>公司目前沒有累積 E&P，也不預期在可預見的未來（十年以上）產生 E&P。</strong></p>
+
+    <h3>對台灣投資者的影響</h3>
+
+    <div class="scenario">
+      <div class="scenario-header">同樣用 $80 買入一股 STRK，年配 $8</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">如果被當普通股息</div>
+        <div class="scenario-cell">美國預扣 30% → 到手 $5.6 → 實際殖利率 7%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">100% ROC（實際情況）</div>
+        <div class="scenario-cell">不預扣 → 到手 $8 → 實際殖利率 10%</div>
+      </div>
+    </div>
+
+    <div class="callout callout-green">
+      <div class="callout-title">對台灣投資者來說，STRK 的配息幾乎完全免稅</div>
+      <p>ROC 不被美國預扣 30% 股息稅。ROC 會降低你的成本基礎，未來賣出時資本利得會變大——但台灣人的美股資本利得本來就免稅（已簽 W-8BEN）。</p>
+      <p>所以：<strong>美國不扣稅，台灣也不課稅。你拿到的 $8 就是 $8，一毛不少。</strong></p>
+    </div>
+
+    <h3>實際影響</h3>
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">如果被當普通股息課稅</span>
+          <span class="info-value">到手 $5.6 / 年（殖利率 7%）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">100% ROC（目前實際狀況）</span>
+          <span class="info-value accent">到手 $8 / 年（殖利率 10%）</span>
+        </div>
+      </div>
+    </div>
+
+    <p>你在市面上找到的其他美股配息產品，標榜 8% 殖利率的，扣完 30% 稅實際到手不到 6%。STRK 標榜 8%，以折價買入的實際殖利率是 10%，而且因為 100% ROC，到手就是 10%。這個稅務差距是巨大的。</p>
+
+    <div class="callout callout-blue">
+      <div class="callout-title">注意事項</div>
+      <p>當 ROC 累積到把你的成本基礎降到 $0 之後，後續的 ROC 會被當成資本利得。但對台灣人來說，資本利得依然免稅，所以影響不大。</p>
+      <p>ROC 的認列取決於 Strategy 的稅務狀況。如果未來公司開始產生 E&P（例如比特幣被出售產生利潤），配息的稅務分類可能改變。但 Strategy 明確預期至少十年內不會發生。</p>
+      <p>部分海外券商可能不熟悉 ROC 處理方式，先全額預扣 30%。這種情況下你需要自行申請退稅，或在開戶前確認券商的處理流程。</p>
+    </div>
+  </section>
+
+  <!-- 風險 -->
+  <section>
+    <h2>風險提醒</h2>
+    <div class="callout callout-red">
+      <div class="callout-title">請注意</div>
+      <p>STRK 的價值最終取決於 Strategy 的存續和比特幣的長期走勢。如果比特幣長期大跌，Strategy 的財務將面臨巨大壓力，股息可能被暫停，而你在資本結構中排在約 $82 億的債務之後。</p>
+      <p>這不是無風險套利。這是一個風險調整後報酬率極度有利的結構性機會，前提是你相信比特幣長期不會歸零。</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>本文僅為個人研究筆記，不構成任何投資建議。所有資料來源為 SEC 公開文件及 Strategy 官方公告。</p>
+    <p>微策略日報 · <a href="https://www.threads.net/@mstr_daily">@mstr_daily</a></p>
+  </div>
+
+</div>
+</body>
+</html>
