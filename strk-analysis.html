@@ -1,39 +1,59 @@
 <!DOCTYPE html>
-
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 <title>STRK 完整條款分析 — 微策略日報</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface-2: #1a1a26;
-    --border: #2a2a3a;
-    --text: #e8e6e3;
-    --text-dim: #8a8a9a;
-    --accent: #f7931a;
-    --accent-glow: rgba(247, 147, 26, 0.15);
-    --green: #22c55e;
-    --green-bg: rgba(34, 197, 94, 0.08);
-    --red: #ef4444;
-    --red-bg: rgba(239, 68, 68, 0.08);
-    --blue: #60a5fa;
-    --blue-bg: rgba(96, 165, 250, 0.08);
-    --purple: #a78bfa;
+    /* Light theme (default) */
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f0f0ea;
+    --border: #d8d8d0;
+    --text: #1a1a1a;
+    --text-dim: #5a5a5a;
+    --accent: #d97706;
+    --accent-glow: rgba(217, 119, 6, 0.08);
+    --green: #15803d;
+    --green-bg: rgba(21, 128, 61, 0.06);
+    --red: #b91c1c;
+    --red-bg: rgba(185, 28, 28, 0.06);
+    --blue: #1d4ed8;
+    --blue-bg: rgba(29, 78, 216, 0.06);
+    --purple: #7c3aed;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e8e6e3;
+      --text-dim: #b4b4c4;
+      --accent: #f7931a;
+      --accent-glow: rgba(247, 147, 26, 0.15);
+      --green: #22c55e;
+      --green-bg: rgba(34, 197, 94, 0.08);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.08);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96, 165, 250, 0.08);
+      --purple: #a78bfa;
+    }
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  html { background: var(--bg); }
   body {
     font-family: 'Noto Sans TC', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.8;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .container {
@@ -48,7 +68,6 @@
     padding-bottom: 48px;
     border-bottom: 1px solid var(--border);
   }
-
   .header-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -57,7 +76,6 @@
     text-transform: uppercase;
     margin-bottom: 16px;
   }
-
   .header h1 {
     font-size: 32px;
     font-weight: 900;
@@ -65,17 +83,12 @@
     margin-bottom: 16px;
     letter-spacing: -0.5px;
   }
-
-  .header h1 span {
-    color: var(--accent);
-  }
-
+  .header h1 span { color: var(--accent); }
   .header-sub {
     font-size: 15px;
     color: var(--text-dim);
     line-height: 1.7;
   }
-
   .header-meta {
     margin-top: 24px;
     font-family: 'JetBrains Mono', monospace;
@@ -84,10 +97,7 @@
   }
 
   /* Section */
-  section {
-    margin-bottom: 56px;
-  }
-
+  section { margin-bottom: 56px; }
   section > h2 {
     font-size: 20px;
     font-weight: 700;
@@ -96,27 +106,14 @@
     border-bottom: 1px solid var(--border);
     letter-spacing: -0.3px;
   }
-
-  section > h3 {
+  section > h3, h3 {
     font-size: 16px;
     font-weight: 500;
     color: var(--accent);
     margin-top: 32px;
     margin-bottom: 12px;
   }
-
-  h3 {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--accent);
-    margin-top: 32px;
-    margin-bottom: 12px;
-  }
-
-  p {
-    margin-bottom: 16px;
-    color: var(--text);
-  }
+  p { margin-bottom: 16px; color: var(--text); }
 
   /* Info card */
   .info-card {
@@ -126,23 +123,13 @@
     padding: 24px;
     margin-bottom: 20px;
   }
-
   .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
-
-  @media (max-width: 480px) {
-    .info-grid { grid-template-columns: 1fr; }
-  }
-
-  .info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
+  @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
   .info-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
@@ -150,16 +137,8 @@
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-
-  .info-value {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .info-value.accent {
-    color: var(--accent);
-  }
+  .info-value { font-size: 18px; font-weight: 700; color: var(--text); }
+  .info-value.accent { color: var(--accent); }
 
   /* Callout boxes */
   .callout {
@@ -168,52 +147,20 @@
     margin-bottom: 20px;
     border-left: 3px solid;
   }
-
-  .callout-green {
-    background: var(--green-bg);
-    border-color: var(--green);
-  }
-
-  .callout-red {
-    background: var(--red-bg);
-    border-color: var(--red);
-  }
-
-  .callout-blue {
-    background: var(--blue-bg);
-    border-color: var(--blue);
-  }
-
-  .callout-accent {
-    background: var(--accent-glow);
-    border-color: var(--accent);
-  }
-
-  .callout-title {
-    font-weight: 700;
-    font-size: 14px;
-    margin-bottom: 8px;
-    letter-spacing: 0.3px;
-  }
-
+  .callout-green { background: var(--green-bg); border-color: var(--green); }
+  .callout-red { background: var(--red-bg); border-color: var(--red); }
+  .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+  .callout-accent { background: var(--accent-glow); border-color: var(--accent); }
+  .callout-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 0.3px; }
   .callout-green .callout-title { color: var(--green); }
   .callout-red .callout-title { color: var(--red); }
   .callout-blue .callout-title { color: var(--blue); }
   .callout-accent .callout-title { color: var(--accent); }
-
-  .callout p {
-    font-size: 14px;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
+  .callout p { font-size: 14px; margin-bottom: 8px; color: var(--text); }
   .callout p:last-child { margin-bottom: 0; }
 
   /* Capital stack */
-  .stack {
-    margin: 24px 0;
-  }
-
+  .stack { margin: 24px 0; }
   .stack-item {
     display: flex;
     align-items: center;
@@ -223,17 +170,14 @@
     font-size: 14px;
     transition: background 0.2s;
   }
-
   .stack-item:first-child { border-radius: 10px 10px 0 0; }
   .stack-item:last-child { border-radius: 0 0 10px 10px; }
-
   .stack-item.highlight {
     background: var(--accent-glow);
     border-color: var(--accent);
     position: relative;
     z-index: 1;
   }
-
   .stack-rank {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
@@ -241,27 +185,15 @@
     width: 24px;
     flex-shrink: 0;
   }
-
-  .stack-name {
-    flex: 1;
-    font-weight: 500;
-  }
-
+  .stack-name { flex: 1; font-weight: 500; }
   .stack-detail {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--text-dim);
     text-align: right;
   }
-
-  .stack-item.highlight .stack-name {
-    color: var(--accent);
-    font-weight: 700;
-  }
-
-  .stack-item.highlight .stack-rank {
-    color: var(--accent);
-  }
+  .stack-item.highlight .stack-name { color: var(--accent); font-weight: 700; }
+  .stack-item.highlight .stack-rank { color: var(--accent); }
 
   /* Scenario table */
   .scenario {
@@ -271,7 +203,6 @@
     overflow: hidden;
     margin-bottom: 20px;
   }
-
   .scenario-header {
     padding: 16px 20px;
     font-weight: 700;
@@ -279,29 +210,19 @@
     border-bottom: 1px solid var(--border);
     background: var(--surface-2);
   }
-
   .scenario-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-bottom: 1px solid var(--border);
   }
-
   .scenario-row:last-child { border-bottom: none; }
-
-  .scenario-cell {
-    padding: 14px 20px;
-    font-size: 14px;
-  }
-
+  .scenario-cell { padding: 14px 20px; font-size: 14px; }
   .scenario-cell:first-child {
     border-right: 1px solid var(--border);
     color: var(--text-dim);
     font-weight: 400;
   }
-
-  .scenario-cell:last-child {
-    font-weight: 500;
-  }
+  .scenario-cell:last-child { font-weight: 500; }
 
   /* Bug section */
   .bug-box {
@@ -311,7 +232,6 @@
     padding: 32px;
     margin: 32px 0;
   }
-
   .bug-box h3 {
     color: var(--accent);
     font-size: 18px;
@@ -319,50 +239,35 @@
     margin-bottom: 16px;
     margin-top: 0;
   }
+  .bug-box p { font-size: 15px; line-height: 1.8; }
 
-  .bug-box p {
-    font-size: 15px;
-    line-height: 1.8;
-  }
-
-  /* Comparison */
+  /* Comparison cards */
   .vs {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin: 24px 0;
   }
-
-  @media (max-width: 480px) {
-    .vs { grid-template-columns: 1fr; }
-  }
-
+  @media (max-width: 480px) { .vs { grid-template-columns: 1fr; } }
   .vs-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 20px;
   }
-
   .vs-card h4 {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     margin-bottom: 12px;
     color: var(--text-dim);
   }
-
-  .vs-card ul {
-    list-style: none;
-    padding: 0;
-  }
-
+  .vs-card ul { list-style: none; padding: 0; }
   .vs-card li {
     font-size: 14px;
     padding: 6px 0;
     padding-left: 20px;
     position: relative;
   }
-
   .vs-card li::before {
     content: '';
     position: absolute;
@@ -372,7 +277,6 @@
     height: 8px;
     border-radius: 50%;
   }
-
   .vs-card.pro li::before { background: var(--green); }
   .vs-card.con li::before { background: var(--red); }
 
@@ -385,13 +289,8 @@
     color: var(--text-dim);
     line-height: 1.8;
   }
+  .footer a { color: var(--accent); text-decoration: none; }
 
-  .footer a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  /* Mono inline */
   code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
@@ -400,7 +299,6 @@
     border-radius: 4px;
     color: var(--accent);
   }
-
   strong { font-weight: 700; }
 </style>
 </head>
@@ -409,7 +307,7 @@
 
   <div class="header">
     <div class="header-tag">mstr_daily · 微策略日報</div>
-    <h1>為什麼 STRK 可能是 Strategy 資本結構裡<span>最被低估的機會</span></h1>
+    <h1>STRK：永遠不會被強制轉換的<span>永續 call option</span></h1>
     <p class="header-sub">Strategy 發行的可轉換永續優先股 STRK，沒有業界標準的強制轉換機制。這個獨特的設計，讓持有人可以永遠同時享受固定收益和上行空間——而市場幾乎沒有意識到這件事的價值。</p>
     <div class="header-meta">2026.05.02 · 資料來源：SEC Filing, Strategy Official</div>
   </div>
@@ -446,7 +344,7 @@
         </div>
         <div class="info-item">
           <span class="info-label">到期日</span>
-          <span class="info-value">永續（無到期日）</span>
+          <span class="info-value">永續(無到期日)</span>
         </div>
         <div class="info-item">
           <span class="info-label">配息頻率</span>
@@ -625,26 +523,31 @@
       </div>
       <div class="stack-item">
         <span class="stack-rank">2</span>
-        <span class="stack-name">STRF 優先股</span>
-        <span class="stack-detail">10% 永續</span>
+        <span class="stack-name">STRF（Strife）</span>
+        <span class="stack-detail">10% 固定 · 累積</span>
       </div>
       <div class="stack-item">
         <span class="stack-rank">3</span>
-        <span class="stack-name">STRC 優先股</span>
-        <span class="stack-detail">浮動 11.50%</span>
-      </div>
-      <div class="stack-item highlight">
-        <span class="stack-rank">4</span>
-        <span class="stack-name">STRK 優先股 ← 你在這裡</span>
-        <span class="stack-detail">8% 永續</span>
+        <span class="stack-name">STRC（Stretch）</span>
+        <span class="stack-detail">浮動 11.50% · 累積</span>
       </div>
       <div class="stack-item">
+        <span class="stack-rank">4</span>
+        <span class="stack-name">STRE（Stream）</span>
+        <span class="stack-detail">10% 固定 · €計價 · 累積</span>
+      </div>
+      <div class="stack-item highlight">
         <span class="stack-rank">5</span>
-        <span class="stack-name">STRD 優先股</span>
-        <span class="stack-detail">10% 永續</span>
+        <span class="stack-name">STRK（Strike）← 你在這裡</span>
+        <span class="stack-detail">8% 可轉換 · 累積</span>
       </div>
       <div class="stack-item">
         <span class="stack-rank">6</span>
+        <span class="stack-name">STRD（Stride）</span>
+        <span class="stack-detail">10% 固定 · 非累積</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">7</span>
         <span class="stack-name">MSTR 普通股</span>
         <span class="stack-detail">最後</span>
       </div>
@@ -658,7 +561,7 @@
     <p>假設你用 $76.69 買入一股 STRK：</p>
 
     <div class="scenario">
-      <div class="scenario-header">📉 MSTR 下跌 50%</div>
+      <div class="scenario-header">MSTR 下跌 50%</div>
       <div class="scenario-row">
         <div class="scenario-cell">MSTR 持有人</div>
         <div class="scenario-cell">虧損 50%，零收入</div>
@@ -670,7 +573,7 @@
     </div>
 
     <div class="scenario">
-      <div class="scenario-header">➡️ MSTR 橫盤三年</div>
+      <div class="scenario-header">MSTR 橫盤三年</div>
       <div class="scenario-row">
         <div class="scenario-cell">MSTR 持有人</div>
         <div class="scenario-cell">三年零回報</div>
@@ -682,7 +585,7 @@
     </div>
 
     <div class="scenario">
-      <div class="scenario-header">📈 MSTR 漲到 $1,500</div>
+      <div class="scenario-header">MSTR 漲到 $1,500</div>
       <div class="scenario-row">
         <div class="scenario-cell">一般可轉換優先股</div>
         <div class="scenario-cell">被強制轉換，保護消失，股息停止</div>
@@ -694,7 +597,7 @@
     </div>
 
     <div class="scenario">
-      <div class="scenario-header">🚀 MSTR 漲到 $3,000</div>
+      <div class="scenario-header">MSTR 漲到 $3,000</div>
       <div class="scenario-row">
         <div class="scenario-cell">轉換價值</div>
         <div class="scenario-cell">$300 / 股（成本 $76.69，近 4 倍）</div>
@@ -728,7 +631,7 @@
           <li>Strategy 倒閉</li>
           <li>董事會暫停配息</li>
           <li>流動性較低（日均成交 ~$9.2M，單日低至 ~$7.5M）</li>
-          <li>排在三層債務之後</li>
+          <li>排在債務、STRF、STRC、STRE 之後</li>
         </ul>
       </div>
     </div>
@@ -816,7 +719,7 @@
     <h2>風險提醒</h2>
     <div class="callout callout-red">
       <div class="callout-title">請注意</div>
-      <p>STRK 的價值最終取決於 Strategy 的存續和比特幣的長期走勢。如果比特幣長期大跌，Strategy 的財務將面臨巨大壓力，股息可能被暫停，而你在資本結構中排在約 $82 億的債務之後。</p>
+      <p>STRK 的價值最終取決於 Strategy 的存續和比特幣的長期走勢。如果比特幣長期大跌，Strategy 的財務將面臨巨大壓力，股息可能被暫停，而你在資本結構中排在約 $82 億的債務、STRF、STRC 和 STRE 之後。</p>
       <p>STRK 的流動性有限：30 日平均成交量約 $9.2M，單日成交量有時低至 $7.5M。大額進出可能面臨明顯的 bid-ask spread。</p>
       <p>這不是無風險套利。這是一個風險調整後報酬率極度有利的結構性機會，前提是你相信比特幣長期不會歸零。</p>
     </div>
@@ -841,12 +744,13 @@
     </div>
     <p>只要比特幣的長期年化報酬率達到 <strong>2.39%</strong>，Strategy 就可以永久支付所有優先股股息。這個門檻極低——比特幣歷史上任何四年週期的年化報酬率都遠超這個數字。</p>
     <p>即使短期遭遇極端下跌，Strategy 資產負債表上有 <strong>$22.5 億現金</strong>，專門用於防範流動性風險。這意味著公司有充足的緩衝來撐過短期壓力，而不需要動用暫停配息這張牌。</p>
-    <p>「董事會暫停配息」這個風險理論上存在，但實際觸發的前提是：比特幣長期年化低於 2.39%，同時 $22.5 億現金儲備也被耗盡。這個情境需要的，不是一次熊市，而是比特幣作為一種資產類別的根本性失敗。</p>
+    <p>「董事會暫停配息」這個風險理論上存在，但實際觸發的前提是：比特幣長期年化低於 2.39%，同時 $22.5 億現金儲備也被耗盡。這個情境需要的，光一次熊市還不夠——需要的是比特幣作為一種資產類別的根本性失敗。</p>
   </section>
 
   <div class="footer">
     <p>本文僅為個人研究筆記，不構成任何投資建議。所有資料來源為 SEC 公開文件及 Strategy 官方公告。</p>
     <p>微策略日報 · <a href="https://www.threads.net/@mstr_daily">@mstr_daily</a></p>
+    <p style="margin-top: 8px;"><a href="strc-analysis.html">STRC 分析 →</a></p>
   </div>
 
 </div>
