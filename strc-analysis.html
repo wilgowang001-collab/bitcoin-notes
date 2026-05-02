@@ -3,308 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light dark">
 <title>STRC 完整條款分析 — 微策略日報</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;510;590;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Colors - Linear Tokens */
-    --color-pitch-black: #08090a;
-    --color-graphite: #0f1011;
-    --color-deep-slate: #161718;
-    --color-charcoal-grey: #23252a;
-    --color-muted-ash: #323334;
-    --color-gunmetal: #383b3f;
-    --color-porcelain: #f7f8f8;
-    --color-light-steel: #d0d6e0;
-    --color-storm-cloud: #8a8f98;
-    --color-fog-grey: #62666d;
-    --color-alabaster: #e5e5e6;
-    --color-neon-lime: #e4f222;
-    --color-aether-blue: #5e6ad2;
-    --color-forest-green: #008d2c;
-    --color-cyan-spark: #02b8cc;
-    --color-emerald: #27a644;
-    --color-warning-red: #eb5757;
-    
-    /* Typography */
-    --font-inter: 'Inter', 'Noto Sans TC', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
-
-    /* Spacing */
-    --spacing-4: 4px;
-    --spacing-8: 8px;
-    --spacing-12: 12px;
-    --spacing-16: 16px;
-    --spacing-20: 20px;
-    --spacing-24: 24px;
-    --spacing-32: 32px;
-    --spacing-40: 40px;
-    --spacing-48: 48px;
-    --spacing-64: 64px;
-
-    /* Shadows & Borders */
-    --shadow-sm: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px;
-    --shadow-subtle: rgb(35, 37, 42) 0px 0px 0px 1px inset;
-    --shadow-subtle-2: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;
-    --radius-sm: 2px;
-    --radius-md: 6px;
-    --radius-xl: 12px;
+    /* Light theme (default) */
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f0f0ea;
+    --border: #d8d8d0;
+    --text: #1a1a1a;
+    --text-dim: #5a5a5a;
+    --accent: #d97706;
+    --accent-glow: rgba(217, 119, 6, 0.08);
+    --green: #15803d;
+    --green-bg: rgba(21, 128, 61, 0.06);
+    --red: #b91c1c;
+    --red-bg: rgba(185, 28, 28, 0.06);
+    --blue: #1d4ed8;
+    --blue-bg: rgba(29, 78, 216, 0.06);
   }
-
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e8e6e3;
+      --text-dim: #b4b4c4;
+      --accent: #f7931a;
+      --accent-glow: rgba(247, 147, 26, 0.15);
+      --green: #22c55e;
+      --green-bg: rgba(34, 197, 94, 0.08);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.08);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96, 165, 250, 0.08);
+    }
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  html { background: var(--color-pitch-black); }
-  
-  body { 
-    font-family: var(--font-inter); 
-    background: var(--color-pitch-black); 
-    color: var(--color-porcelain); 
-    line-height: 1.6; 
-    font-size: 15px; 
-    font-weight: 400; 
-    letter-spacing: -0.11px;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .container { max-width: 720px; margin: 0 auto; padding: 64px 24px 128px; }
-
-  /* Header */
-  .header { margin-bottom: 64px; }
-  .header-tag { 
-    display: inline-block;
-    font-family: var(--font-mono); 
-    font-size: 12px; 
-    color: var(--color-storm-cloud); 
-    background: var(--color-gunmetal);
-    padding: 2px 6px;
-    border-radius: var(--radius-sm);
-    text-transform: uppercase; 
-    margin-bottom: 20px; 
-    letter-spacing: -0.15px;
-  }
-  .header h1 { 
-    font-size: 48px; 
-    font-weight: 590; 
-    line-height: 1.2; 
-    margin-bottom: 24px; 
-    letter-spacing: -0.22px; 
-    color: var(--color-porcelain);
-  }
-  .header h1 span { color: var(--color-neon-lime); }
-  .header-sub { 
-    font-size: 16px; 
-    color: var(--color-storm-cloud); 
-    line-height: 1.5; 
-  }
-  .header-meta { 
-    margin-top: 24px; 
-    font-family: var(--font-mono); 
-    font-size: 12px; 
-    color: var(--color-fog-grey); 
-  }
-
-  section { margin-bottom: 64px; }
-  
-  h2 { 
-    font-size: 24px; 
-    font-weight: 510; 
-    margin-bottom: 24px; 
-    letter-spacing: -0.22px; 
-    color: var(--color-porcelain);
-  }
-  
-  h3 { 
-    font-size: 17px; 
-    font-weight: 510; 
-    color: var(--color-porcelain); 
-    margin-top: 32px; 
-    margin-bottom: 16px; 
-  }
-
-  p { margin-bottom: 16px; color: var(--color-light-steel); }
-  strong { font-weight: 590; color: var(--color-porcelain); }
-
-  /* Default Card / Info Card */
-  .info-card { 
-    background: var(--color-graphite); 
-    border-radius: var(--radius-md); 
-    padding: 12px; 
-    margin-bottom: 24px; 
-    box-shadow: var(--shadow-sm);
-    box-shadow: var(--shadow-subtle);
-  }
-  
-  .info-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: var(--spacing-8); 
-  }
+  html { background: var(--bg); }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 16px; font-weight: 400; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+  .header { margin-bottom: 64px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+  .header-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .header h1 { font-size: 32px; font-weight: 900; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header-sub { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+  .header-meta { margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); }
+  section { margin-bottom: 56px; }
+  section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); letter-spacing: -0.3px; }
+  h3 { font-size: 16px; font-weight: 500; color: var(--accent); margin-top: 32px; margin-bottom: 12px; }
+  p { margin-bottom: 16px; color: var(--text); }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
-  
-  .info-item { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 4px; 
-    background: var(--color-pitch-black);
-    padding: 12px;
-    border-radius: var(--radius-md);
-  }
-  
-  .info-label { 
-    font-family: var(--font-mono); 
-    font-size: 12px; 
-    color: var(--color-storm-cloud); 
-    letter-spacing: -0.15px; 
-  }
-  
-  .info-value { 
-    font-size: 14px; 
-    font-weight: 510; 
-    color: var(--color-porcelain); 
-  }
-  .info-value.accent { color: var(--color-neon-lime); }
-
-  /* Callouts (Mapped to Linear Surfaces) */
-  .callout { 
-    background: var(--color-graphite); 
-    border-radius: var(--radius-md); 
-    padding: 16px; 
-    margin-bottom: 24px; 
-    box-shadow: var(--shadow-subtle);
-    border-left: 2px solid var(--color-charcoal-grey);
-  }
-  .callout-green { border-left-color: var(--color-forest-green); }
-  .callout-red { border-left-color: var(--color-warning-red); }
-  .callout-blue { border-left-color: var(--color-aether-blue); }
-  .callout-accent { border-left-color: var(--color-neon-lime); }
-  
-  .callout-title { 
-    font-weight: 510; 
-    font-size: 14px; 
-    margin-bottom: 8px; 
-  }
-  .callout-green .callout-title { color: var(--color-forest-green); }
-  .callout-red .callout-title { color: var(--color-warning-red); }
-  .callout-blue .callout-title { color: var(--color-aether-blue); }
-  .callout-accent .callout-title { color: var(--color-neon-lime); }
-  
-  .callout p { font-size: 14px; margin-bottom: 8px; color: var(--color-light-steel); }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+  .info-value { font-size: 18px; font-weight: 700; color: var(--text); }
+  .info-value.accent { color: var(--accent); }
+  .callout { border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; border-left: 3px solid; }
+  .callout-green { background: var(--green-bg); border-color: var(--green); }
+  .callout-red { background: var(--red-bg); border-color: var(--red); }
+  .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+  .callout-accent { background: var(--accent-glow); border-color: var(--accent); }
+  .callout-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .callout-green .callout-title { color: var(--green); }
+  .callout-red .callout-title { color: var(--red); }
+  .callout-blue .callout-title { color: var(--blue); }
+  .callout-accent .callout-title { color: var(--accent); }
+  .callout p { font-size: 14px; margin-bottom: 8px; color: var(--text); }
   .callout p:last-child { margin-bottom: 0; }
-
-  /* Stack List */
-  .stack { margin: 24px 0; display: flex; flex-direction: column; gap: 4px; }
-  .stack-item { 
-    display: flex; 
-    align-items: center; 
-    padding: 8px 12px; 
-    background: var(--color-graphite);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-subtle);
-    font-size: 14px; 
-  }
-  .stack-item.highlight { 
-    background: var(--color-deep-slate); 
-    box-shadow: var(--shadow-subtle-2);
-  }
-  .stack-rank { 
-    font-family: var(--font-mono); 
-    font-size: 12px; 
-    color: var(--color-fog-grey); 
-    width: 24px; 
-    flex-shrink: 0; 
-  }
-  .stack-name { flex: 1; font-weight: 400; color: var(--color-light-steel); }
-  .stack-detail { 
-    font-family: var(--font-mono); 
-    font-size: 12px; 
-    color: var(--color-storm-cloud); 
-    text-align: right; 
-  }
-  .stack-item.highlight .stack-name { color: var(--color-neon-lime); font-weight: 510; }
-  .stack-item.highlight .stack-rank { color: var(--color-neon-lime); }
-  .stack-item.highlight .stack-detail { color: var(--color-porcelain); }
-
-  /* Scenario Tables */
-  .scenario { 
-    background: var(--color-graphite); 
-    border-radius: var(--radius-md); 
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 24px; 
-    overflow: hidden;
-  }
-  .scenario-header { 
-    padding: 12px 16px; 
-    font-weight: 510; 
-    font-size: 14px; 
-    background: var(--color-deep-slate);
-    color: var(--color-porcelain);
-    box-shadow: var(--shadow-subtle);
-  }
-  .scenario-row { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    border-bottom: 1px solid var(--color-muted-ash); 
-  }
+  .stack { margin: 24px 0; }
+  .stack-item { display: flex; align-items: center; padding: 14px 20px; border: 1px solid var(--border); margin-bottom: -1px; font-size: 14px; }
+  .stack-item:first-child { border-radius: 10px 10px 0 0; }
+  .stack-item:last-child { border-radius: 0 0 10px 10px; }
+  .stack-item.highlight { background: var(--accent-glow); border-color: var(--accent); position: relative; z-index: 1; }
+  .stack-rank { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); width: 24px; flex-shrink: 0; }
+  .stack-name { flex: 1; font-weight: 500; }
+  .stack-detail { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); text-align: right; }
+  .stack-item.highlight .stack-name { color: var(--accent); font-weight: 700; }
+  .stack-item.highlight .stack-rank { color: var(--accent); }
+  .scenario { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .scenario-header { padding: 16px 20px; font-weight: 700; font-size: 14px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
   .scenario-row:last-child { border-bottom: none; }
-  .scenario-cell { padding: 12px 16px; font-size: 14px; color: var(--color-light-steel); }
-  .scenario-cell:first-child { color: var(--color-storm-cloud); }
-  
-  /* CMP3 Table */
-  .cmp3 { 
-    background: var(--color-graphite); 
-    border-radius: var(--radius-md); 
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 24px; 
-    overflow: hidden;
-  }
-  .cmp3-row { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    border-bottom: 1px solid var(--color-muted-ash); 
-  }
+  .scenario-cell { padding: 14px 20px; font-size: 14px; }
+  .scenario-cell:first-child { border-right: 1px solid var(--border); color: var(--text-dim); font-weight: 400; }
+  .scenario-cell:last-child { font-weight: 500; }
+  .cmp3 { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .cmp3-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
   .cmp3-row:last-child { border-bottom: none; }
-  .cmp3-head { background: var(--color-deep-slate); box-shadow: var(--shadow-subtle); }
-  .cmp3-cell { padding: 12px 16px; font-size: 13px; color: var(--color-light-steel); }
-  .cmp3-head .cmp3-cell { 
-    font-weight: 510; 
-    color: var(--color-storm-cloud); 
-  }
-  .cmp3-head .cmp3-cell:nth-child(2) { color: var(--color-neon-lime); }
-  .cmp3-cell:first-child { color: var(--color-storm-cloud); }
+  .cmp3-head { background: var(--surface-2); }
+  .cmp3-cell { padding: 14px 16px; font-size: 13px; border-right: 1px solid var(--border); }
+  .cmp3-cell:last-child { border-right: none; }
+  .cmp3-head .cmp3-cell { font-weight: 700; font-size: 12px; letter-spacing: 0.5px; color: var(--text-dim); text-transform: uppercase; }
+  .cmp3-head .cmp3-cell:nth-child(2) { color: var(--accent); }
+  .cmp3-cell:first-child { color: var(--text-dim); font-weight: 400; }
   @media (max-width: 520px) {
     .cmp3-row { grid-template-columns: 80px 1fr 1fr; }
-    .cmp3-cell { padding: 10px 12px; }
+    .cmp3-cell { padding: 10px 8px; font-size: 12px; }
   }
-
-  /* Bug Box */
-  .bug-box { 
-    background: var(--color-deep-slate); 
-    box-shadow: var(--shadow-subtle-2);
-    border-radius: var(--radius-md); 
-    padding: 24px; 
-    margin: 32px 0; 
-    border-left: 2px solid var(--color-neon-lime);
-  }
-  .bug-box h3 { color: var(--color-neon-lime); font-size: 16px; font-weight: 510; margin-bottom: 12px; margin-top: 0; }
-  .bug-box p { font-size: 14px; margin-bottom: 0; }
-
-  /* Footer */
-  .footer { 
-    margin-top: 80px; 
-    padding-top: 32px; 
-    border-top: 1px solid var(--color-muted-ash); 
-    font-size: 13px; 
-    color: var(--color-fog-grey); 
-  }
-  .footer a { 
-    color: var(--color-storm-cloud); 
-    text-decoration: none; 
-    transition: color 0.2s;
-  }
-  .footer a:hover { color: var(--color-porcelain); }
+  .bug-box { background: var(--accent-glow); border: 2px solid var(--accent); border-radius: 12px; padding: 32px; margin: 32px 0; }
+  .bug-box h3 { color: var(--accent); font-size: 18px; font-weight: 900; margin-bottom: 16px; margin-top: 0; }
+  .bug-box p { font-size: 15px; line-height: 1.8; }
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  strong { font-weight: 700; }
 </style>
 </head>
 <body>
@@ -325,7 +131,7 @@
       <div class="info-grid">
         <div class="info-item">
           <span class="info-label">全名</span>
-          <span class="info-value" style="font-size:13px;">Variable Rate Series A Perpetual Stretch Preferred Stock</span>
+          <span class="info-value" style="font-size:14px;">Variable Rate Series A Perpetual Stretch Preferred Stock</span>
         </div>
         <div class="info-item">
           <span class="info-label">代碼</span>
@@ -424,8 +230,8 @@
         <div class="scenario-cell">11.25%</div>
       </div>
       <div class="scenario-row">
-        <div class="scenario-cell" style="color: var(--color-neon-lime);">2026 年 3 月</div>
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">11.50%（首次未調升）</div>
+        <div class="scenario-cell" style="color: var(--accent);">2026 年 3 月</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">11.50%（首次未調升）</div>
       </div>
       <div class="scenario-row">
         <div class="scenario-cell">2026 年 4 月</div>
@@ -433,7 +239,7 @@
       </div>
       <div class="scenario-row">
         <div class="scenario-cell">2026 年 5 月</div>
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">11.50%（連續第三個月維持）</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">11.50%（連續第三個月維持）</div>
       </div>
     </div>
     <p>連續升息七個月，然後穩住了。4 月的 VWAP 是 $99.76——幾乎完美貼合面值。機制在運作。央行升息升到匯率穩了，就停手。STRC 做了一模一樣的事。</p>
@@ -518,8 +324,8 @@
     <div class="scenario">
       <div class="scenario-header">Sharpe Ratio 比較</div>
       <div class="scenario-row">
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">STRC</div>
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">2.76</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 500;">STRC</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">2.76</div>
       </div>
       <div class="scenario-row">
         <div class="scenario-cell">頂級對沖基金</div>
@@ -556,8 +362,8 @@
         <div class="scenario-cell">~7.0% · 波動率 ~8%</div>
       </div>
       <div class="scenario-row">
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">STRC</div>
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">11.50% · 波動率 ~2.86%</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 500;">STRC</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">11.50% · 波動率 ~2.86%</div>
       </div>
     </div>
 
@@ -587,7 +393,7 @@
       </div>
       <div class="scenario-row">
         <div class="scenario-cell">2026 年 4 月 30D 平均日成交額</div>
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">$3.83 億</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">$3.83 億</div>
       </div>
     </div>
 
@@ -764,7 +570,7 @@
       </div>
       <div class="cmp3-row">
         <div class="cmp3-cell">30D 波動</div>
-        <div class="cmp3-cell" style="color: var(--color-neon-lime);">2.86%</div>
+        <div class="cmp3-cell" style="color: var(--accent);">2.86%</div>
         <div class="cmp3-cell">~19%</div>
       </div>
       <div class="cmp3-row">
@@ -785,7 +591,7 @@
     </div>
 
     <p>要穩定現金流、極低波動、每月領錢 → STRC。它就是一個高收益儲蓄帳戶的替代品。</p>
-    <p>要 BTC 上行曝險加固定收益 → STRK。你犧牲 3.5% 的利差，換一個永續的 MSTR call option——而且因為沒有 forced conversion，<a href="strk-analysis.html" style="color: var(--color-neon-lime); text-decoration: none;">那個 call option 永遠不會被公司收走</a>。</p>
+    <p>要 BTC 上行曝險加固定收益 → STRK。你犧牲 3.5% 的利差，換一個永續的 MSTR call option——而且因為沒有 forced conversion，<a href="strk-analysis.html">那個 call option 永遠不會被公司收走</a>。</p>
     <p>兩者不衝突。STRC 產生的月現金流可以拿去買 MSTR 或 STRK。</p>
   </section>
 
@@ -804,7 +610,7 @@
       </div>
       <div class="scenario-row">
         <div class="scenario-cell">100% ROC（實際情況）</div>
-        <div class="scenario-cell" style="color: var(--color-neon-lime); font-weight: 510;">不預扣 → 到手 11.53%</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">不預扣 → 到手 11.53%</div>
       </div>
     </div>
 
