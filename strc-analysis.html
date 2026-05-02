@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>STRC 完整條款分析 — 微策略日報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Light theme (default) */
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f0f0ea;
+    --border: #d8d8d0;
+    --text: #1a1a1a;
+    --text-dim: #5a5a5a;
+    --accent: #d97706;
+    --accent-glow: rgba(217, 119, 6, 0.08);
+    --green: #15803d;
+    --green-bg: rgba(21, 128, 61, 0.06);
+    --red: #b91c1c;
+    --red-bg: rgba(185, 28, 28, 0.06);
+    --blue: #1d4ed8;
+    --blue-bg: rgba(29, 78, 216, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e8e6e3;
+      --text-dim: #b4b4c4;
+      --accent: #f7931a;
+      --accent-glow: rgba(247, 147, 26, 0.15);
+      --green: #22c55e;
+      --green-bg: rgba(34, 197, 94, 0.08);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.08);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96, 165, 250, 0.08);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 16px; font-weight: 400; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+  .header { margin-bottom: 64px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+  .header-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .header h1 { font-size: 32px; font-weight: 900; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header-sub { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+  .header-meta { margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); }
+  section { margin-bottom: 56px; }
+  section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); letter-spacing: -0.3px; }
+  h3 { font-size: 16px; font-weight: 500; color: var(--accent); margin-top: 32px; margin-bottom: 12px; }
+  p { margin-bottom: 16px; color: var(--text); }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+  .info-value { font-size: 18px; font-weight: 700; color: var(--text); }
+  .info-value.accent { color: var(--accent); }
+  .callout { border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; border-left: 3px solid; }
+  .callout-green { background: var(--green-bg); border-color: var(--green); }
+  .callout-red { background: var(--red-bg); border-color: var(--red); }
+  .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+  .callout-accent { background: var(--accent-glow); border-color: var(--accent); }
+  .callout-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .callout-green .callout-title { color: var(--green); }
+  .callout-red .callout-title { color: var(--red); }
+  .callout-blue .callout-title { color: var(--blue); }
+  .callout-accent .callout-title { color: var(--accent); }
+  .callout p { font-size: 14px; margin-bottom: 8px; color: var(--text); }
+  .callout p:last-child { margin-bottom: 0; }
+  .stack { margin: 24px 0; }
+  .stack-item { display: flex; align-items: center; padding: 14px 20px; border: 1px solid var(--border); margin-bottom: -1px; font-size: 14px; }
+  .stack-item:first-child { border-radius: 10px 10px 0 0; }
+  .stack-item:last-child { border-radius: 0 0 10px 10px; }
+  .stack-item.highlight { background: var(--accent-glow); border-color: var(--accent); position: relative; z-index: 1; }
+  .stack-rank { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); width: 24px; flex-shrink: 0; }
+  .stack-name { flex: 1; font-weight: 500; }
+  .stack-detail { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); text-align: right; }
+  .stack-item.highlight .stack-name { color: var(--accent); font-weight: 700; }
+  .stack-item.highlight .stack-rank { color: var(--accent); }
+  .scenario { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .scenario-header { padding: 16px 20px; font-weight: 700; font-size: 14px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .scenario-row:last-child { border-bottom: none; }
+  .scenario-cell { padding: 14px 20px; font-size: 14px; }
+  .scenario-cell:first-child { border-right: 1px solid var(--border); color: var(--text-dim); font-weight: 400; }
+  .scenario-cell:last-child { font-weight: 500; }
+  .cmp3 { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .cmp3-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .cmp3-row:last-child { border-bottom: none; }
+  .cmp3-head { background: var(--surface-2); }
+  .cmp3-cell { padding: 14px 16px; font-size: 13px; border-right: 1px solid var(--border); }
+  .cmp3-cell:last-child { border-right: none; }
+  .cmp3-head .cmp3-cell { font-weight: 700; font-size: 12px; letter-spacing: 0.5px; color: var(--text-dim); text-transform: uppercase; }
+  .cmp3-head .cmp3-cell:nth-child(2) { color: var(--accent); }
+  .cmp3-cell:first-child { color: var(--text-dim); font-weight: 400; }
+  @media (max-width: 520px) {
+    .cmp3-row { grid-template-columns: 80px 1fr 1fr; }
+    .cmp3-cell { padding: 10px 8px; font-size: 12px; }
+  }
+  .bug-box { background: var(--accent-glow); border: 2px solid var(--accent); border-radius: 12px; padding: 32px; margin: 32px 0; }
+  .bug-box h3 { color: var(--accent); font-size: 18px; font-weight: 900; margin-bottom: 16px; margin-top: 0; }
+  .bug-box p { font-size: 15px; line-height: 1.8; }
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  strong { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-tag">mstr_daily · 微策略日報</div>
+    <h1>STRC：如何把比特幣變成一個<span>波動率不到 3% 的現金流工具</span></h1>
+    <p class="header-sub">Strategy 的浮動利率永續優先股 STRC，用一套類似央行的利率調整機制，把比特幣——30D 波動率 53% 的東西——壓縮成一個波動率只有 2.86% 的月配息產品。上市不到一年，累計發行超過 $85 億，成為全世界規模最大的優先股。一個之前完全不存在的東西。</p>
+    <div class="header-meta">2026.05.02 · 資料來源：SEC Filing, Strategy Official, BitcoinQuant</div>
+  </div>
+
+  <!-- 基本資訊 -->
+
+  <section>
+    <h2>基本資訊</h2>
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">全名</span>
+          <span class="info-value" style="font-size:14px;">Variable Rate Series A Perpetual Stretch Preferred Stock</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">代碼</span>
+          <span class="info-value accent">STRC</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">面值 / 聲明金額</span>
+          <span class="info-value">$100</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">目前市價</span>
+          <span class="info-value accent">$99.75</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">目前年化股息率</span>
+          <span class="info-value accent">11.50%（浮動，實際殖利率 11.53%）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">累計發行規模</span>
+          <span class="info-value">~$85.4 億（85,373,389 股）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">到期日</span>
+          <span class="info-value">永續（無到期日）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">配息頻率</span>
+          <span class="info-value">每月（投票中改為每兩週）</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">轉換權</span>
+          <span class="info-value">無</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">波動率 / Sharpe</span>
+          <span class="info-value accent">30D: 2.86% · Sharpe: 2.76</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">52 週區間</span>
+          <span class="info-value">$90.52 — $100.42</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Strategy BTC 持倉</span>
+          <span class="info-value accent">818,334 BTC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心機制 -->
+
+  <section>
+    <h2>核心機制：一間微型央行</h2>
+    <p>理解 STRC 最好的方式：忘掉股票，忘掉債券。把它想成央行。</p>
+    <p>央行怎麼維持匯率穩定？升息吸引資金流入，降息釋放流動性。STRC 做的是一模一樣的事——只不過操作對象從國家貨幣換成了一支優先股的價格。</p>
+
+    <div class="callout callout-blue">
+      <div class="callout-title">利率調整機制</div>
+      <p>股價跌破 $100 → 升息，用更高的殖利率把買盤吸引回來。股價穩定在 $100 → 維持利率。股價高於 $100 → 降息。</p>
+      <p>下調有速度限制：每月不超過 25 個基點加上 SOFR 變動差額，防止利率暴降。但上調沒有上限——跌多少就補多少。</p>
+    </div>
+
+    <p>同時，$101 的贖回權形成硬頂。STRC 永遠不會漲超過 $101 太多——沒有理性投資者會用 $102 買一個公司隨時可以用 $101 收走的東西。</p>
+
+    <p>所以你得到的是一個被雙重壓縮的價格區間：<strong>底下有利率在撐，上面有贖回權在壓。</strong>股價被鎖死在 $100 附近。Saylor 在 Bitcoin 2026 大會上的原話："One penny of volatility, $330 million of liquidity, closed at par."</p>
+
+    <h3>股息歷史：從 9% 到 11.50%</h3>
+    <div class="scenario">
+      <div class="scenario-header">STRC 利率調整紀錄</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2025 年 8 月（上市首月）</div>
+        <div class="scenario-cell">9.00%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2025 年 9 月</div>
+        <div class="scenario-cell">10.00%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2025 年 10 月</div>
+        <div class="scenario-cell">10.25%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2025 年 11 月</div>
+        <div class="scenario-cell">10.50%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2025 年 12 月</div>
+        <div class="scenario-cell">10.75%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2026 年 1 月</div>
+        <div class="scenario-cell">11.00%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2026 年 2 月</div>
+        <div class="scenario-cell">11.25%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell" style="color: var(--accent);">2026 年 3 月</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">11.50%（首次未調升）</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2026 年 4 月</div>
+        <div class="scenario-cell">11.50%（維持）</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2026 年 5 月</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">11.50%（連續第三個月維持）</div>
+      </div>
+    </div>
+    <p>連續升息七個月，然後穩住了。4 月的 VWAP 是 $99.76——幾乎完美貼合面值。機制在運作。央行升息升到匯率穩了，就停手。STRC 做了一模一樣的事。</p>
+  </section>
+
+  <!-- 波動率壓縮 -->
+
+  <section>
+    <h2>波動率壓縮：2.86% 是怎麼做到的</h2>
+
+    <p>比特幣的 30D 波動率大約 53%。MSTR 普通股大約 70%。但 STRC——一個底層資產 100% 是比特幣的公司所發行的證券——30D 波動率只有 <strong>2.86%</strong>。</p>
+
+    <p>背後有三層機制在同時運作，每一層都在壓縮波動率：</p>
+
+    <div class="callout callout-accent">
+      <div class="callout-title">第一層：利率錨定</div>
+      <p>浮動利率把股價拉回 $100。跌了就升息，投資者被更高的殖利率吸引回來。這是最主要的力量——其他優先股沒有這個。STRF 是固定 10%，不管價格跌到哪裡利率都不會變。結果？STRF 的 30D 波動率是 17.64%，STRC 是 2.86%。同一家公司，差 6 倍。</p>
+    </div>
+
+    <div class="callout callout-accent">
+      <div class="callout-title">第二層：贖回權壓頂</div>
+      <p>$101 的贖回價形成硬性天花板。底下有利率在撐，上面有贖回權在壓，價格被困在一個極窄的通道裡。</p>
+    </div>
+
+    <div class="callout callout-accent">
+      <div class="callout-title">第三層：高頻配息重置</div>
+      <p>每次配息都是一個「價格重置點」——投資者領到現金，股價回到除息價，利息重新累積。配息頻率越高，每次累積的幅度越小，價格偏離 $100 的空間越窄。</p>
+    </div>
+
+    <div class="bug-box">
+      <h3>兩週配息：把通道壓得更窄</h3>
+      <p>Strategy 正在投票將配息頻率從每月改為每兩週。累積週期砍半，價格偏離幅度也會更小。理論極限是連續配息——波動率趨近於零。兩週一次已經非常接近這個極限了。</p>
+    </div>
+
+    <p>Saylor 把這套結構叫「數位信貸」（Digital Credit）。邏輯很簡單：普通股（MSTR）吸收比特幣的所有波動，優先股把波動壓縮掉，只留下穩定的股息。目前 Strategy 持有 818,334 BTC，對 STRC 的抵押比例是五比一——底層資產可以跌 80%，STRC 持有人仍然受到保護。</p>
+  </section>
+
+  <!-- 波動率守恆 -->
+
+  <section>
+    <h2>波動率守恆</h2>
+
+    <p>讀到這裡，有經驗的投資者腦裡大概已經在閃紅燈了。一個底層資產波動率 53% 的東西被壓縮到 2.86%——金融史上每次有人試圖把高波動資產強制錨定在低波動，結局通常都很難看。</p>
+
+    <p>但仔細看那些失敗案例，會發現一個被忽略的物理定律：<strong>金融工程不會真的消除波動率，只會轉移波動率。</strong>如果一個產品看起來波動率比它的底層資產低，意思是有人在另一邊承擔了多出來的那部分。真正該問的問題只有一個：轉移到哪裡，那個地方有沒有能力承擔。</p>
+
+    <h3>三個失敗案例</h3>
+
+    <p><strong>UST / Luna（2022）：</strong>演算法穩定幣。UST 把波動率轉移給 Luna。Luna 確實有自己的生態系——Terra 區塊鏈、staking 收益、Anchor 和 Mirror 等 dApp——但這些獨立價值的規模相對 UST 的市值太小。崩盤前夕 UST 流通約 $180 億，Luna 市值約 $250 億。當 UST 開始 depeg，救 peg 的動作（鑄更多 Luna）需要的稀釋規模遠超過 Terra 生態系能消化的需求，Luna 價格崩潰，承擔能力跟著消失。48 小時內 $400 億蒸發。<strong>承擔工具：Luna 的生態系價值。被自己的稀釋規模壓垮。</strong></p>
+
+    <p><strong>瑞郎兌歐元 peg（2011-2015）：</strong>瑞士央行承諾把瑞郎錨定在 1.20 歐元，承擔波動的是央行印鈔買歐元的能力。三年半看起來像個無風險的低波動，全世界都信了——許多東歐國家的房貸用瑞郎計價，因為「瑞郎不會大幅波動」。但承擔工具不是無限的，央行資產負債表暴增到 GDP 的 80%。2015 年 1 月放棄 peg，瑞郎幾分鐘內升值 30%，三年半被壓制的波動率一次性釋放，多家外匯經紀商破產。<strong>承擔工具：央行外匯存底。被耗盡。</strong></p>
+
+    <p><strong>Reserve Primary Fund（2008）：</strong>Money Market Fund 承諾 NAV = $1.00，承擔波動的是底層的商業票據和短期債券。Reserve Primary Fund 持有 7.85 億美元 Lehman 商業票據，Lehman 倒閉後一夜歸零。NAV 跌到 $0.97——「broke the buck」。接下來兩天整個 MMF 行業被擠兌 $1,440 億，連沒持有 Lehman 部位的 fund 也被波及，因為「MMF 永遠 = $1」這個信念被打破了。<strong>承擔工具：底層債券品質。失效。</strong></p>
+
+    <p>模式都一樣：產品的低波動由某個工具承擔，平常運作看起來無風險。但承擔工具不是無限的——當它被擊穿、被耗盡、或失效，原本「不存在」的波動率瞬間出現。而且因為市場長期把這個 peg 當預設前提，崩潰時所有依賴它的下游全部一起出問題。</p>
+
+    <h3>STRC 把波動率轉移到哪裡？</h3>
+
+    <p>STRC 把比特幣的波動率明確轉移到 <strong>MSTR 普通股</strong>。MSTR 的 30D 波動率是 70%——比比特幣自己（53%）還高。它就是被設計來承擔波動的，吸收 BTC 的波動再加上槓桿放大。MSTR 股東簽下這個合約時就知道。他們買 MSTR 從來不是為了穩定，他們買 MSTR 是要 BTC 的高 beta 曝險。</p>
+
+    <p>關鍵差異在規模。MSTR 普通股代表的是<strong>真實資產的所有權</strong>——818,334 BTC（$640 億）、軟體業務、上市公司本身，市值在 $千億級別。STRC 的義務只有 $85 億——大約是 MSTR 承擔能力的 1/12。Strategy 為了救 STRC 的 peg 多付的利息，由 MSTR 普通股股東吸收，但這個成本相對 MSTR 的市值是會計噪音，遠遠不夠引發像 Luna 那樣的螺旋。</p>
+
+    <div class="callout callout-accent">
+      <div class="callout-title">三個關鍵結構差異</div>
+      <p><strong>承擔工具的規模 vs 義務的規模。</strong>Luna 有獨立價值，但市值不夠大來吸收 UST 的稀釋。央行外匯存底有限。MMF 底層債券會違約。MSTR 普通股代表 818,334 BTC（$640 億）加軟體業務的所有權，相對 STRC 的 $85 億義務是五比一的緩衝——這個比例保護的不只是 STRC，同時保護 MSTR 不會像 Luna 那樣被自己的承擔義務壓垮。</p>
+      <p><strong>沒有反身性循環。</strong>UST 救 peg → Luna 跌 → peg 更破。STRC 救 peg → Strategy 多付利息 → MSTR 股東吸收。前者是正回饋（放大擾動），後者是負回饋（穩定系統）。</p>
+      <p><strong>沒有 covenant 強制清算。</strong>很多結構性產品死於自動清算條款。STRC 沒有任何 maintenance covenant、沒有 LTV 要求、沒有強制贖回門檻。沒有任何外部力量可以逼 Strategy 在它不想的時候做任何事。</p>
+    </div>
+
+    <p>但這不代表 STRC 沒有風險。如果比特幣真的長期下跌而且不回來，承擔波動的那一方（MSTR + Strategy 現金流）會被耗盡，跟瑞士央行的外匯存底被耗盡一樣。差別在於 <strong>STRC 唯一的死因必須是底層資產 BTC 失敗，結構本身殺不死它</strong>。UST 可以在比特幣繼續活著的世界裡死掉，STRC 不會。</p>
+  </section>
+
+  <!-- 風險調整報酬 + 固收比較 -->
+
+  <section>
+    <h2>跟其他東西比</h2>
+
+    <p>Sharpe Ratio 衡量的是每承擔一單位風險，你拿到多少超額報酬。STRC 的 30D Sharpe 是 <strong>2.76</strong>。頂級對沖基金大概 1.0 到 1.5。同一家公司的 STRF 是 0.36。</p>
+
+    <p>差距很大。STRC 的 Sharpe 是頂級對沖基金的 2 倍，是同家公司最資深優先股的 7.6 倍。而且差距的來源很反直覺——殖利率其實差不多，STRF 固定 10%，STRC 浮動 11.50%。真正拉開距離的是波動率。浮動利率機制直接把波動率壓到地板，Sharpe 就被拉上天了。</p>
+
+    <div class="scenario">
+      <div class="scenario-header">Sharpe Ratio 比較</div>
+      <div class="scenario-row">
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 500;">STRC</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">2.76</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">頂級對沖基金</div>
+        <div class="scenario-cell">~1.0 — 1.5</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">S&P 500 長期</div>
+        <div class="scenario-cell">~0.4 — 0.6</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">比特幣</div>
+        <div class="scenario-cell">~0.5 — 0.8</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">STRF（同家公司最資深）</div>
+        <div class="scenario-cell">0.36</div>
+      </div>
+    </div>
+
+    <h3>跟傳統固收的差距</h3>
+
+    <div class="scenario">
+      <div class="scenario-header">殖利率 vs 波動率</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Money Market Fund</div>
+        <div class="scenario-cell">~4.5% · 波動率 ≈ 0%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">投資等級公司債 (LQD)</div>
+        <div class="scenario-cell">~5.5% · 波動率 ~7%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">高收益公司債 (HYG)</div>
+        <div class="scenario-cell">~7.0% · 波動率 ~8%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 500;">STRC</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">11.50% · 波動率 ~2.86%</div>
+      </div>
+    </div>
+
+    <p>殖利率是 Money Market 的 2.5 倍，波動率比高收益債還低。加上 100% ROC 對外國投資者免稅（後面會詳細講），實際到手殖利率跟其他產品完全不在同一個級別。Phong Le 稱之為公司的「iPhone moment」——他說的沒錯，因為這東西不需要被推銷。產品本身就是行銷。</p>
+  </section>
+
+  <!-- 成長速度 -->
+
+  <section>
+    <h2>$85 億，10 個月</h2>
+
+    <p>2025 年 7 月 25 日上市，IPO 價 $90。不到 10 個月，累計發行 $85.4 億，成為全球最大優先股。</p>
+
+    <p>這個速度值得放進去感受一下。Strategy 從 2020 年 8 月開始買比特幣，花了 <strong>48 個月</strong>才累計投入 $84 億。STRC 用不到五分之一的時間就超過了這個數字。</p>
+
+    <p>2026 年至今，STRC 的 ATM 發行已累計買入約 77,000 BTC。同期所有美國現貨比特幣 ETF 的淨買入量？大約 8,000 BTC。<strong>STRC 一個產品買的比特幣，是所有 ETF 加起來的 10 倍。</strong></p>
+
+    <div class="scenario">
+      <div class="scenario-header">成交量趨勢</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2025 年 12 月 月均日成交量</div>
+        <div class="scenario-cell">571,882 股</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2026 年 1 月 月均日成交量</div>
+        <div class="scenario-cell">1,218,507 股</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">2026 年 4 月 30D 平均日成交額</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">$3.83 億</div>
+      </div>
+    </div>
+
+    <p>流動性在形成正向飛輪：成交量越大，bid-ask spread 越窄，越多機構願意配置，成交量更大。Strategy 已經把 shelf registration 擴大到 $210 億。Saylor 的說法是，STRC 瞄準的是 $3.5 兆的私人信貸市場，跟優先股市場根本不同量級。</p>
+  </section>
+
+  <!-- 浮動清算優先價 -->
+
+  <section>
+    <h2>浮動清算優先價：一個幾乎沒人在討論的設計</h2>
+
+    <p>大部分優先股的清算優先價是固定的。STRK 永遠是 $100——不管市價多少，清算時就是 $100。</p>
+
+    <p>STRC 不一樣。它的清算優先價會<strong>追蹤市價向上調整</strong>，取以下三者的最高值：</p>
+
+    <div class="callout callout-blue">
+      <div class="callout-title">清算優先價 = max(A, B, C)</div>
+      <p><strong>(A)</strong> 聲明金額 $100（永遠不低於此）</p>
+      <p><strong>(B)</strong> 新的 ATM 發行前一個交易日的收盤價</p>
+      <p><strong>(C)</strong> 過去一段交易日的平均收盤價</p>
+    </div>
+
+    <p>這代表什麼？如果 Strategy 被清算，你拿到的是市價或更高——至少 $100。對一個設計上永遠在 $100 附近交易的產品來說，這個條款幾乎不會被用到。但它在極端情境下提供了一層額外的保護——而且是免費的。</p>
+  </section>
+
+  <!-- 公司贖回權 -->
+
+  <section>
+    <h2>公司贖回權</h2>
+
+    <h3>Optional Redemption（主動贖回）</h3>
+    <div class="callout callout-blue">
+      <div class="callout-title">條款</div>
+      <p>Strategy 可以隨時贖回全部或部分 STRC，贖回價 <strong>$101</strong>（或更高）+ 未付股息。部分贖回後至少保留 $2.5 億聲明金額流通。</p>
+    </div>
+    <p>這是公司保留的利率管理工具。未來如果利率環境改變，Strategy 可以用 $101 把高息 STRC 買回來，再發一批低息版本。你的上行被鎖在 $101——但你買 STRC 本來就是為了現金流，資本利得從來就不在計畫裡。</p>
+
+    <h3>其他贖回條款</h3>
+    <p><strong>Clean-up Redemption：</strong>流通量低於原始發行量 25% 時可全部贖回。<strong>Tax Event Redemption：</strong>特定稅務事件時可全部贖回。兩者贖回價皆為清算優先價 + 未付股息。</p>
+  </section>
+
+  <!-- 資本結構 -->
+
+  <section>
+    <h2>資本結構順位</h2>
+    <p>清算時誰先拿錢，由高到低：</p>
+    <div class="stack">
+      <div class="stack-item">
+        <span class="stack-rank">1</span>
+        <span class="stack-name">可轉換高級票據</span>
+        <span class="stack-detail">~$82 億</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">2</span>
+        <span class="stack-name">STRF（Strife）</span>
+        <span class="stack-detail">10% 固定 · 累積</span>
+      </div>
+      <div class="stack-item highlight">
+        <span class="stack-rank">3</span>
+        <span class="stack-name">STRC（Stretch）← 你在這裡</span>
+        <span class="stack-detail">浮動 11.50% · 累積</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">4</span>
+        <span class="stack-name">STRE（Stream）</span>
+        <span class="stack-detail">10% 固定 · €計價 · 累積</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">5</span>
+        <span class="stack-name">STRK（Strike）</span>
+        <span class="stack-detail">8% 可轉換 · 累積</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">6</span>
+        <span class="stack-name">STRD（Stride）</span>
+        <span class="stack-detail">10% 固定 · 非累積</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-rank">7</span>
+        <span class="stack-name">MSTR 普通股</span>
+        <span class="stack-detail">最後</span>
+      </div>
+    </div>
+    <p>STRC 排第三。只在約 $82 億的債務和 STRF 之後。而且股息是<strong>累積性</strong>的——如果 Strategy 錯過一次配息，欠的錢會累積，必須在支付任何下層證券（包括 STRK、STRD、普通股）之前全部還清。相比之下，STRD 是非累積性的——錯過就沒了，永遠不用補。</p>
+  </section>
+
+  <!-- 資不抵債的數學 -->
+
+  <section>
+    <h2>資不抵債的數學</h2>
+
+    <p>「Strategy 倒閉」這個詞被丟得很頻繁，但很少人真的去算過數字。</p>
+
+    <p>要 STRC 開始實質受影響，需要的條件：Strategy 的 BTC 持倉市值，跌破資本結構中 STRC 以上所有層級的帳面總和。</p>
+
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">可轉換高級票據</span>
+          <span class="info-value">~$82 億</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">STRF（粗估）</span>
+          <span class="info-value">~$15 億</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">STRC</span>
+          <span class="info-value">$85 億</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">STRC 以上層級總和</span>
+          <span class="info-value accent">~$182 億</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Strategy 持有 BTC</span>
+          <span class="info-value">818,334 顆</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">資不抵債觸發 BTC 價</span>
+          <span class="info-value accent">~$22,000</span>
+        </div>
+      </div>
+    </div>
+
+    <p>$182 億 ÷ 818,334 顆 BTC ≈ 每顆 $22,000。從目前 BTC 價算下來，這需要再跌 70% 以上，而且要待在那裡——急跌一下又彈回來不算。</p>
+
+    <p>而且這還只是「STRC 開始有風險」的點。要 STRC 持有人完全血本無歸，還需要 BTC 再跌到接近歸零。</p>
+
+    <h3>「資不抵債」≠「會倒」</h3>
+
+    <p>很多人不知道，S&P 500 裡有相當多公司技術上是資不抵債的，帳面股東權益為負。Boeing、McDonald's、Starbucks、Philip Morris、AutoZone——多年大量股票回購把帳面權益買到負數。他們還是好端端在那裡營運、付股息、發新債。</p>
+
+    <p>帳面資不抵債只是會計上的狀態，跟公司能否繼續運作沒有直接關係。真正讓公司倒閉的是<strong>現金流斷裂</strong>——付不出利息、付不出薪水、無法借新還舊。</p>
+
+    <p>Strategy 的現金流來源有：發行新優先股的 ATM、發行可轉換債券、帳上 $22.5 億現金、必要時的 BTC 變現。要這些全部同時失靈，光「BTC 跌一波熊市」遠遠不夠——需要整個比特幣市場結構性崩塌外加資本市場關閉外加 Strategy 失去一切信用。這個 scenario 確實存在，但門檻遠遠高於大部分人腦中那個「Strategy 倒閉」的畫面。</p>
+
+    <h3>STRC 沒有抵押品</h3>
+
+    <p>最後一個容易被誤解的技術細節：STRC 不是債券，沒有抵押品。</p>
+
+    <p>Secured bonds 有特定的擔保資產，違約時債權人可以直接拿到那批指定資產。STRC 雖然在資本結構排第三，但它的優先權是對公司「剩餘資產」的索取權——沒有任何特定 BTC 部位被綁定為 STRC 的抵押。</p>
+
+    <p>好時光的時候這個細節無關痛癢。在極端壞時光，這代表 STRC 的回收率取決於整個公司清算後的剩餘價值——而因為 BTC 幾乎是 Strategy 唯一有意義的資產，這個價值幾乎完全等於屆時 BTC 持倉的市值。Saylor 的「五比一抵押」是經濟意義上的描述，不是法律意義上的擔保關係。</p>
+  </section>
+
+
+  <!-- STRC vs STRK -->
+
+  <section>
+    <h2>STRC vs STRK：兩種完全不同的東西</h2>
+
+    <p>很多人問這兩個怎麼選。答案取決於你要什麼。</p>
+
+    <div class="cmp3">
+      <div class="cmp3-row cmp3-head">
+        <div class="cmp3-cell"></div>
+        <div class="cmp3-cell">STRC</div>
+        <div class="cmp3-cell">STRK</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">股息</div>
+        <div class="cmp3-cell">浮動 11.50%</div>
+        <div class="cmp3-cell">固定 8%</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">配息</div>
+        <div class="cmp3-cell">每月</div>
+        <div class="cmp3-cell">每季</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">BTC 上行</div>
+        <div class="cmp3-cell">無</div>
+        <div class="cmp3-cell">有（$1,000 永續 call）</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">30D 波動</div>
+        <div class="cmp3-cell" style="color: var(--accent);">2.86%</div>
+        <div class="cmp3-cell">~19%</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">價格行為</div>
+        <div class="cmp3-cell">錨定 $100</div>
+        <div class="cmp3-cell">追蹤 MSTR</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">順位</div>
+        <div class="cmp3-cell">第三</div>
+        <div class="cmp3-cell">第五</div>
+      </div>
+      <div class="cmp3-row">
+        <div class="cmp3-cell">轉換權</div>
+        <div class="cmp3-cell">無</div>
+        <div class="cmp3-cell">可轉 MSTR</div>
+      </div>
+    </div>
+
+    <p>要穩定現金流、極低波動、每月領錢 → STRC。它就是一個高收益儲蓄帳戶的替代品。</p>
+    <p>要 BTC 上行曝險加固定收益 → STRK。你犧牲 3.5% 的利差，換一個永續的 MSTR call option——而且因為沒有 forced conversion，<a href="strk-analysis.html">那個 call option 永遠不會被公司收走</a>。</p>
+    <p>兩者不衝突。STRC 產生的月現金流可以拿去買 MSTR 或 STRK。</p>
+  </section>
+
+  <!-- ROC -->
+
+  <section>
+    <h2>稅務：100% Return of Capital</h2>
+
+    <p>STRC 在 2025 年的所有配息被 100% 認列為 Return of Capital。Strategy 預期此狀態持續十年以上。原因跟 STRK 一樣：公司沒有累積盈餘可分配，所有配出去的現金在稅務上都被歸類為資本返還。</p>
+
+    <div class="scenario">
+      <div class="scenario-header">稅務影響（以外國投資者為例）</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">如果被當普通股息</div>
+        <div class="scenario-cell">預扣 30% → 到手 ~8.05%</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">100% ROC（實際情況）</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">不預扣 → 到手 11.53%</div>
+      </div>
+    </div>
+
+    <p>對台灣投資者：ROC 不被美國預扣稅，台灣不課美股資本利得稅（W-8BEN）。<strong>美國不扣，台灣不課。到手就是 11.50%，一毛不少。</strong></p>
+  </section>
+
+  <!-- 風險 -->
+
+  <section>
+    <h2>風險提醒</h2>
+    <div class="callout callout-red">
+      <div class="callout-title">請注意</div>
+      <p>STRC <strong>不是銀行存款</strong>，沒有 FDIC 保險，本金不保證。優先股不以 Strategy 的比特幣持倉作為擔保品——你對公司的剩餘資產有優先請求權，但如果剩餘資產不夠，你就是不夠。</p>
+      <p>如果比特幣長期歸零，Strategy 的財務壓力會直接傳導到 STRC。股息可能被暫停，你在約 $82 億的債務和 STRF 後面排隊。</p>
+      <p>利率是浮動的。目前是 11.50%，但未來可能被調降。下調有速度限制（每月 25bps + SOFR 差額），但長期可以大幅低於現在。</p>
+      <p>52 週低點是 $90.52。MSTR 曾連跌八個月（2025.08 — 2026.03），STRC 同期也承受了壓力。利率機制最終把價格拉回來了，但過程中你得扛得住大約 10% 的帳面虧損。</p>
+    </div>
+  </section>
+
+  <!-- 股息可持續性 -->
+
+  <section>
+    <h2>股息可持續性</h2>
+
+    <p>上面列了風險，但也要看觸發這些風險的門檻有多高。</p>
+
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">BTC 長期年化門檻</span>
+          <span class="info-value accent">2.39%</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">帳上現金儲備</span>
+          <span class="info-value accent">$2.25B</span>
+        </div>
+      </div>
+    </div>
+
+    <p>只要比特幣的長期年化報酬率達到 <strong>2.39%</strong>，Strategy 就可以永久支付所有優先股股息。這個門檻極低——比特幣歷史上任何四年週期的年化報酬率都遠超這個數字。</p>
+    <p>即使短期遭遇極端下跌，帳上有 $22.5 億現金作為緩衝，可以覆蓋超過 21 個月的股息支出，即使公司完全沒有其他收入。「股息被暫停」這個風險要觸發，光一次熊市還不夠——需要的是比特幣作為一種資產類別的根本性失敗。</p>
+  </section>
+
+  <!-- 結語 -->
+
+  <section>
+    <h2>簡單來說</h2>
+    <div class="callout callout-accent">
+      <p>你不持有比特幣，但你的收益來自比特幣。你不承擔比特幣的波動，但你享受比特幣生態系統創造的超額報酬。你的殖利率是 Money Market 的 2.5 倍，波動率比高收益債還低，而且因為 ROC，免稅。</p>
+      <p>一個之前完全不存在的東西，上市十個月就成為全球最大優先股，買的比特幣比所有 ETF 加起來還多。已經很難再叫它小眾產品了。</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>本文僅為個人研究筆記，不構成任何投資建議。所有資料來源為 SEC 公開文件及 Strategy 官方公告。</p>
+    <p>微策略日報 · <a href="https://www.threads.net/@mstr_daily">@mstr_daily</a></p>
+    <p style="margin-top: 8px;"><a href="strk-analysis.html">STRK 分析 →</a></p>
+  </div>
+
+</div>
+</body>
+</html>
