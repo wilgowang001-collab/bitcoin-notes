@@ -1,0 +1,9 @@
+# 囤比特幣筆記 — W.
+
+> 中文圈最深入的 Strategy (MSTR) 資本結構分析。涵蓋 STRK、STRC 優先股完整條款拆解，以及比特幣本位的長篇思考筆記。
+
+## Pages
+
+- [囤比特幣筆記](https://wilgowang001-collab.github.io/bitcoin-notes/): 八章完整筆記，從法幣體系問題到 Strategy 資本結構，涵蓋比特幣價值主張、Strategy 商業模式、優先股設計、風險分析。
+- [STRK 完整條款分析](https://wilgowang001-collab.github.io/bitcoin-notes/strk-analysis.html): Strategy 8% Series A Perpetual Strike Preferred Stock 的完整分析。核心發現：STRK 沒有強制轉換機制 (no forced conversion)，持有人可永久同時享有 8% 股息、優先清償權、與 MSTR $1,000 轉換權。包含期權框架拆解、情境模擬、稅務分析 (100% Return of Capital)。
+- [STRC 分析](https://wilgowang001-collab.github.io/bitcoin-notes/strc-analysis.html): Strategy 浮動利率永續優先股 STRC 的完整分析。核心機制：央行式浮動利率錨定，將比特幣 53% 波動率壓縮至 2.86%，Sharpe Ratio 2.76。包含波動率守恆分析（UST/Luna、瑞郎 peg、Reserve Primary Fund 比較）、資不抵債數學、稅務分析。上市十個月累計發行 $85 億，全球最大優先股。
