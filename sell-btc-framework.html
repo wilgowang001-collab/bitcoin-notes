@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>賣幣還是發股？Strategy Q1 2026 決策框架拆解 — 微策略日報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f0f0ea;
+    --border: #d8d8d0;
+    --text: #1a1a1a;
+    --text-dim: #5a5a5a;
+    --accent: #d97706;
+    --accent-glow: rgba(217, 119, 6, 0.08);
+    --green: #15803d;
+    --green-bg: rgba(21, 128, 61, 0.06);
+    --red: #b91c1c;
+    --red-bg: rgba(185, 28, 28, 0.06);
+    --blue: #1d4ed8;
+    --blue-bg: rgba(29, 78, 216, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e8e6e3;
+      --text-dim: #b4b4c4;
+      --accent: #f7931a;
+      --accent-glow: rgba(247, 147, 26, 0.15);
+      --green: #22c55e;
+      --green-bg: rgba(34, 197, 94, 0.08);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.08);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96, 165, 250, 0.08);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 16px; font-weight: 400; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+  .header { margin-bottom: 64px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+  .header-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .header h1 { font-size: 32px; font-weight: 900; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header-sub { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+  .header-meta { margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); }
+  section { margin-bottom: 56px; }
+  section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); letter-spacing: -0.3px; }
+  h3 { font-size: 16px; font-weight: 500; color: var(--accent); margin-top: 32px; margin-bottom: 12px; }
+  p { margin-bottom: 16px; color: var(--text); }
+  strong { font-weight: 700; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+  .info-value { font-size: 18px; font-weight: 700; color: var(--text); }
+  .info-value.accent { color: var(--accent); }
+  .callout { border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; border-left: 3px solid; }
+  .callout-green { background: var(--green-bg); border-color: var(--green); }
+  .callout-red { background: var(--red-bg); border-color: var(--red); }
+  .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+  .callout-accent { background: var(--accent-glow); border-color: var(--accent); }
+  .callout-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .callout-green .callout-title { color: var(--green); }
+  .callout-red .callout-title { color: var(--red); }
+  .callout-blue .callout-title { color: var(--blue); }
+  .callout-accent .callout-title { color: var(--accent); }
+  .callout p { font-size: 14px; margin-bottom: 8px; color: var(--text); }
+  .callout p:last-child { margin-bottom: 0; }
+  .scenario { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .scenario-header { padding: 16px 20px; font-weight: 700; font-size: 14px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .scenario-row:last-child { border-bottom: none; }
+  .scenario-cell { padding: 14px 20px; font-size: 14px; }
+  .scenario-cell:first-child { border-right: 1px solid var(--border); color: var(--text-dim); font-weight: 400; }
+  .scenario-cell:last-child { font-weight: 500; }
+  .scenario-row-4 { display: grid; grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr; border-bottom: 1px solid var(--border); }
+  .scenario-row-4:last-child { border-bottom: none; }
+  .scenario-row-4 .scenario-cell { padding: 12px 14px; font-size: 13px; border-right: 1px solid var(--border); }
+  .scenario-row-4 .scenario-cell:last-child { border-right: none; }
+  .scenario-row-4.head { background: var(--surface-2); }
+  .scenario-row-4.head .scenario-cell { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700; color: var(--text-dim); }
+  .scenario-row-4.highlight { background: var(--accent-glow); }
+  .scenario-row-4.highlight .scenario-cell { color: var(--accent); font-weight: 700; }
+  .scenario-row-4.btc-row { border-top: 2px dashed var(--accent); }
+  .bug-box { background: var(--accent-glow); border: 2px solid var(--accent); border-radius: 12px; padding: 32px; margin: 32px 0; }
+  .bug-box h3 { color: var(--accent); font-size: 18px; font-weight: 900; margin-bottom: 16px; margin-top: 0; }
+  .bug-box p { font-size: 15px; line-height: 1.8; }
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .neg { color: var(--red); }
+  .pos { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-tag">mstr_daily · 微策略日報</div>
+    <h1>Saylor 說要「賣幣」，<span>但數學說的不是你想的那樣</span></h1>
+    <p class="header-sub">5 月 5 日 Q1 財報電話會議，Saylor 說了一句話，MSTR 盤後跌 4%。所有你在推特上看到的「信仰崩塌」、「死亡螺旋」的說法，讓我們算一遍數字再做判斷。</p>
+    <div class="header-meta">2026.05.06 · 資料來源：Q1 2026 Earnings Call, strategy.com</div>
+  </div>
+
+  <!-- 01 發生什麼事 -->
+  <section>
+    <h2>發生什麼事</h2>
+    <p>Q1 財報電話會議上，Saylor 說了一句：</p>
+    <div class="callout callout-accent">
+      <p>"We will probably sell some bitcoin to pay a dividend just to inoculate the market — just to send the message that we did it."</p>
+    </div>
+    <p>「永不賣幣」講了好幾年，現在改口了。盤後 MSTR 跌 4%。其實 Strategy 在之前的 SEC filing 和電話會議裡就提過賣幣是保留選項之一，但從來沒有明確說「我們會做」。這次的差別在於 Saylor 直接說了：我們真的會賣。</p>
+    <p>CEO Phong Le 補了一句更直接的：公司未來會在「對公司有利的時機」考慮賣幣。年度 preferred 股息加上債務利息，合計大約 <strong>$1.5B</strong>。以前這筆錢全靠發 MSTR 普通股來付，現在多了一條路——直接賣 BTC。</p>
+    <p>聽起來很可怕。接下來看數字。</p>
+  </section>
+
+  <!-- 02 到底賣多少 -->
+  <section>
+    <h2>到底要賣多少</h2>
+    <p>$1.5B 的年度義務，以目前幣價 ~$80,000 計算：</p>
+
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">需要賣出的 BTC</span>
+          <span class="info-value accent">~19,000 顆 / 年</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">佔總持倉 818,334 顆</span>
+          <span class="info-value accent">2.3%</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">分散到每天</span>
+          <span class="info-value">~$4M / 天</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">BTC 日均交易量</span>
+          <span class="info-value">$200 億+</span>
+        </div>
+      </div>
+    </div>
+
+    <p>每天 $4M 放進 $200 億的交易量裡，連 noise 都算不上。</p>
+    <p>而且只要 BTC 年漲幅超過 2.3%——歷史上任何四年週期都遠不止——持倉的美元價值根本不會減少。Andrew Kang 在 call 上給了一個數字：即使 BTC 完全不漲，光靠現有儲備就能撐 <strong>43 年</strong>。</p>
+    <p>更關鍵的是，如果 STRC 年發行量超過 $1.5B（幾週前兩天就賣了 $1.5B），公司賣幣付息之後，<strong>淨持倉反而還是增加的</strong>——買進的比賣出的多。</p>
+    <p>所以死亡螺旋的前提——被迫在最差的時機大量拋售——完全不成立。量太小、速度太慢、主動權完全在公司手上。</p>
+  </section>
+
+  <!-- 03 為什麼要賣 -->
+  <section>
+    <h2>那為什麼要賣</h2>
+    <p>既然量這麼小，為什麼不繼續用老方法——發 MSTR 普通股來付息？</p>
+    <p>因為發股的效率取決於 MSTR 的交易價格。Strategy 追蹤的核心指標是 <strong>BTC Per Share（BPS）</strong>——每股含多少比特幣。不管用哪種方式付股息，BPS 都會下降，但下降幅度不同。</p>
+
+    <div class="callout callout-blue">
+      <div class="callout-title">賣 BTC 付息</div>
+      <p>分子（BTC 數量）減少，分母（股數）不變。</p>
+    </div>
+    <div class="callout callout-blue">
+      <div class="callout-title">發 MSTR 普通股付息</div>
+      <p>分子不變，分母（股數）增加。</p>
+    </div>
+
+    <p>這很抽象。下面這段是整篇文章最難的部分——如果讀一遍沒有完全理解是正常的。我用一個比喻來拆解。</p>
+
+    <h3>房子比喻</h3>
+
+    <p>你有一棟房子，市價 <strong>$100 萬</strong>。你有一筆房貸，欠銀行 <strong>$20 萬</strong>——這是固定金額，不管房子漲到 $200 萬還是跌到 $50 萬，你欠的都是 $20 萬。你的淨資產 = $100 萬 − $20 萬 = <strong>$80 萬</strong>。</p>
+
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">房子市價</span>
+          <span class="info-value accent">$100 萬</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">固定房貸（不隨房價變動）</span>
+          <span class="info-value">$20 萬</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">你的淨資產</span>
+          <span class="info-value accent">$80 萬</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">需要籌的現金</span>
+          <span class="info-value">$10 萬</span>
+        </div>
+      </div>
+    </div>
+
+    <p>今天你需要 <strong>$10 萬</strong>付帳單。兩個方法：</p>
+
+    <div class="callout callout-green">
+      <div class="callout-title">方法 A：賣掉房子的一部分</div>
+      <p>把一間套房賣了，拿到 $10 萬現金。房子從 $100 萬變 $90 萬。房貸還是 $20 萬。你的淨資產從 $80 萬變 $70 萬。</p>
+      <p>損失 = <strong>$10 萬的房子</strong>。清楚明白。</p>
+    </div>
+
+    <div class="callout callout-red">
+      <div class="callout-title">方法 B：找合夥人按淨資產入股</div>
+      <p>你告訴合夥人：「我在這棟房子裡的淨資產是 $80 萬。你出 $10 萬，拿 12.5% 的所有權。」成交。</p>
+      <p>現在假設房子漲到 <strong>$200 萬</strong>：</p>
+      <p>房貸還是 $20 萬——<strong>固定的，不跟著漲。</strong></p>
+      <p>淨資產 = $200 萬 − $20 萬 = $180 萬。</p>
+      <p>合夥人的 12.5% = <strong>$22.5 萬</strong>。他出了 $10 萬，拿到 $22.5 萬。</p>
+    </div>
+
+    <p>為什麼合夥人賺這麼多？因為房貸是<strong>固定美元</strong>。房子漲了 $100 萬，房貸不動，增值全部歸股東。合夥人按淨資產（$80 萬）的 12.5% 入股，但他享受的是整棟房子（$100 萬）增值的 12.5%。</p>
+    <p>你呢？你拿到了 $10 萬現金，但送出去了 12.5% 的放大增值權。<strong>賣便宜了。</strong></p>
+
+    <div class="callout callout-accent">
+      <div class="callout-title">什麼時候方法 B 才不虧？</div>
+      <p>合夥人不按你的淨資產（$80 萬）出價，而是按整棟房子的市價（$100 萬）出價。</p>
+      <p>$10 萬 / $100 萬 = 10% 的所有權 → 對應 10% 的房子增值。一比一，公平。</p>
+      <p>這個溢價 = $100 萬 / $80 萬 = <strong>1.25 倍</strong>。低於這個倍數，合夥人占便宜；高於這個倍數，你占便宜。</p>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-header">房子 → Strategy</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">房子市價 $100 萬</div>
+        <div class="scenario-cell">BTC 持倉 $64B</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">固定房貸 $20 萬</div>
+        <div class="scenario-cell">不可轉換 preferred $12.1B</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">淨資產 $80 萬</div>
+        <div class="scenario-cell">NAV $51.9B</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">賣套房</div>
+        <div class="scenario-cell">賣 BTC</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">找合夥人入股</div>
+        <div class="scenario-cell">發行 MSTR 普通股</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell" style="color: var(--accent);">Breakeven 1.25x</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">Breakeven mNAV ~1.23x（Phong Le 報 1.22x）</div>
+      </div>
+    </div>
+
+    <p>理解了這個比喻之後，下面的實際數字就容易看了。</p>
+
+    <h3>實際比較表</h3>
+
+    <p>哪個方法讓 BPS 掉更少，取決於 mNAV。Saylor 在 call 上展示了完整的比較表（以 $1B 為例）：</p>
+
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">方法</div>
+        <div class="scenario-cell">股價</div>
+        <div class="scenario-cell">BTC Yield</div>
+        <div class="scenario-cell">vs 賣幣</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">發股 @ 1.00x mNAV</div>
+        <div class="scenario-cell">$130</div>
+        <div class="scenario-cell neg">-188 bps</div>
+        <div class="scenario-cell neg">較差</div>
+      </div>
+      <div class="scenario-row-4 highlight">
+        <div class="scenario-cell">發股 @ ~1.23x mNAV</div>
+        <div class="scenario-cell">$160</div>
+        <div class="scenario-cell">-154 bps</div>
+        <div class="scenario-cell">≈ 打平</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">發股 @ 1.50x mNAV</div>
+        <div class="scenario-cell">$195</div>
+        <div class="scenario-cell pos">-118 bps</div>
+        <div class="scenario-cell pos">較好</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">發股 @ 2.00x mNAV</div>
+        <div class="scenario-cell">$260</div>
+        <div class="scenario-cell pos">-95 bps</div>
+        <div class="scenario-cell pos">好很多</div>
+      </div>
+      <div class="scenario-row-4 btc-row">
+        <div class="scenario-cell">直接賣 BTC</div>
+        <div class="scenario-cell">—</div>
+        <div class="scenario-cell">-156 bps</div>
+        <div class="scenario-cell">基準線</div>
+      </div>
+    </div>
+
+    <p>mNAV 高於 ~1.23x → 發股比賣幣划算，因為股票有溢價，每一塊發股拿到的錢造成的稀釋更小。mNAV 低於 ~1.23x → 賣幣比發股划算。</p>
+    <p>重要的是：ATM 發行普通股仍然是主要工具，這一點完全沒變。mNAV 高的時候，發股依然是最優解——溢價越高越划算。賣幣只是在 mNAV 低的時候多了一個備案，讓公司在任何市場環境下都有路可以走，而不是被卡在只能用最貴的方式付息。兩條路互補，整體更有彈性。</p>
+    <p>當然，賣幣有一個發股沒有的代價：它會把 BTC 釋放回市場，增加流通籌碼。發股的稀釋發生在股票市場，不碰 BTC 的供需；賣幣則直接製造賣壓。量級雖然小到幾乎不影響價格，但結構上這是一個真實的 trade-off——也是為什麼 mNAV 夠高的時候，發股仍然是更好的選擇。</p>
+  </section>
+
+  <!-- 04 為什麼 1.22x -->
+  <section>
+    <h2>為什麼分界線在 ~1.23x</h2>
+    <p>直覺上，mNAV > 1.0x 就代表股票有溢價，發股應該就划算了吧？</p>
+    <p>要理解為什麼 breakeven 被推高到 ~1.23x（Phong Le 在 call 上報的數字是 1.22x，差異來自輸入數字的精度），先看資本結構裡有哪些東西壓在普通股上面。</p>
+
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">工具</div>
+        <div class="scenario-cell">面值</div>
+        <div class="scenario-cell">年度義務</div>
+        <div class="scenario-cell">可轉換？</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">Converts（可轉債）</div>
+        <div class="scenario-cell">$8,214M</div>
+        <div class="scenario-cell">$35M</div>
+        <div class="scenario-cell pos">是</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">STRK</div>
+        <div class="scenario-cell">$1,402M</div>
+        <div class="scenario-cell">$112M</div>
+        <div class="scenario-cell pos">是</div>
+      </div>
+      <div class="scenario-row-4 btc-row">
+        <div class="scenario-cell">STRC</div>
+        <div class="scenario-cell">$8,537M</div>
+        <div class="scenario-cell">$982M</div>
+        <div class="scenario-cell neg">否</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">STRF</div>
+        <div class="scenario-cell">$1,284M</div>
+        <div class="scenario-cell">$128M</div>
+        <div class="scenario-cell neg">否</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">STRE</div>
+        <div class="scenario-cell">$911M</div>
+        <div class="scenario-cell">$91M</div>
+        <div class="scenario-cell neg">否</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">STRD</div>
+        <div class="scenario-cell">$1,402M</div>
+        <div class="scenario-cell">$140M</div>
+        <div class="scenario-cell neg">否</div>
+      </div>
+      <div class="scenario-row-4 highlight">
+        <div class="scenario-cell">合計</div>
+        <div class="scenario-cell">$21,750M</div>
+        <div class="scenario-cell">$1,488M</div>
+        <div class="scenario-cell"></div>
+      </div>
+    </div>
+
+    <p>關鍵在「可轉換」那一欄。Converts 和 STRK 未來會轉成普通股——它們的股數已經被算進 BPS 分母的 Assumed Diluted Shares 裡了。對 BPS 來說，它們已經「消化掉了」。</p>
+    <p>真正拉高 breakeven 的是<strong>不可轉換的那部分</strong>：STRC + STRF + STRE + STRD，合計約 $12.1B。這些有現金義務但永遠不會變成股票。</p>
+
+    <h3>每股有兩個「價值」</h3>
+
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">每股 BTC 市值</span>
+          <span class="info-value accent">$160</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">每股 NAV（扣掉不可轉換 claims）</span>
+          <span class="info-value">$130</span>
+        </div>
+      </div>
+    </div>
+
+    <p>每股背後有 $160 的 BTC，但 NAV 只有 $130。差距 $30 就是不可轉換 claims 分攤到每股的成本。</p>
+    <p>在 1.0x mNAV 時，股價 = $130。你賣一股拿到 $130，但稀釋掉的是 $160 的 BTC 權益——你用折扣價出清了放大曝險。只有當股價追上每股 BTC 價值（$160），也就是 mNAV ≈ 1.23x（= $64B / $51.9B），發股才不虧。</p>
+
+    <div class="bug-box">
+      <h3>Amplification（放大曝險）</h3>
+      <p>不可轉換 claims 是固定的。BTC 漲 1% → 總值 +$640M → 全部歸普通股 → NAV 漲 1.23%。普通股對 BTC 有 1.23 倍的放大曝險。</p>
+      <p>放大倍數 = $64B / $51.9B = 1.23x = breakeven mNAV。兩個數字相等，因為它們問的是同一個問題：股價要到多少，才等於每股背後的真實 BTC 價值。</p>
+      <p>不可轉換 claims 越多 → 放大倍數越高 → breakeven 越高。STRC 繼續發行的話，這條線會持續往上推。Phong Le 在 call 上特別強調：這個數字已經從 1.0x 上升到了 1.22x。</p>
+    </div>
+
+    <h3>strategy.com 上的 amplification 33% 是什麼？</h3>
+    <p>strategy.com 即時顯示的 amplification 33% 用的是<strong>全部</strong> senior claims（$21.75B / $64B），量化的是整體槓桿水準。而 breakeven ~1.23x 只數不可轉換的那部分（$12.1B），排除了已經在股數裡的 Converts 和 STRK。兩個數字口徑不同，都是對的。</p>
+  </section>
+
+  <!-- 05 稅務 -->
+  <section>
+    <h2>賣幣還能撿稅盾</h2>
+    <p>即使發股和賣幣在 BPS 上打平，賣幣還有一個額外好處：稅務優化。</p>
+    <p>Strategy 的 BTC 是分批買的，成本從幾千到十萬都有。高於目前幣價（~$78k）的那批，在帳面上是未實現虧損。但未實現虧損在稅法上沒有用——你沒賣就不能抵稅。</p>
+
+    <div class="scenario">
+      <div class="scenario-header">賣高成本 BTC 的稅務效果</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">動作</div>
+        <div class="scenario-cell">賣出高成本幣（例如 $95k 買的）</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">稅務結果</div>
+        <div class="scenario-cell">認列已實現資本虧損（realized capital loss）</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">用途</div>
+        <div class="scenario-cell">抵銷未來的資本利得 → 少繳稅</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell" style="color: var(--accent);">帳上遞延稅務利益</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">≈ $2.2B</div>
+      </div>
+    </div>
+
+    <p>Saylor 在 call 上的原話：「我們有 22 億美元的稅務抵免躺在地上，應該去把它撿起來。」</p>
+
+    <div class="callout callout-blue">
+      <div class="callout-title">精確一點</div>
+      <p>在美國稅法下，賣 BTC 產生的虧損是<strong>資本虧損（capital loss）</strong>，只能用來抵銷<strong>資本利得（capital gain）</strong>，無法直接抵銷一般營業收入。所以這 $2.2B 是遞延稅務資產——帳上掛著，等未來有資本利得時才能兌現。它不是一筆今天就能用的現金。</p>
+      <p>但這不代表它沒有價值。Strategy 未來一定會賣幣（不管是付息、回購、還是其他用途），只要賣出獲利的幣，這些累積的資本虧損就能拿來抵掉稅。$2.2B 的稅盾遲早會用上，只是時間問題。</p>
+    </div>
+
+    <p>除了稅盾之外，賣高成本幣還有一個直接好處：降低剩餘持倉的平均成本基礎。高成本幣清掉了，剩下的幣成本更低，未來賣出時的帳面利潤更大、但配合稅盾可以抵消。一個動作同時優化了稅務結構和成本結構。</p>
+  </section>
+
+  <!-- 06 結論 -->
+  <section>
+    <h2>Inoculate</h2>
+    <p>Saylor 在 call 上用了一個詞：<strong>inoculate</strong>——接種疫苗。先小量賣一次，讓市場習慣這個操作，消除恐慌預期。</p>
+    <p>提前把邏輯攤開——mNAV 框架、稅務策略、breakeven 數學——全部算給你看。等到真正執行的時候，市場已經消化完了。</p>
+
+    <p>但最容易被忽略的一件事：這個決策改變的是付息的<strong>路徑</strong>，改變的不是買幣的方向。Strategy 的淨買入量依然會大於賣出量。幾週前 STRC 兩天就賣了 $1.5B，全部拿去買幣。一整年的股息也是 $1.5B。只要 STRC 持續發行，買進的永遠比賣出的多。</p>
+
+    <p>真正的價值在細節裡：賣掉的是高成本幣，累積遞延稅盾，降低剩餘持倉的平均成本。買進的是市價幣。一來一回，持倉的品質反而更好了——同樣的 BTC 數量，成本基礎更低，稅務結構更乾淨。</p>
+
+    <div class="bug-box">
+      <h3>這場電話會議本身就是疫苗</h3>
+      <p>每年 2.3% 的量，分散在 365 天，配合 $200 億日均交易量。價格影響趨近於零。</p>
+      <p>mNAV 高 → 發股買幣。mNAV 低 → 賣幣付息，甚至回購股票。同時累積 $2.2B 的遞延稅盾供未來使用。</p>
+      <p>Strategy 依然是淨買入者。只是現在它有了一套完整的工具箱，可以在任何市場環境下選擇最優的路徑。</p>
+      <p>盤後跌 4%，反應的是「sell」這個字。數學沒有人看。</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>本文僅為個人研究筆記，不構成任何投資建議。文中的數字和推導基於公開資料和我自己的理解，可能有錯。如果你發現任何計算錯誤或邏輯問題，歡迎直接跟我說——我會修正。</p>
+    <p>微策略日報 · <a href="https://www.threads.net/@mstr_daily">@mstr_daily</a></p>
+    <p style="margin-top: 8px;"><a href="strc-analysis.html">STRC 分析 →</a> · <a href="strk-analysis.html">STRK 分析 →</a></p>
+  </div>
+
+</div>
+</body>
+</html>
