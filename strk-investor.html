@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>STRK 收益層產品說明</title>
+<link href="[https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap](https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap)" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f0f0ea;
+    --border: #d8d8d0;
+    --text: #1a1a1a;
+    --text-dim: #5a5a5a;
+    --accent: #d97706;
+    --accent-glow: rgba(217, 119, 6, 0.08);
+    --green: #15803d;
+    --green-bg: rgba(21, 128, 61, 0.06);
+    --red: #b91c1c;
+    --red-bg: rgba(185, 28, 28, 0.06);
+    --blue: #1d4ed8;
+    --blue-bg: rgba(29, 78, 216, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e8e6e3;
+      --text-dim: #b4b4c4;
+      --accent: #f7931a;
+      --accent-glow: rgba(247, 147, 26, 0.15);
+      --green: #22c55e;
+      --green-bg: rgba(34, 197, 94, 0.08);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.08);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96, 165, 250, 0.08);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 16px; font-weight: 400; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  .header { margin-bottom: 48px; }
+  .header-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .header h1 { font-size: 32px; font-weight: 900; line-height: 1.3; margin-bottom: 20px; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header-sub { font-size: 16px; color: var(--text-dim); line-height: 1.7; margin-bottom: 32px; }
+  .header-meta { padding-top: 24px; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); }
+
+  .hero-numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+  @media (max-width: 560px) { .hero-numbers { grid-template-columns: 1fr; } }
+  .hero-num { background: var(--surface); padding: 24px 20px; text-align: center; }
+  .hero-num-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero-num-value { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1.1; margin-bottom: 4px; }
+  .hero-num-detail { font-size: 12px; color: var(--text-dim); }
+
+  section { margin-bottom: 64px; }
+  section > h2 { font-size: 22px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); letter-spacing: -0.3px; }
+  .section-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 1.5px; margin-right: 8px; }
+  h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-top: 32px; margin-bottom: 12px; }
+  h3.accent { color: var(--accent); font-weight: 500; }
+  p { margin-bottom: 16px; color: var(--text); }
+  strong { font-weight: 700; }
+
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+  .info-value { font-size: 18px; font-weight: 700; color: var(--text); }
+  .info-value.accent { color: var(--accent); }
+
+  .callout { border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; border-left: 3px solid; }
+  .callout-green { background: var(--green-bg); border-color: var(--green); }
+  .callout-red { background: var(--red-bg); border-color: var(--red); }
+  .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+  .callout-accent { background: var(--accent-glow); border-color: var(--accent); }
+  .callout-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 0.3px; }
+  .callout-green .callout-title { color: var(--green); }
+  .callout-red .callout-title { color: var(--red); }
+  .callout-blue .callout-title { color: var(--blue); }
+  .callout-accent .callout-title { color: var(--accent); }
+  .callout p { font-size: 14px; margin-bottom: 8px; color: var(--text); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .scenario { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .scenario-header { padding: 14px 20px; font-weight: 700; font-size: 13px; border-bottom: 1px solid var(--border); background: var(--surface-2); letter-spacing: 0.3px; }
+  .scenario-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .scenario-row:last-child { border-bottom: none; }
+  .scenario-cell { padding: 14px 20px; font-size: 14px; }
+  .scenario-cell:first-child { border-right: 1px solid var(--border); color: var(--text-dim); font-weight: 400; }
+  .scenario-cell:last-child { font-weight: 500; }
+  .scenario-row-4 { display: grid; grid-template-columns: 1fr 0.8fr 0.8fr 0.8fr; border-bottom: 1px solid var(--border); }
+  .scenario-row-4:last-child { border-bottom: none; }
+  .scenario-row-4 .scenario-cell { padding: 12px 14px; font-size: 13px; border-right: 1px solid var(--border); }
+  .scenario-row-4 .scenario-cell:last-child { border-right: none; }
+  .scenario-row-4.head { background: var(--surface-2); }
+  .scenario-row-4.head .scenario-cell { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700; color: var(--text-dim); }
+  .scenario-row-4.highlight { background: var(--accent-glow); }
+  .scenario-row-4.highlight .scenario-cell { color: var(--accent); font-weight: 700; }
+
+  .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-weight: 700; font-size: 15px; margin-bottom: 8px; color: var(--text); }
+  .faq-a { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
+
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-tag">產品說明書</div>
+    <h1>STRK 收益層：<span>12% · First-Loss Protected</span></h1>
+    <p class="header-sub">基於 Strategy 永續特別股 STRK 的固定收益結構。你出 $67，我出 $9 墊在下面。你拿全部股息，我承擔第一層虧損。以下是這個結構的完整邏輯。</p>
+
+    <div class="hero-numbers">
+      <div class="hero-num">
+        <div class="hero-num-label">Annual Yield</div>
+        <div class="hero-num-value">12%</div>
+        <div class="hero-num-detail">$8/$67 · 6 年固定</div>
+      </div>
+      <div class="hero-num">
+        <div class="hero-num-label">First-Loss Buffer</div>
+        <div class="hero-num-value">12%</div>
+        <div class="hero-num-detail">$9/股由操作者承擔</div>
+      </div>
+      <div class="hero-num">
+        <div class="hero-num-label">Lock-Up</div>
+        <div class="hero-num-value">6 年</div>
+        <div class="hero-num-detail">到期返還本金</div>
+      </div>
+    </div>
+
+    <div class="header-meta">2026.05 · 產品說明 · 不構成投資建議</div>
+  </div>
+
+  <section>
+    <h2><span class="section-num">01</span>從需求說起</h2>
+    <p>如果你有一筆 6 年內不會動的資金，想要穩定的現金流回報，現在的選擇大概是這些：</p>
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">產品</div>
+        <div class="scenario-cell">殖利率</div>
+        <div class="scenario-cell">下行保護</div>
+        <div class="scenario-cell">Trade-off</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">台幣定存</div>
+        <div class="scenario-cell">~1.5%</div>
+        <div class="scenario-cell">有</div>
+        <div class="scenario-cell">實質購買力下降</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">投資級債券基金</div>
+        <div class="scenario-cell">~4-5%</div>
+        <div class="scenario-cell">無</div>
+        <div class="scenario-cell">淨值波動、利率風險</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">高收益債基金</div>
+        <div class="scenario-cell">~7-9%</div>
+        <div class="scenario-cell">無</div>
+        <div class="scenario-cell">持倉不透明、信用風險</div>
+      </div>
+    </div>
+    <p>殖利率高的沒有下行保護，有保護的殖利率不夠。這中間有一個 gap — 高 yield、有保護、看得到底層資產的產品在市場上幾乎不存在。這個結構是為了填這個位置。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">02</span>底層資產：STRK</h2>
+    <p>STRK 是 Strategy（前 MicroStrategy，NASDAQ: MSTR）發行的永續特別股，在 NASDAQ 公開交易，每年固定配發 $8/股股息。</p>
+    <div class="scenario">
+      <div class="scenario-header">STRK Key Terms</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Dividend</div>
+        <div class="scenario-cell">$8/年，每季 $2，固定</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Cumulative</div>
+        <div class="scenario-cell">暫停的股息會累積，必須補發才能恢復普通股配息</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Seniority</div>
+        <div class="scenario-cell">優先於 STRD 和普通股</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Tax Treatment</div>
+        <div class="scenario-cell">100% Return of Capital (ROC) — 非美國來源所得，不預扣稅</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Listing</div>
+        <div class="scenario-cell">NASDAQ 公開交易，即時報價</div>
+      </div>
+    </div>
+    <p>Strategy 持有超過 81 萬枚 BTC，年化 2.39% 的 BTC 報酬即可永久覆蓋所有特別股股息，帳上另有 $22.5 億現金作為流動性緩衝。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">03</span>結構</h2>
+    <p>STRK 目前交易在 ~$76。</p>
+    <p>你出 $67，我出 $9，合計 $76 買入一股 STRK。</p>
+    <div class="scenario">
+      <div class="scenario-header">分配規則</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">股息（$8/年）</div>
+        <div class="scenario-cell">全部歸你</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">下跌（$76 → $67）</div>
+        <div class="scenario-cell">由我的 $9 吸收</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">$76 以上的增值</div>
+        <div class="scenario-cell">歸我</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">6 年到期</div>
+        <div class="scenario-cell">優先返還你的 $67</div>
+      </div>
+    </div>
+    <p>你拿的是 fixed income — $67 投入，$8/年，年化 12%，6 年到期拿回本金。</p>
+    <p>我拿的是 equity upside — $76 以上的增值。如果 STRK 沒漲，我只是拿回我的 $9。</p>
+    <div class="info-card">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">你的出資</span>
+          <span class="info-value accent">$67/股</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">等效殖利率</span>
+          <span class="info-value accent">12%</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">每季到帳</span>
+          <span class="info-value">$2.00/股</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">6 年累計股息</span>
+          <span class="info-value">$48.00/股</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="section-num">04</span>雙方各取所需</h2>
+    <p>你跟我想要的東西不一樣。</p>
+    <p>你想要的是可預測的 12% 現金流。STRK 如果六年後漲到 $200，跟你無關 — 你拿的是固定的 $8/年。</p>
+    <p>我想要的是 STRK 的 upside。$8/年的股息對我來說不是重點。</p>
+    <p>同一個資產裡面，各有一個對方不在乎的部分。你不要 upside，我不要 yield。拆開來，各自拿走自己 care 的那塊。</p>
+    <p>不存在誰讓利的問題 — 你拿到高於市場的 yield 加上 first-loss 保護，我拿到我本來就想要的 risk exposure。這是一個 positive-sum 的安排。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">05</span>First-Loss 下行保護</h2>
+    <p>我的 $9 在資本結構裡是 junior tranche。STRK 價格下跌時，先吃的是我的錢。</p>
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">6 年後 STRK</div>
+        <div class="scenario-cell">你的本金</div>
+        <div class="scenario-cell">我的本金</div>
+        <div class="scenario-cell">說明</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$80</div>
+        <div class="scenario-cell pos">$67 全額</div>
+        <div class="scenario-cell pos">正常</div>
+        <div class="scenario-cell">—</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$76</div>
+        <div class="scenario-cell pos">$67 全額</div>
+        <div class="scenario-cell">正常</div>
+        <div class="scenario-cell">—</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$70</div>
+        <div class="scenario-cell pos">$67 全額</div>
+        <div class="scenario-cell neg">虧 $3</div>
+        <div class="scenario-cell">我吸收</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$67</div>
+        <div class="scenario-cell pos">$67 全額</div>
+        <div class="scenario-cell neg">歸零</div>
+        <div class="scenario-cell">我虧光，你剛好沒事</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$55</div>
+        <div class="scenario-cell neg">拿回 $55</div>
+        <div class="scenario-cell neg">歸零</div>
+        <div class="scenario-cell">你開始虧本金</div>
+      </div>
+    </div>
+    <p>STRK 跌 12% 以內，你的本金不受影響。跌破 $67 你才開始虧 — 但就算在 STRK 跌到 $55 的極端情境下（跌幅 28%），你六年間累計收到 $48 股息加上 $55 本金，合計 $103，對比投入的 $67，仍然是正報酬。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">06</span>vs. STRD</h2>
+    <p>Strategy 還有一個特別股叫 STRD，殖利率 13.2%，比這裡高 1.2 個百分點。直接比較：</p>
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">　</div>
+        <div class="scenario-cell">STRD（直接持有）</div>
+        <div class="scenario-cell">本結構</div>
+        <div class="scenario-cell">差異</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">殖利率</div>
+        <div class="scenario-cell">13.2%</div>
+        <div class="scenario-cell">12%</div>
+        <div class="scenario-cell">−1.2%</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">股息制度</div>
+        <div class="scenario-cell neg">Non-cumulative</div>
+        <div class="scenario-cell pos">Cumulative</div>
+        <div class="scenario-cell">停付的息 STRD 永遠拿不回來</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">清償順位</div>
+        <div class="scenario-cell">最後</div>
+        <div class="scenario-cell pos">優先於 STRD</div>
+        <div class="scenario-cell">STRK 排在 STRD 前面</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">下行保護</div>
+        <div class="scenario-cell">無</div>
+        <div class="scenario-cell pos">12% first-loss buffer</div>
+        <div class="scenario-cell">STRD 跌多少你虧多少</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">流動性</div>
+        <div class="scenario-cell pos">隨時賣出</div>
+        <div class="scenario-cell">6 年 lock-up</div>
+        <div class="scenario-cell">這裡不能中途退出</div>
+      </div>
+    </div>
+    <p>簡單講：你讓 1.2% yield 和流動性，換到 cumulative 保護、更高的 seniority、和一層 first-loss buffer。怎麼取捨取決於你的優先順序。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">07</span>利率鎖定</h2>
+    <p>12% 在 6 年合約期內固定。這件事有兩面。</p>
+    <div class="callout callout-green">
+      <div class="callout-title">利率下行 → 你的 12% 越來越有競爭力</div>
+      <p>聯準會降息、市場 yield 下滑的時候，你已經 locked in 12%。別人在 7-8% 的環境裡找 yield，你不用動。</p>
+    </div>
+    <div class="callout callout-red">
+      <div class="callout-title">利率上行 → 你被鎖在 12%</div>
+      <p>如果市場 yield 跑到 15%，你的 12% 相對不再突出，但合約鎖住了你。這是 fixed-rate 的 opportunity cost。</p>
+    </div>
+    <p>跟任何固定利率工具一樣 — 你用靈活性換取可預測性。如果你在意的是「確定拿到多少」而不是「隨時可以換」，鎖定是一個 feature。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">08</span>Tax：Return of Capital</h2>
+    <p>STRK 的股息在美國聯邦稅務上被分類為 100% return of capital (ROC)。Strategy 在 2026 年 2 月正式確認這一點，並表示預計未來十年以上都會維持 ROC 待遇 — 因為公司沒有累積的 earnings and profits。</p>
+    <p>這對你意味著什麼？</p>
+    <div class="scenario">
+      <div class="scenario-header">ROC vs 一般股息</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">一般美股股息</div>
+        <div class="scenario-cell">非美國人被預扣 30% 稅。$8 只拿到 $5.60</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">STRK 股息（ROC）</div>
+        <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">不預扣。$8 全額到手。未來 capital gain 美國免稅、台灣門檻下免稅</div>
+      </div>
+    </div>
+    <p>ROC 的機制是降低你的持股成本基礎，而不是產生當期所得。未來賣出時產生的 capital gain，美國對 non-US person 免稅；台灣端則適用最低稅負制 — 全年海外所得低於 NT$100 萬不計入基本所得額，基本所得額低於 NT$670 萬不課稅。以一般投資規模來說，<strong>兩端實質上都是零稅負</strong>。</p>
+    <p>換個方式想：很多美股產品標榜的 yield，拿到手已經被扣了 30%。STRK 的 $8 是 gross = net，而且未來的 capital gain 在多數情境下也不課稅。<strong>你看到的 12%，就是你實際拿到的 12%。</strong></p>
+    <div class="callout callout-blue">
+      <div class="callout-title">注意事項</div>
+      <p>ROC 待遇由 Strategy 基於其 E&P 狀況決定，未來如果 Strategy 產生累積盈餘，分類可能改變。但以 Strategy 目前的資產結構（主要持有 BTC，未實現損益不計入 E&P），這個分類在可見的未來是穩定的。具體稅務問題請諮詢你的稅務顧問。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="section-num">09</span>數字</h2>
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">6 年後 STRK</div>
+        <div class="scenario-cell">累計股息</div>
+        <div class="scenario-cell">本金返還</div>
+        <div class="scenario-cell">Annualized Return</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">≥ $76</div>
+        <div class="scenario-cell">$48</div>
+        <div class="scenario-cell pos">$67</div>
+        <div class="scenario-cell pos">~12%</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$67 ~ $76</div>
+        <div class="scenario-cell">$48</div>
+        <div class="scenario-cell pos">$67（差額由我吸收）</div>
+        <div class="scenario-cell pos">~12%</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$50</div>
+        <div class="scenario-cell">$48</div>
+        <div class="scenario-cell">$50</div>
+        <div class="scenario-cell">~4.6%</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$30</div>
+        <div class="scenario-cell">$48</div>
+        <div class="scenario-cell neg">$30</div>
+        <div class="scenario-cell">~1.6%</div>
+      </div>
+    </div>
+    <p>STRK 腰斬到 $30（跌幅 60%）的情境下，$48 股息 + $30 本金 = $78，對比投入 $67，總回報仍然為正。要讓你在絕對值上虧錢，需要 STRK 跌超過 75% 且 Strategy 長期停發股息。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">10</span>Don't Trust, Verify</h2>
+    <p>這個結構的設計原則是讓你不需要盲目信任任何人。</p>
+    <p><strong>底層資產 verifiable。</strong> STRK 在 NASDAQ 公開交易，即時報價。你隨時可以查。</p>
+    <p><strong>持倉 verifiable。</strong> STRK 託管在券商帳戶，你可以要求查看持倉紀錄，確認你對應的股數存在。</p>
+    <p><strong>No active trading。</strong> 我不做任何交易決策。買入 STRK 之後不動，每季收到股息機械式轉給你。沒有操盤空間。</p>
+    <p><strong>Skin in the game。</strong> 我的 $9 壓在你的 $67 下面，是 first-loss tranche。出問題的時候我先虧。這不是口頭承諾 — 是結構上 baked in 的 incentive alignment。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">11</span>風險揭露</h2>
+    <div class="callout callout-red">
+      <div class="callout-title">Strategy Credit Risk</div>
+      <p>所有現金流取決於 Strategy 的持續經營。比特幣價格大幅崩盤可能導致 Strategy 財務惡化，影響 STRK 價格和股息支付。極端情況下可能損失本金。</p>
+    </div>
+    <div class="callout callout-blue">
+      <div class="callout-title">Liquidity Risk</div>
+      <p>6 年 lock-up，原則上不可提前退出。只有確定這筆錢 6 年內不會動用才適合。</p>
+    </div>
+    <div class="callout callout-blue">
+      <div class="callout-title">Interest Rate Risk</div>
+      <p>12% 固定。市場利率上行時，你承受 opportunity cost。</p>
+    </div>
+    <div class="callout callout-blue">
+      <div class="callout-title">Dividend Suspension Risk</div>
+      <p>Strategy 可暫停特別股股息。STRK 為 cumulative — 暫停期間不會收到現金流，但欠付的股息會累積。</p>
+    </div>
+    <div class="callout callout-blue">
+      <div class="callout-title">Counterparty Risk</div>
+      <p>結構依賴操作者忠實執行合約。First-loss 設計和持倉透明降低但不消除此風險。</p>
+    </div>
+    <div class="callout callout-blue">
+      <div class="callout-title">Legal/Structural Risk</div>
+      <p>合約安排，非正式基金或信託。法律保護可能不如正規金融產品完整。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="section-num">12</span>到期流程</h2>
+    <div class="scenario">
+      <div class="scenario-header">Maturity Process</div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Step 1</div>
+        <div class="scenario-cell">賣出足量 STRK，優先返還你的 $67/股</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Step 2</div>
+        <div class="scenario-cell">你收到本金（$67 或 STRK 市價，取較低者）</div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-cell">Step 3</div>
+        <div class="scenario-cell">合約終止。無後續義務</div>
+      </div>
+    </div>
+    <p>到期後你可以選擇續投下一個週期，條件另行協議。沒有續投義務。</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">13</span>FAQ</h2>
+    <div class="faq-item">
+      <div class="faq-q">操作者靠什麼賺錢？</div>
+      <div class="faq-a">不收管理費、不收 performance fee。操作者的 return 來自 STRK 在 $76 以上的增值。如果 STRK 沒漲，操作者只是拿回自己的 $9。你的 12% 跟操作者賺不賺無關。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Strategy 暫停配息會怎樣？</div>
+      <div class="faq-a">STRK 是 cumulative — 暫停的股息累積，恢復普通股配息前必須全數補發。你暫時不會收到現金流，但欠付的部分不會消失。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">可以中途退出嗎？</div>
+      <div class="faq-a">原則上不行。特殊情況可協商，但沒有保證。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">12% 會變嗎？</div>
+      <div class="faq-a">不會。STRK 股息 $8 固定，你的出資 $67 固定，$8/$67 = 12% 在合約期內不變。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">股息要繳稅嗎？</div>
+      <div class="faq-a">STRK 股息被分類為 return of capital (ROC)，不適用美國 30% 預扣稅，$8 全額到手。未來賣出時的 capital gain，美國對 non-US person 免稅；台灣適用最低稅負制，全年海外所得低於 NT$100 萬不計入，基本所得額低於 NT$670 萬不課稅。以一般投資規模來說，收息和退場兩端實質上都是零稅負。具體情況建議諮詢你的稅務顧問。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">你拿走的 upside 會影響我嗎？</div>
+      <div class="faq-a">不會。你拿到的永遠是 $8/年加到期 $67。STRK 漲到 $300 或維持 $76，你的數字不變。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">跟基金有什麼不同？</div>
+      <div class="faq-a">三點。第一，no active trading — 買入後不動。第二，底層 100% 透明 — 就是 STRK，不是一堆你看不懂的衍生品。第三，操作者 first-loss — 一般 fund manager 不會拿自己的錢墊在投資人下面。</div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>本文件僅供參考，不構成投資建議或要約。所有數字基於公開資料，可能隨市場變化。投資涉及風險，包括本金損失的可能。請自行評估風險承受能力。</p>
+  </div>
+
+</div>
+</body>
+</html>
