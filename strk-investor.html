@@ -147,6 +147,7 @@
   <section>
     <h2><span class="section-num">01</span>從需求說起</h2>
     <p>如果你有一筆 6 年內不會動的資金，想要穩定的現金流回報，現在的選擇大概是這些：</p>
+
     <div class="scenario">
       <div class="scenario-row-4 head">
         <div class="scenario-cell">產品</div>
@@ -170,15 +171,18 @@
         <div class="scenario-cell">高收益債基金</div>
         <div class="scenario-cell">~7-9%</div>
         <div class="scenario-cell">無</div>
-        <div class="scenario-cell">持倉不透明、信用風險</div>
+        <div class="scenario-cell">持倉不透明、常用槓桿</div>
       </div>
     </div>
+
     <p>殖利率高的沒有下行保護，有保護的殖利率不夠。這中間有一個 gap — 高 yield、有保護、看得到底層資產的產品在市場上幾乎不存在。這個結構是為了填這個位置。</p>
+    <p>還有一件事值得注意：很多高 yield 產品的報酬來自槓桿 — 基金內部加 leverage、嵌入衍生品、用 margin 撐高報酬率。槓桿放大上行也放大下行。這個結構裡<strong>不存在任何槓桿</strong>。底層 $76 的 STRK 由 $67 + $9 全額現金買入。12% 的 yield 來自結構拆分的算術（$8 ÷ $67），不是來自借貸。No leverage, no margin, no derivatives。</p>
   </section>
 
   <section>
     <h2><span class="section-num">02</span>底層資產：STRK</h2>
     <p>STRK 是 Strategy（前 MicroStrategy，NASDAQ: MSTR）發行的永續特別股，在 NASDAQ 公開交易，每年固定配發 $8/股股息。</p>
+
     <div class="scenario">
       <div class="scenario-header">STRK Key Terms</div>
       <div class="scenario-row">
@@ -202,6 +206,7 @@
         <div class="scenario-cell">NASDAQ 公開交易，即時報價</div>
       </div>
     </div>
+
     <p>Strategy 持有超過 81 萬枚 BTC，年化 2.39% 的 BTC 報酬即可永久覆蓋所有特別股股息，帳上另有 $22.5 億現金作為流動性緩衝。</p>
   </section>
 
@@ -209,6 +214,7 @@
     <h2><span class="section-num">03</span>結構</h2>
     <p>STRK 目前交易在 ~$76。</p>
     <p>你出 $67，我出 $9，合計 $76 買入一股 STRK。</p>
+
     <div class="scenario">
       <div class="scenario-header">分配規則</div>
       <div class="scenario-row">
@@ -228,8 +234,10 @@
         <div class="scenario-cell">優先返還你的 $67</div>
       </div>
     </div>
+
     <p>你拿的是 fixed income — $67 投入，$8/年，年化 12%，6 年到期拿回本金。</p>
     <p>我拿的是 equity upside — $76 以上的增值。如果 STRK 沒漲，我只是拿回我的 $9。</p>
+
     <div class="info-card">
       <div class="info-grid">
         <div class="info-item">
@@ -264,6 +272,7 @@
   <section>
     <h2><span class="section-num">05</span>First-Loss 下行保護</h2>
     <p>我的 $9 在資本結構裡是 junior tranche。STRK 價格下跌時，先吃的是我的錢。</p>
+
     <div class="scenario">
       <div class="scenario-row-4 head">
         <div class="scenario-cell">6 年後 STRK</div>
@@ -302,12 +311,14 @@
         <div class="scenario-cell">你開始虧本金</div>
       </div>
     </div>
+
     <p>STRK 跌 12% 以內，你的本金不受影響。跌破 $67 你才開始虧 — 但就算在 STRK 跌到 $55 的極端情境下（跌幅 28%），你六年間累計收到 $48 股息加上 $55 本金，合計 $103，對比投入的 $67，仍然是正報酬。</p>
   </section>
 
   <section>
     <h2><span class="section-num">06</span>vs. STRD</h2>
     <p>Strategy 還有一個特別股叫 STRD，殖利率 13.2%，比這裡高 1.2 個百分點。直接比較：</p>
+
     <div class="scenario">
       <div class="scenario-row-4 head">
         <div class="scenario-cell">　</div>
@@ -346,20 +357,24 @@
         <div class="scenario-cell">這裡不能中途退出</div>
       </div>
     </div>
+
     <p>簡單講：你讓 1.2% yield 和流動性，換到 cumulative 保護、更高的 seniority、和一層 first-loss buffer。怎麼取捨取決於你的優先順序。</p>
   </section>
 
   <section>
     <h2><span class="section-num">07</span>利率鎖定</h2>
     <p>12% 在 6 年合約期內固定。這件事有兩面。</p>
+
     <div class="callout callout-green">
       <div class="callout-title">利率下行 → 你的 12% 越來越有競爭力</div>
       <p>聯準會降息、市場 yield 下滑的時候，你已經 locked in 12%。別人在 7-8% 的環境裡找 yield，你不用動。</p>
     </div>
+
     <div class="callout callout-red">
       <div class="callout-title">利率上行 → 你被鎖在 12%</div>
       <p>如果市場 yield 跑到 15%，你的 12% 相對不再突出，但合約鎖住了你。這是 fixed-rate 的 opportunity cost。</p>
     </div>
+
     <p>跟任何固定利率工具一樣 — 你用靈活性換取可預測性。如果你在意的是「確定拿到多少」而不是「隨時可以換」，鎖定是一個 feature。</p>
   </section>
 
@@ -367,6 +382,7 @@
     <h2><span class="section-num">08</span>Tax：Return of Capital</h2>
     <p>STRK 的股息在美國聯邦稅務上被分類為 100% return of capital (ROC)。Strategy 在 2026 年 2 月正式確認這一點，並表示預計未來十年以上都會維持 ROC 待遇 — 因為公司沒有累積的 earnings and profits。</p>
     <p>這對你意味著什麼？</p>
+
     <div class="scenario">
       <div class="scenario-header">ROC vs 一般股息</div>
       <div class="scenario-row">
@@ -378,8 +394,10 @@
         <div class="scenario-cell" style="color: var(--accent); font-weight: 700;">不預扣。$8 全額到手。未來 capital gain 美國免稅、台灣門檻下免稅</div>
       </div>
     </div>
+
     <p>ROC 的機制是降低你的持股成本基礎，而不是產生當期所得。未來賣出時產生的 capital gain，美國對 non-US person 免稅；台灣端則適用最低稅負制 — 全年海外所得低於 NT$100 萬不計入基本所得額，基本所得額低於 NT$670 萬不課稅。以一般投資規模來說，<strong>兩端實質上都是零稅負</strong>。</p>
     <p>換個方式想：很多美股產品標榜的 yield，拿到手已經被扣了 30%。STRK 的 $8 是 gross = net，而且未來的 capital gain 在多數情境下也不課稅。<strong>你看到的 12%，就是你實際拿到的 12%。</strong></p>
+
     <div class="callout callout-blue">
       <div class="callout-title">注意事項</div>
       <p>ROC 待遇由 Strategy 基於其 E&P 狀況決定，未來如果 Strategy 產生累積盈餘，分類可能改變。但以 Strategy 目前的資產結構（主要持有 BTC，未實現損益不計入 E&P），這個分類在可見的未來是穩定的。具體稅務問題請諮詢你的稅務顧問。</p>
@@ -388,6 +406,7 @@
 
   <section>
     <h2><span class="section-num">09</span>數字</h2>
+
     <div class="scenario">
       <div class="scenario-row-4 head">
         <div class="scenario-cell">6 年後 STRK</div>
@@ -420,6 +439,7 @@
         <div class="scenario-cell">~1.6%</div>
       </div>
     </div>
+
     <p>STRK 腰斬到 $30（跌幅 60%）的情境下，$48 股息 + $30 本金 = $78，對比投入 $67，總回報仍然為正。要讓你在絕對值上虧錢，需要 STRK 跌超過 75% 且 Strategy 長期停發股息。</p>
   </section>
 
@@ -430,17 +450,19 @@
     <p><strong>持倉 verifiable。</strong> STRK 託管在券商帳戶，你可以要求查看持倉紀錄，確認你對應的股數存在。</p>
     <p><strong>No active trading。</strong> 我不做任何交易決策。買入 STRK 之後不動，每季收到股息機械式轉給你。沒有操盤空間。</p>
     <p><strong>Skin in the game。</strong> 我的 $9 壓在你的 $67 下面，是 first-loss tranche。出問題的時候我先虧。這不是口頭承諾 — 是結構上 baked in 的 incentive alignment。</p>
+    <p><strong>Zero leverage。</strong> 底層 STRK 由 $67 + $9 全額現金買入。沒有借貸、沒有 margin、沒有衍生品。12% yield 來自結構拆分，不來自槓桿。不存在「槓桿爆掉」的可能。</p>
   </section>
 
   <section>
     <h2><span class="section-num">11</span>風險揭露</h2>
+
     <div class="callout callout-red">
       <div class="callout-title">Strategy Credit Risk</div>
       <p>所有現金流取決於 Strategy 的持續經營。比特幣價格大幅崩盤可能導致 Strategy 財務惡化，影響 STRK 價格和股息支付。極端情況下可能損失本金。</p>
     </div>
     <div class="callout callout-blue">
       <div class="callout-title">Liquidity Risk</div>
-      <p>6 年 lock-up，原則上不可提前退出。只有確定這筆錢 6 年內不會動用才適合。</p>
+      <p>前 3 年 hard lock-up，不可贖回。第 4-5 年可提前退出但需支付 early redemption fee（5% / 2.5%）。只有確定這筆錢至少 3 年內不會動用才適合。</p>
     </div>
     <div class="callout callout-blue">
       <div class="callout-title">Interest Rate Risk</div>
@@ -461,9 +483,84 @@
   </section>
 
   <section>
-    <h2><span class="section-num">12</span>到期流程</h2>
+    <h2><span class="section-num">12</span>Lock-Up 與到期</h2>
+
+    <h3 class="accent">閉鎖期結構</h3>
     <div class="scenario">
-      <div class="scenario-header">Maturity Process</div>
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">期間</div>
+        <div class="scenario-cell">狀態</div>
+        <div class="scenario-cell">提前贖回</div>
+        <div class="scenario-cell">Early Redemption Fee</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">Year 1 – 3</div>
+        <div class="scenario-cell">Hard Lock-Up</div>
+        <div class="scenario-cell neg">不可贖回</div>
+        <div class="scenario-cell">—</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">Year 4</div>
+        <div class="scenario-cell">Soft Lock-Up</div>
+        <div class="scenario-cell">可贖回</div>
+        <div class="scenario-cell">贖回金額 × 5%</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">Year 5</div>
+        <div class="scenario-cell">Soft Lock-Up</div>
+        <div class="scenario-cell">可贖回</div>
+        <div class="scenario-cell">贖回金額 × 2.5%</div>
+      </div>
+      <div class="scenario-row-4 highlight">
+        <div class="scenario-cell">Year 6</div>
+        <div class="scenario-cell">到期</div>
+        <div class="scenario-cell">正常贖回</div>
+        <div class="scenario-cell">無</div>
+      </div>
+    </div>
+
+    <p>前 3 年為硬閉鎖期，不接受任何提前贖回。第 4 年起可申請提前退出，需支付 early redemption fee。</p>
+    <p>Fee 計算基礎是你「本來能拿到的金額」— 也就是依照正常 first-loss 邏輯算出的返還金額，再乘以費率。已收取的股息不受影響，不需退回。</p>
+
+    <h3 class="accent">Early Redemption 情境</h3>
+    <div class="scenario">
+      <div class="scenario-row-4 head">
+        <div class="scenario-cell">Year 4 STRK 價格</div>
+        <div class="scenario-cell">正常應返還</div>
+        <div class="scenario-cell">扣除 5% Fee</div>
+        <div class="scenario-cell">你實際拿到</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$80</div>
+        <div class="scenario-cell">$67</div>
+        <div class="scenario-cell">$3.35</div>
+        <div class="scenario-cell">$63.65</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$76</div>
+        <div class="scenario-cell">$67</div>
+        <div class="scenario-cell">$3.35</div>
+        <div class="scenario-cell">$63.65</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$60</div>
+        <div class="scenario-cell">$60</div>
+        <div class="scenario-cell">$3.00</div>
+        <div class="scenario-cell">$57.00</div>
+      </div>
+      <div class="scenario-row-4">
+        <div class="scenario-cell">$50</div>
+        <div class="scenario-cell">$50</div>
+        <div class="scenario-cell">$2.50</div>
+        <div class="scenario-cell">$47.50</div>
+      </div>
+    </div>
+
+    <p>提前贖回在任何價位都會比「留在結構裡繼續收息、等待反彈」更差。這個設計是刻意的 — early exit 是一個 option，fee 是這個 option 的 price。你永遠可以選擇不行使，留在原位繼續收 12%。</p>
+
+    <h3 class="accent">正常到期流程</h3>
+    <div class="scenario">
+      <div class="scenario-header">Year 6 Maturity</div>
       <div class="scenario-row">
         <div class="scenario-cell">Step 1</div>
         <div class="scenario-cell">賣出足量 STRK，優先返還你的 $67/股</div>
@@ -477,11 +574,13 @@
         <div class="scenario-cell">合約終止。無後續義務</div>
       </div>
     </div>
+
     <p>到期後你可以選擇續投下一個週期，條件另行協議。沒有續投義務。</p>
   </section>
 
   <section>
     <h2><span class="section-num">13</span>FAQ</h2>
+
     <div class="faq-item">
       <div class="faq-q">操作者靠什麼賺錢？</div>
       <div class="faq-a">不收管理費、不收 performance fee。操作者的 return 來自 STRK 在 $76 以上的增值。如果 STRK 沒漲，操作者只是拿回自己的 $9。你的 12% 跟操作者賺不賺無關。</div>
@@ -492,7 +591,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">可以中途退出嗎？</div>
-      <div class="faq-a">原則上不行。特殊情況可協商，但沒有保證。</div>
+      <div class="faq-a">前 3 年為 hard lock-up，不可贖回。第 4 年起可提前退出，需支付 early redemption fee（第 4 年 5%、第 5 年 2.5%），基於你本來能拿到的返還金額計算。已收到的股息不受影響。第 6 年正常到期，無費用。詳見第 12 節。</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">12% 會變嗎？</div>
@@ -508,8 +607,9 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">跟基金有什麼不同？</div>
-      <div class="faq-a">三點。第一，no active trading — 買入後不動。第二，底層 100% 透明 — 就是 STRK，不是一堆你看不懂的衍生品。第三，操作者 first-loss — 一般 fund manager 不會拿自己的錢墊在投資人下面。</div>
+      <div class="faq-a">四點。第一，no active trading — 買入後不動。第二，底層 100% 透明 — 就是 STRK，不是一堆你看不懂的衍生品。第三，操作者 first-loss — 一般 fund manager 不會拿自己的錢墊在投資人下面。第四，zero leverage — 全額現金買入，沒有借貸放大。很多基金的高 yield 是靠槓桿撐出來的，這裡不是。</div>
     </div>
+
   </section>
 
   <div class="footer">
