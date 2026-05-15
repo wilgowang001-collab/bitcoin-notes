@@ -471,9 +471,9 @@ strong { font-weight: 700; }
 
 <p>STRK 跌到 $50（跌幅 35%，已經很極端），你還是賺 $31。跌到 $30（跌幅 60%），你還是賺 $11。6 年的 $48 股息提供了巨大的緩衝。</p>
 
-<h3 class="accent">Strategy 自己怎麼評估這個風險？</h3>
+<h3 class="accent">補充參考：Strategy 的 BTC Risk 模型</h3>
 
-<p>Strategy 在 strategy.com 上公開了一個叫 BTC Risk 的指標。它用 BTC 的對數常態分布模型，在不同假設下計算 BTC 儲備不足以覆蓋 STRK 以上所有工具面值的機率。你可以自己去調參數驗證。</p>
+<p>以上是從你的實際損益算出來的結論。如果你想用另一個角度交叉驗證，Strategy 在 strategy.com 上公開了一個叫 BTC Risk 的指標——它用對數常態分布模型，計算 BTC 儲備不足以覆蓋 STRK 以上所有工具面值的機率。</p>
 
 <div class="scenario">
   <div class="scenario-row-4 head">
@@ -502,24 +502,15 @@ strong { font-weight: 700; }
   </div>
 </div>
 
-<p>幾個重點：</p>
+<p>Bear Case 的 25% 看起來不低，但這個數字衡量的是「帳面資產低於帳面負債」的機率——不是「付不出股息」的機率，更不是「你虧錢」的機率。BTC Rating 跌破 1x 不會觸發任何強制性後果，Strategy 繼續營運、繼續配息。從帳面不夠覆蓋到真的停發股息，中間還隔了很長的距離。而從停發股息到你虧錢，中間還隔了 $48 的股息緩衝。</p>
 
-<p><strong>Bull Case（30% ARR）</strong>是 Strategy 官方的預設假設。BTC 延續歷史趨勢，機構採用持續加速。在這個情境下 STRK 的 BTC Risk 只有 0.31%。</p>
-
-<p><strong>Base Case（15% ARR）</strong>假設 BTC 增長大幅放緩，但仍然是表現不錯的資產類別。</p>
-
-<p><strong>Bear Case（10% ARR）</strong>假設 BTC 年化只漲 10%——跟 S&P 500 的歷史平均差不多。對一個過去十年 CAGR 超過 50% 的資產來說，這已經是非常悲觀的假設。即使如此，BTC Risk 也只有約 25%。</p>
-
-<p>這裡的 25% 是什麼意思？BTC Risk 衡量的是：在 STRK 的 Duration 結束時，Strategy 帳上的 BTC 資產價值低於 STRK 以上所有工具（可轉債 + 更高順位的優先股）面值加總的機率。BTC Rating = 1x 代表 BTC 資產剛好等於這些負債的帳面數字。低於 1x 代表帳面上資產不夠覆蓋負債。</p>
-
-<p>但帳面上資產不夠覆蓋負債，跟真的付不出錢完全是兩回事。關鍵在於：Strategy 的優先股沒有抵押品，沒有任何人可以因為 BTC Rating 低於 1x 就強制 Strategy 賣 BTC 或還錢。只要 Strategy 每季付得出股息，一切照常。BTC Rating 跌破 1x 不會觸發任何強制性的後果——Strategy 繼續營運、繼續配息。從 BTC Rating 跌破 1x 到真正停發股息，中間還隔了很長的距離。</p>
-
-<p>加上你 6 年間收到的 $48 股息——STRK 要跌到 $19 以下你才會虧錢。BTC Risk 看起來的數字和你實際虧損的門檻，差距非常大。</p>
+<p>BTC Risk 是一個值得追蹤的指標，但不要把它跟你的實際虧損門檻搞混。你的虧損門檻是 $19。</p>
 
 <div class="callout callout-green">
   <div class="callout-title">你可以自己驗證</div>
   <p>打開 <strong>strategy.com</strong>，點選 Credit 頁面。上方有三個可調整的參數：BTC Price、BTC Volatility、BTC ARR。調整之後，頁面會即時更新每一個工具的 BTC Rating 和 BTC Risk。你不需要相信任何人的數字——自己調、自己看。</p>
 </div>
+
 
   </section>
 
