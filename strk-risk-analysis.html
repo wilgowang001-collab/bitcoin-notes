@@ -473,7 +473,7 @@ strong { font-weight: 700; }
 
 <h3 class="accent">補充參考：Strategy 的 BTC Risk 模型</h3>
 
-<p>以上是從你的實際損益算出來的結論。如果你想用另一個角度交叉驗證，Strategy 在 strategy.com 上公開了一個叫 BTC Risk 的指標——它用對數常態分布模型，計算 BTC 儲備不足以覆蓋 STRK 以上所有工具面值的機率。</p>
+<p>Strategy 在 strategy.com/credit 公開了 BTC Risk 指標：用對數常態分布模型，計算在 STRK 的 Duration（目前 <strong>9.8 年</strong>）結束時，BTC 儲備不足以覆蓋 STRK 以上所有工具面值的累積機率。注意這是近十年的累積機率，不是年化。</p>
 
 <div class="scenario">
   <div class="scenario-row-4 head">
@@ -483,33 +483,34 @@ strong { font-weight: 700; }
     <div class="scenario-cell">STRK BTC Risk</div>
   </div>
   <div class="scenario-row-4">
-    <div class="scenario-cell">Bull Case</div>
+    <div class="scenario-cell">Maximalist（官方預設）</div>
     <div class="scenario-cell">30%</div>
     <div class="scenario-cell">40%</div>
-    <div class="scenario-cell pos">0.31%</div>
+    <div class="scenario-cell pos">0.30%</div>
   </div>
   <div class="scenario-row-4">
-    <div class="scenario-cell">Base Case</div>
-    <div class="scenario-cell">15%</div>
+    <div class="scenario-cell">Investor *</div>
+    <div class="scenario-cell">20%</div>
     <div class="scenario-cell">45%</div>
-    <div class="scenario-cell">~8%</div>
+    <div class="scenario-cell">~5%</div>
   </div>
   <div class="scenario-row-4">
-    <div class="scenario-cell neg">Bear Case</div>
+    <div class="scenario-cell neg">Trader *</div>
     <div class="scenario-cell">10%</div>
     <div class="scenario-cell">50%</div>
     <div class="scenario-cell">~25%</div>
   </div>
 </div>
 
-<p>Bear Case 的 25% 看起來不低，但這個數字衡量的是「帳面資產低於帳面負債」的機率——不是「付不出股息」的機率，更不是「你虧錢」的機率。BTC Rating 跌破 1x 不會觸發任何強制性後果，Strategy 繼續營運、繼續配息。從帳面不夠覆蓋到真的停發股息，中間還隔了很長的距離。而從停發股息到你虧錢，中間還隔了 $48 的股息緩衝。</p>
+<p style="font-size: 13px; color: var(--text-dim); margin-top: -12px; margin-bottom: 20px;">* Investor 和 Trader 的波動率為本文假設，非官方預設。你可以在 strategy.com/credit 自行調整參數驗證。Maximalist 的 0.30% 為截至 2026.05.13 的官方即時數據。</p>
 
-<p>BTC Risk 是一個值得追蹤的指標，但不要把它跟你的實際虧損門檻搞混。你的虧損門檻是 $19。</p>
+<p>BTC Risk 衡量的是帳面覆蓋率，不是配息能力，也不是你的實際虧損機率。帳面不足跟付不出錢之間還有很長的距離，而從停發股息到你虧錢之間還有 $48 的股息緩衝。具體的虧損門檻見上方情境表。</p>
 
 <div class="callout callout-green">
   <div class="callout-title">你可以自己驗證</div>
-  <p>打開 <strong>strategy.com</strong>，點選 Credit 頁面。上方有三個可調整的參數：BTC Price、BTC Volatility、BTC ARR。調整之後，頁面會即時更新每一個工具的 BTC Rating 和 BTC Risk。你不需要相信任何人的數字——自己調、自己看。</p>
+  <p>打開 <strong>strategy.com/credit</strong>，上方有三個可調整的參數：BTC Price、BTC Volatility、BTC ARR。調整之後頁面會即時更新所有工具的 BTC Rating、BTC Risk 和 Duration。</p>
 </div>
+
 
 
   </section>
